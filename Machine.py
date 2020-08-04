@@ -24,15 +24,17 @@ def idioma_screen ():
 
     # se crea un canvas para dibujar
 
-    canvas_idio = Canvas(idi_screen, width = 1200, height = 800, bg = dark_green)
+    canvas_idio = Canvas(idi_screen, width = 1200, height = 800, bg = dark_green, highlightbackground = dark_green)
     canvas_idio.pack()
 
     # Botones
     
-    button_español = Button (idi_screen, text = "Español", font = font1, bg = dark_yellow)
+    button_español = Button (idi_screen, text = "Español", font = font1, bg = dark_yellow,
+                             activebackground = purple, activeforeground = dark_yellow)
     button_español.place (x = 200, y = 400, width = 300, height = 100)
 
-    button_ingles = Button(idi_screen, text = "English", font = font1, bg = dark_yellow)
+    button_ingles = Button(idi_screen, text = "English", font = font1, bg = dark_yellow,
+                           activebackground = purple, activeforeground = dark_yellow)
     button_ingles.place(x = 700, y = 400, width = 300, height = 100)
 
     # Texto
