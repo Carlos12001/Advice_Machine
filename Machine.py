@@ -23,7 +23,7 @@ font5 = ("fixedsys", 18)
 
 def set_idi (idioma):
     global glo_idioma, reset_var, off_var, return_var, ex_var
-    global conse_var, dicho_var, chiste_var, coins_var, sms
+    global conse_var, dicho_var, chiste_var, coins_var, sms, rest_var
     glo_idioma = idioma
     if idioma == "español":
         # Texto machine
@@ -32,6 +32,7 @@ def set_idi (idioma):
         chiste_var = "Chistes"
         coins_var = "Su dinero"
         sms = "Su selección es:"
+        rest_var = "Monto a pagar: "
         # Texto admin
         reset_var = "Restaurar"
         off_var = "Apagar"
@@ -45,6 +46,7 @@ def set_idi (idioma):
         chiste_var = "Jokes"
         coins_var = "Your cash"
         sms = "Your selection is:"
+        rest_var = "Amount to be paid: "
         # Texto admin
         reset_var = "Reset"
         off_var = "Turn off"
@@ -63,25 +65,42 @@ def openAdmin(window, idioma):
 
 
 def openMachine(window, idioma):
-    global money
-    money = random.randrange(100, 2000, 25)
     window.destroy()
     set_idi(idioma)
     machine()
 
 # ---------------------------  tienda  ---------------------------- #
 
-def shop (tipo):
-    global sms, conse_var, dicho_var, chiste_var, screen_sms
+def set_shop (tipo):
+    global sms, conse_var, dicho_var, chiste_var, screen_sms, price_str, rest_var
     # tipo consejo
     if tipo == 1:
         screen_sms.set(sms + "\n" + conse_var)
+        price_str.set(rest_var + "250") # agregar variable que cambie
     # tipo dicho
     elif tipo == 2:
         screen_sms.set(sms + "\n" + dicho_var)
+        price_str.set(rest_var + "500")
     # tipo chiste
     elif tipo == 3:
         screen_sms.set(sms + "\n" + chiste_var)
+        price_str.set(rest_var + "700")
+
+def shop(pay):
+    global price, rest_var, money
+    price = 500
+    if (price - pay) >= 0:
+        price -= pay
+        money.set(rest_var + str(price))
+    elif (price - pay) == 0:
+        # logica de print
+        pass
+    else:
+        price = -1 * (price - pay)
+        money.set(price)
+        #logica vuelto
+        pass
+
 
 
 # --------------------------- Ventanas ---------------------------- #
@@ -120,9 +139,8 @@ def idioma_screen ():
 
 
 def machine ():
-    global conse_var, dicho_var, chiste_var, coins_var, money, screen_sms
+    global conse_var, dicho_var, chiste_var, coins_var, money, screen_sms, price_str
 
-    #screen_sms.set("")
     # Ventana principal, aqui se encuentra la animacion
 
     machine_screen = Tk() # se crea una ventana de inicio
@@ -139,17 +157,17 @@ def machine ():
 
     button_Conse = Button (machine_screen, text = conse_var, font = font3, bg = dark_yellow,
                              activebackground = purple, activeforeground = dark_yellow, relief = SUNKEN,
-                           command = lambda x = 1: shop(x))
+                           command = lambda x = 1: set_shop(x))
     button_Conse.place (x = 850, y = 300, width = 100, height = 50)
 
     button_Dicho = Button(machine_screen, text= dicho_var, font=font3, bg=dark_yellow,
                     activebackground=purple, activeforeground=dark_yellow, relief = SUNKEN,
-                          command = lambda x = 2: shop(x))
+                          command = lambda x = 2: set_shop(x))
     button_Dicho.place(x=850, y=370, width=100, height=50)
 
     button_chiste = Button(machine_screen, text=chiste_var, font=font3, bg=dark_yellow,
                     activebackground=purple, activeforeground=dark_yellow, relief = SUNKEN,
-                           command = lambda x = 3: shop(x))
+                           command = lambda x = 3: set_shop(x))
     button_chiste.place(x=850, y=440, width=100, height=50)
 
     button_admin = Button(machine_screen, text = "ADMIN", font=font3, bg=gray,
@@ -157,7 +175,7 @@ def machine ():
     button_admin.place(x=850, y=700, width=100, height=50)
 
         # Boton monedas
-    button_coin25 = Button(machine_screen, text=25, font=font3, bg=brown, relief = FLAT)
+    button_coin25 = Button(machine_screen, text=25, font=font3, bg=brown, relief = FLAT, command = lambda x = 25: shop(25))
     button_coin25.place(x=1050, y=150, width=100, height=100)
 
     button_coin50 = Button(machine_screen, text=50, font=font3, bg=brown, relief=FLAT)
@@ -174,6 +192,17 @@ def machine ():
     consola = Label(machine_screen,textvariable = screen_sms, font = font5, bg = purple)
     consola.place(x = 685, y = 70, width = 290, height = 100)
 
+    money = StringVar()
+    money_tmp = random.randrange(100, 2000, 25)
+    money.set(money_tmp)
+
+    monedas = Label(machine_screen, textvariable = money, font = font4, bg = white)
+    monedas.place(x = 1020, y = 90, width = 160, height = 50)
+
+    price_str = StringVar()
+    precio_consol = Label(machine_screen, textvariable = price_str, font = font4, bg = purple)
+    precio_consol.place(x = 685, y = 200, width = 290, height = 50)
+
     # Dibujos en pantalla
     canvasP.create_rectangle(1000, 0, 1200, 800, fill = brown, outline = brown)
     canvasP.create_rectangle(680, 20, 980, 280, fill = purple, outline = purple)
@@ -185,7 +214,7 @@ def machine ():
     # texto
     canvasP.create_text(350, 50, text = "ADVICE MACHINE", font = font2, fill = dark_yellow)
     canvasP.create_text(1100, 45, text=coins_var, font = font4, fill = dark_green)
-    canvasP.create_text(1100, 115, text = money, font = font4, fill = black)
+    #canvasP.create_text(1100, 115, text = money, font = font4, fill = black)
 
 
     mainloop()
