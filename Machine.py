@@ -21,9 +21,7 @@ font4 = ("fixedsys", 20)
 font5 = ("fixedsys", 18)
 
 
-# Cargar idioma
-
-
+# -------------------------- Setea el idioma ---------------------------- #
 def set_idi (idioma):
     global glo_idioma, reset_var, off_var, return_var, ex_var
     global conse_var, dicho_var, chiste_var, coins_var, sms, rest_var
@@ -63,12 +61,10 @@ def set_idi (idioma):
 
 # ---------------------------  Abriri Ventanas  ---------------------------- #
 
-
 def openAdmin(window, idioma):
     window.destroy()
     set_idi(idioma)
     admin()
-
 
 def openMachine(window, idioma):
     window.destroy()
@@ -77,7 +73,7 @@ def openMachine(window, idioma):
 
 # ---------------------------  tienda  ---------------------------- #
 
-def shop (tipo):
+def set_shop (tipo):
     global sms, conse_var, dicho_var, chiste_var, screen_sms, active_shop, price_str, rest_var
     # tipo consejo
     if tipo == 1 and active_shop:
@@ -95,10 +91,25 @@ def shop (tipo):
         screen_sms.set(sms + "\n" + chiste_var)
         active_shop = False
 
-
+def shop(pay):
+       price = 500
+       if (price - pay) >= 0:
+           price -= pay
+           money.set(rest_var + str(price))
+       elif (price - pay) == 0:
+           # logica de print
+           pass
+       else:
+           price = -1 * (price - pay)
+           money.set(price)
+           # logica vuelto
+           pass
+       
 # --------------------------- Animacion ---------------------------- #
 
 def paying(window):
+    global price, rest_var, money
+
     if 0<18:
         return paying_aux(window)
     else:
@@ -134,22 +145,6 @@ def paying_aux_3(s):
     window.title(titulo_ventana_ms )
     
     window.mainloop()
-
-def shop(pay):
-    global price, rest_var, money
-    price = 500
-    if (price - pay) >= 0:
-        price -= pay
-        money.set(rest_var + str(price))
-    elif (price - pay) == 0:
-        # logica de print
-        pass
-    else:
-        price = -1 * (price - pay)
-        money.set(price)
-        #logica vuelto
-        pass
-
 
 
 # --------------------------- Ventanas ---------------------------- #
@@ -235,8 +230,9 @@ def machine ():
         command = lambda x = machine_screen: paying(x))
     button_pay.place(x=750, y=560)
 
-        # Boton monedas
-    button_coin25 = Button(machine_screen, text=25, font=font3, bg=brown, relief = FLAT, command = lambda x = 25: shop(25))
+    # Boton monedas
+    button_coin25 = Button(machine_screen, text=25, font=font3, bg=brown, relief = FLAT,
+                    command = lambda x=25: shop(25))
     button_coin25.place(x=1050, y=150, width=100, height=100)
 
     button_coin50 = Button(machine_screen, text=50, font=font3, bg=brown, relief=FLAT)
