@@ -24,7 +24,7 @@ def idioma_screen ():
         pass
 
     # Ventana principal, aqui se encuentra la animacion
-   
+
     idi_screen = Tk() # se crea una ventana de inicio
     idi_screen.title ("Advice Machine") # Cambiar el nombre a la ventana
     idi_screen.geometry ("1200x800+400+100")
@@ -36,7 +36,7 @@ def idioma_screen ():
     canvas_idio.pack()
 
     # Botones
-    
+
     button_español = Button (idi_screen, text = "Español", font = font1, bg = dark_yellow,
                              activebackground = purple, activeforeground = dark_yellow, command = machine)
     button_español.place (x = 200, y = 400, width = 300, height = 100)
@@ -50,12 +50,12 @@ def idioma_screen ():
 
     mainloop()
 
+
 def machine ():
     global idioma_screen, machine_screen
-    
+
     try:
         idi_screen.destroy()
-        
     except:
         pass
 
@@ -75,15 +75,16 @@ def machine ():
     # se crea un canvas para dibujar
 
     canvasP = Canvas(machine_screen, width = 1200, height = 800, bg = dark_green, highlightbackground = dark_green)
-    canvasP.pack() 
-    
+    canvasP.pack()
+
     #Botones
     button = Button (machine_screen, text = "prueba", font = font1, bg = dark_yellow,
                              activebackground = purple, activeforeground = dark_yellow, command = admin)
     button.place (x = 200, y = 400, width = 300, height = 100)
 
-    # Dibujos en pantalla 
+    # Dibujos en pantalla
     mainloop()
+
 
 def admin():
     global machine_screen,admin_screen
@@ -91,7 +92,7 @@ def admin():
         machine_screen.destroy()
     except:
         pass
-    
+
     
     # Ventana principal, aqui se encuentra la animacion
 
@@ -103,33 +104,15 @@ def admin():
     # se crea un canvas para dibujar
 
     canvasP = Canvas(admin_screen, width = 1200, height = 800, bg = dark_yellow, highlightbackground = dark_green)
-    canvasP.pack() 
-    
+    canvasP.pack()
+
     #Botones
     button = Button (admin_screen, text = "prueba2", font = font1, bg = dark_yellow,
                              activebackground = purple, activeforeground = dark_yellow, command = machine)
     button.place (x = 200, y = 400, width = 300, height = 100)
     mainloop()
-    
-    # Ventana principal
 
-    machine_screen = Tk()  # se crea una ventana de inicio
-    machine_screen.title("Advice Machine")  # Cambiar el nombre a la ventana
-    machine_screen.geometry("1200x800+400+100")
-    machine_screen.resizable(0, 0)  # No hay cambio de tamaño de la ventana
 
-    # se crea un canvas para dibujar
-
-    canvasP = Canvas(machine_screen, width=1200, height=800,
-                     bg=dark_green, highlightbackground=white)
-    canvasP.pack()
-
-    #Botones
-    button = Button(machine_screen, text="prueba", font=font1, bg=dark_yellow,
-                    activebackground=purple, activeforeground=dark_yellow, command=idioma_screen)
-    button.place(x=200, y=400, width=300, height=100)
-    
-    mainloop()
     
 if __name__ == "__main__" :
     idioma_screen()
