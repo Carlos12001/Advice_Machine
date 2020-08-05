@@ -63,18 +63,13 @@ def openMachine(window, idioma):
 # --------------------------- Ventanas ---------------------------- #
 
 def idioma_screen ():
-    global idi_screen, machine_screen
 
-    #try:
-    #    machine_screen.destroy()
-    #except:
-    #    pass
 
     # Ventana principal, aqui se encuentra la animacion
 
     idi_screen = Tk() # se crea una ventana de inicio
     idi_screen.title ("Advice Machine") # Cambiar el nombre a la ventana
-    idi_screen.geometry ("1200x800+400+100")
+    idi_screen.geometry ("1200x800+100+100")
     idi_screen.resizable (0,0)  # No hay cambio de tamaño de la ventana
 
     # se crea un canvas para dibujar
@@ -101,17 +96,13 @@ def idioma_screen ():
 
 
 def machine ():
-    global machine_screen, admin_screen
-    try:
-        machine_screen.destroy()
-    except:
-        pass
+
 
     # Ventana principal, aqui se encuentra la animacion
 
     machine_screen = Tk() # se crea una ventana de inicio
     machine_screen.title ("Advice Machine") # Cambiar el nombre a la ventana
-    machine_screen.geometry ("1200x800+400+100")
+    machine_screen.geometry ("1200x800+100+100")
     machine_screen.resizable (0,0)  # No hay cambio de tamaño de la ventana
 
     # se crea un canvas para dibujar
@@ -136,6 +127,9 @@ def machine ():
     # Dibujos en pantalla
     canvasP.create_rectangle(1000, 0, 1200, 800, fill = brown, outline = brown)
     canvasP.create_rectangle(680, 20, 980, 280, fill = purple, outline = purple)
+    
+    #canvasP.create_rectangle(100, 300, 600, 450, fill = black, outline = black)
+    #canvasP.create_oval(1,355,130,375,fill=white)
 
     # texto
     canvasP.create_text(350, 50, text = "ADVICE MACHINE", font = font2, fill = dark_yellow)
@@ -144,19 +138,14 @@ def machine ():
 
 
 def admin():
-    global machine_screen,admin_screen
     global glo_idioma, reset_var, off_var, return_var, ex_var
-    try:
-        machine_screen.destroy()
-    except:
-        pass
 
     
     # Ventana principal, aqui se encuentra la animacion
 
     admin_screen = Tk() # se crea una ventana de inicio
     admin_screen.title ("Advice Machine") # Cambiar el nombre a la ventana
-    admin_screen.geometry ("1200x800+400+100")
+    admin_screen.geometry ("1200x800+100+100")
     admin_screen.resizable (0,0)  # No hay cambio de tamaño de la ventana
 
     # se crea un canvas para dibujar
@@ -189,6 +178,6 @@ def admin():
     mainloop()
     
 if __name__ == "__main__" :
-    idioma_screen()
+    machine()
 
 
