@@ -9,6 +9,7 @@ purple = "#A4ACC3"
 white = "#FFFFFF"
 gray = "#AEAEAE"
 black = "#000000"
+red_light='#c26d06'
 # fonts
 
 font1 = ("fixedsys", 25)
@@ -33,6 +34,7 @@ def set_idi (idioma):
         off_var = "Apagar"
         return_var = "Volver"
         ex_var = "Generar Excel"
+        #----logica para cargar archivo en espanol----
     elif idioma == "ingles":
         # Texto machine
         conse_var = "Advice"
@@ -43,6 +45,7 @@ def set_idi (idioma):
         off_var = "Turn off"
         return_var = "Return"
         ex_var = "Generate Excel"
+        # ----logica para cargar archivo en englicsj---
 
 
 
@@ -58,6 +61,9 @@ def openMachine(window, idioma):
     window.destroy()
     set_idi(idioma)
     machine()
+
+
+# --------------------------- Animacion ---------------------------- #
 
 
 # --------------------------- Ventanas ---------------------------- #
@@ -96,7 +102,7 @@ def idioma_screen ():
 
 
 def machine ():
-
+    set_idi("español")
 
     # Ventana principal, aqui se encuentra la animacion
 
@@ -113,23 +119,30 @@ def machine ():
     #Botones
 
     button_Conse = Button (machine_screen, text = "Consejo", font = font3, bg = dark_yellow,
-                             activebackground = purple, activeforeground = dark_yellow, relief = SUNKEN, command = admin)
+                             activebackground = purple, activeforeground = dark_yellow, relief = SUNKEN,
+                           command  = lambda x = machine_screen:openAdmin(x))
     button_Conse.place (x = 850, y = 300, width = 100, height = 50)
 
     button_Dicho = Button(machine_screen, text="Dichos", font=font3, bg=dark_yellow,
-                    activebackground=purple, activeforeground=dark_yellow, relief = SUNKEN, command = admin)
+                    activebackground=purple, activeforeground=dark_yellow, relief = SUNKEN,
+                          command = lambda x = machine_screen:openAdmin(x))
     button_Dicho.place(x=850, y=370, width=100, height=50)
 
     button_chiste = Button(machine_screen, text="Chistes", font=font3, bg=dark_yellow,
-                    activebackground=purple, activeforeground=dark_yellow, relief = SUNKEN, command = admin)
+                    activebackground=purple, activeforeground=dark_yellow, relief = SUNKEN,
+                           command = lambda x = machine_screen:openAdmin(x))
     button_chiste.place(x=850, y=440, width=100, height=50)
+
+    button_pay = Button(machine_screen,text='PUSH ME ( ͡° ͜ʖ ͡°)',font=font3,bg=red_light)
+    button_pay.place(x=750, y=560)
 
     # Dibujos en pantalla
     canvasP.create_rectangle(1000, 0, 1200, 800, fill = brown, outline = brown)
     canvasP.create_rectangle(680, 20, 980, 280, fill = purple, outline = purple)
-    
-    #canvasP.create_rectangle(100, 300, 600, 450, fill = black, outline = black)
-    #canvasP.create_oval(1,355,130,375,fill=white)
+    canvasP.create_rectangle(50, 200, 650, 400, width=15, outline = '#959593')
+    image_printa = PhotoImage(file='resource/printa.png')
+    canvasP.create_image(350,300,image = image_printa)
+
 
     # texto
     canvasP.create_text(350, 50, text = "ADVICE MACHINE", font = font2, fill = dark_yellow)
