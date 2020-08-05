@@ -80,19 +80,20 @@ def machine ():
     #Botones
 
     button_Conse = Button (machine_screen, text = "Consejo", font = font3, bg = dark_yellow,
-                             activebackground = purple, activeforeground = dark_yellow)
+                             activebackground = purple, activeforeground = dark_yellow, relief = SUNKEN)
     button_Conse.place (x = 850, y = 300, width = 100, height = 50)
 
     button_Dicho = Button(machine_screen, text="Dichos", font=font3, bg=dark_yellow,
-                    activebackground=purple, activeforeground=dark_yellow)
+                    activebackground=purple, activeforeground=dark_yellow, relief = SUNKEN)
     button_Dicho.place(x=850, y=370, width=100, height=50)
 
     button_chiste = Button(machine_screen, text="Chistes", font=font3, bg=dark_yellow,
-                    activebackground=purple, activeforeground=dark_yellow)
+                    activebackground=purple, activeforeground=dark_yellow, relief = SUNKEN)
     button_chiste.place(x=850, y=440, width=100, height=50)
 
     # Dibujos en pantalla
     canvasP.create_rectangle(1000, 0, 1200, 800, fill = brown, outline = brown)
+    canvasP.create_rectangle(500, 0, 950, 280, fill = purple, outline = purple)
 
     mainloop()
 
