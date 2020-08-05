@@ -95,45 +95,61 @@ def set_shop (tipo):
         price_str.set(rest_var + str(price))
 
 def shop(pay):
-       price = 500
-       if (price - pay) >= 0:
-           price -= pay
-           money.set(rest_var + str(price))
-       elif (price - pay) == 0:
-           # logica de print
-           pass
-       else:
-           price = -1 * (price - pay)
-           money.set(price)
-           # logica vuelto
-           pass
+    global price_str, price
+    if (price - pay) >= 0:
+       price -= pay
+       price_str.set(rest_var + str(price))
+    elif (price - pay) == 0:
+       # logica de print
+       pass
+    else:
+       price = -1 * (price - pay)
+       money.set(price)
+       # logica vuelto
+       pass
 
-def coins_rest(type):
-    global price, money_tmp
-    if type == 25:
-        price -= 25
-        money_tmp -= 25
-    elif type == 50:
-        price -= 50
-        money_tmp -= 50
-    elif type == 100:
-        price -= 100
-        money_tmp -= 100
-    elif type == 500:
-        price -= 500
-        money_tmp -= 500
+def coins_rest(type1, window):
+    global price, money_tmp, price_str, money
+    if price > 0:
+        if type1 == 25:
+            price -= 25
+            money_tmp -= 25
+            price_str.set(rest_var + str(price))
+            money.set(money_tmp)
+            return paying(window)
+        elif type1 == 50:
+            price -= 50
+            money_tmp -= 50
+            price_str.set(rest_var + str(price))
+            money.set(money_tmp)
+            return paying(window)
+        elif type1 == 100:
+            price -= 100
+            money_tmp -= 100
+            price_str.set(rest_var + str(price))
+            money.set(money_tmp)
+            return paying(window)
+        elif type1 == 500:
+            price -= 500
+            money_tmp -= 500
+            price_str.set(rest_var + str(price))
+            money.set(money_tmp)
+            return paying(window)
+
 # --------------------------- Animacion ---------------------------- #
 
 def paying(window):
-    global price, rest_var, money
-
+    global price, rest_var, money, price_str, money_tmp
     if price > 0:
         pass
     elif price == 0:
         return paying_aux(window)
-    else:
+    elif price < 0:
         price = -1 * price
-        money.set("Su vuelto es" + str(price))
+        money_tmp += price
+        money.set(money_tmp)
+        price_str.set("Su vuelto es: " + str(price))
+        return paying_aux(window)
 
 def paying_aux(window):
     t = Thread( name = 'Ani_Paper', target = paying_aux_2, args = (window,))
@@ -252,16 +268,19 @@ def machine ():
 
     # Boton monedas
     button_coin25 = Button(machine_screen, text=25, font=font3, bg=brown, relief = FLAT,
-                    command = lambda x=25: shop(25))
+                    command = lambda x=25, y = machine_screen: coins_rest(x, y))
     button_coin25.place(x=1050, y=150, width=100, height=100)
 
-    button_coin50 = Button(machine_screen, text=50, font=font3, bg=brown, relief=FLAT)
+    button_coin50 = Button(machine_screen, text=50, font=font3, bg=brown, relief=FLAT,
+                           command = lambda x=50, y = machine_screen: coins_rest(x, y))
     button_coin50.place(x=1050, y=300, width=100, height=100)
 
-    button_coin100 = Button(machine_screen, text=100, font=font3, bg=brown, relief=FLAT)
+    button_coin100 = Button(machine_screen, text=100, font=font3, bg=brown, relief=FLAT,
+                            command = lambda x=100, y = machine_screen: coins_rest(x, y))
     button_coin100.place(x=1050, y=450, width=100, height=100)
 
-    button_coin500 = Button(machine_screen, text=500, font=font3, bg=brown, relief=FLAT)
+    button_coin500 = Button(machine_screen, text=500, font=font3, bg=brown, relief=FLAT,
+                            command = lambda x=500, y = machine_screen: coins_rest(x, y))
     button_coin500.place(x=1050, y=600, width=100, height=100)
 
     # Etiquetas
