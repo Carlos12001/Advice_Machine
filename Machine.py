@@ -12,6 +12,7 @@ white = "#FFFFFF"
 
 font1 = ("fixedsys", 25)
 font2 = ("fixedsys", 50)
+font3 = ("arial", 18)
 
 # --------------------------- Ventanas ---------------------------- #
 
@@ -63,7 +64,6 @@ def machine ():
         admin_screen.destroy()
     except:
         pass
-    
 
     # Ventana principal, aqui se encuentra la animacion
 
@@ -78,11 +78,22 @@ def machine ():
     canvasP.pack()
 
     #Botones
-    button = Button (machine_screen, text = "prueba", font = font1, bg = dark_yellow,
-                             activebackground = purple, activeforeground = dark_yellow, command = admin)
-    button.place (x = 200, y = 400, width = 300, height = 100)
+
+    button_Conse = Button (machine_screen, text = "Consejo", font = font3, bg = dark_yellow,
+                             activebackground = purple, activeforeground = dark_yellow)
+    button_Conse.place (x = 850, y = 300, width = 100, height = 50)
+
+    button_Dicho = Button(machine_screen, text="Dichos", font=font3, bg=dark_yellow,
+                    activebackground=purple, activeforeground=dark_yellow)
+    button_Dicho.place(x=850, y=370, width=100, height=50)
+
+    button_chiste = Button(machine_screen, text="Chistes", font=font3, bg=dark_yellow,
+                    activebackground=purple, activeforeground=dark_yellow)
+    button_chiste.place(x=850, y=440, width=100, height=50)
 
     # Dibujos en pantalla
+    canvasP.create_rectangle(1000, 0, 1200, 800, fill = brown, outline = brown)
+
     mainloop()
 
 
