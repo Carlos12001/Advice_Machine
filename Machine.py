@@ -33,10 +33,10 @@ def openMachine(window):
 def idioma_screen ():
     global idi_screen, machine_screen
 
-    try:
-        machine_screen.destroy()
-    except:
-        pass
+    #try:
+    #    machine_screen.destroy()
+    #except:
+    #    pass
 
     # Ventana principal, aqui se encuentra la animacion
 
@@ -68,7 +68,11 @@ def idioma_screen ():
 
 
 def machine ():
-
+    global machine_screen, admin_screen
+    try:
+        machine_screen.destroy()
+    except:
+        pass
 
     # Ventana principal, aqui se encuentra la animacion
 
@@ -85,20 +89,23 @@ def machine ():
     #Botones
 
     button_Conse = Button (machine_screen, text = "Consejo", font = font3, bg = dark_yellow,
-                             activebackground = purple, activeforeground = dark_yellow, relief = SUNKEN)
+                             activebackground = purple, activeforeground = dark_yellow, relief = SUNKEN, command = admin)
     button_Conse.place (x = 850, y = 300, width = 100, height = 50)
 
     button_Dicho = Button(machine_screen, text="Dichos", font=font3, bg=dark_yellow,
-                    activebackground=purple, activeforeground=dark_yellow, relief = SUNKEN)
+                    activebackground=purple, activeforeground=dark_yellow, relief = SUNKEN, command = admin)
     button_Dicho.place(x=850, y=370, width=100, height=50)
 
     button_chiste = Button(machine_screen, text="Chistes", font=font3, bg=dark_yellow,
-                    activebackground=purple, activeforeground=dark_yellow, relief = SUNKEN)
+                    activebackground=purple, activeforeground=dark_yellow, relief = SUNKEN, command = admin)
     button_chiste.place(x=850, y=440, width=100, height=50)
 
     # Dibujos en pantalla
     canvasP.create_rectangle(1000, 0, 1200, 800, fill = brown, outline = brown)
-    canvasP.create_rectangle(500, 0, 950, 280, fill = purple, outline = purple)
+    canvasP.create_rectangle(680, 20, 980, 280, fill = purple, outline = purple)
+
+    # texto
+    canvasP.create_text(350, 50, text = "ADVICE MACHINE", font = font2, fill = dark_yellow)
 
     mainloop()
 
