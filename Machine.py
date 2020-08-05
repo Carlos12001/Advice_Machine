@@ -1,5 +1,7 @@
 from tkinter import *
-import random
+import random, time
+from threading import Thread
+
 # Colores
 
 dark_green = "#718C85"
@@ -25,6 +27,7 @@ font5 = ("fixedsys", 18)
 def set_idi (idioma):
     global glo_idioma, reset_var, off_var, return_var, ex_var
     global conse_var, dicho_var, chiste_var, coins_var, sms
+    global cost_sms, titulo_ventana_ms
     glo_idioma = idioma
     if idioma == "español":
         # Texto machine
@@ -33,6 +36,8 @@ def set_idi (idioma):
         chiste_var = "Chistes"
         coins_var = "Su dinero"
         sms = "Su selección es:"
+        cost_sms = 'Tienes que pagar:'
+        titulo_ventana_ms = 'Paper'
         # Texto admin
         reset_var = "Restaurar"
         off_var = "Apagar"
@@ -45,14 +50,15 @@ def set_idi (idioma):
         chiste_var = "Jokes"
         coins_var = "Your cash"
         sms = "Your selection is:"
+        cost_sms  = 'You need to pay:'
+        titulo_ventana_ms = 'Papel'
         # Texto admin
         reset_var = "Reset"
         off_var = "Turn off"
         return_var = "Return"
         ex_var = "Generate Excel"
+
         # ----logica para cargar archivo en englicsj---
-
-
 
 # ---------------------------  Abriri Ventanas  ---------------------------- #
 
@@ -73,20 +79,60 @@ def openMachine(window, idioma):
 # ---------------------------  tienda  ---------------------------- #
 
 def shop (tipo):
-    global sms, conse_var, dicho_var, chiste_var, screen_sms
+    global sms, conse_var, dicho_var, chiste_var, screen_sms, active_shop
     # tipo consejo
-    if tipo == 1:
+    if tipo == 1 and active_shop:
         screen_sms.set(sms + "\n" + conse_var)
+        active_shop = False
+
     # tipo dicho
-    elif tipo == 2:
+    elif tipo == 2 and active_shop:
         screen_sms.set(sms + "\n" + dicho_var)
+        active_shop = False
     # tipo chiste
-    elif tipo == 3:
+    elif tipo == 3 and active_shop:
         screen_sms.set(sms + "\n" + chiste_var)
+        active_shop = False
 
 
 # --------------------------- Animacion ---------------------------- #
 
+def paying(window):
+    if 0<18:
+        return paying_aux(window)
+    else:
+        pass
+
+def paying_aux(window):
+    t = Thread( name = 'Ani_Paper', target = paying_aux_2, args = (window,))
+    t.daemon = True
+    t.start()
+
+def paying_aux_2(window):
+    global image_paper,all_canvas
+    anchor = 20
+    all_canvas= []
+    image_paper = Canvas(window, width=300, height=anchor)
+    all_canvas+= [image_paper]
+    while anchor<300:
+        anchor += 20
+        time.sleep(0.5)
+        image_paper = Canvas(window, width=300, height=anchor)
+        image_paper.place(x=110,y=310)
+        all_canvas += [image_paper]
+
+    image_paper.bind("<Button-1>",paying_aux_3)
+    
+def paying_aux_3(s):
+    global  all_canvas, titulo_ventana_ms
+    for i in all_canvas:
+        i.place(x=-1000)
+    window = Tk()
+    window.resizable(width = False, height = False)
+    window.geometry('500x500+350+250')
+    window.title(titulo_ventana_ms )
+    
+    window.mainloop()
 
 # --------------------------- Ventanas ---------------------------- #
 
@@ -125,10 +171,12 @@ def idioma_screen ():
 
 def machine ():
     set_idi("español")
+    global conse_var, dicho_var, chiste_var, coins_var, money, screen_sms, active_shop , im_printing
 
-    global conse_var, dicho_var, chiste_var, coins_var, money, screen_sms
+    #Variables de la ventana
+    active_shop = True
+    money = 1000
 
-    #screen_sms.set("")
     # Ventana principal, aqui se encuentra la animacion
 
     machine_screen = Tk() # se crea una ventana de inicio
@@ -159,11 +207,13 @@ def machine ():
     button_chiste.place(x=850, y=440, width=100, height=50)
 
     button_admin = Button(machine_screen, text = "ADMIN", font=font3, bg=gray,
-                    activebackground=purple, activeforeground=dark_yellow, relief = SUNKEN, command = lambda x = machine_screen, y = glo_idioma : openAdmin(x, y))
+                    activebackground=purple, activeforeground=dark_yellow, relief = SUNKEN,
+                          command = lambda x = machine_screen, y = glo_idioma : openAdmin(x, y))
     button_admin.place(x=850, y=700, width=100, height=50)
 
     button_pay = Button(
-        machine_screen, text='PUSH ME ( ͡° ͜ʖ ͡°)', font=font3, bg=red_light)
+        machine_screen, text='PUSH ME ( ͡° ͜ʖ ͡°)', font=font3, bg=red_light,
+        command = lambda x = machine_screen: paying(x))
     button_pay.place(x=750, y=560)
 
         # Boton monedas
@@ -197,7 +247,7 @@ def machine ():
     # texto
     canvasP.create_text(350, 50, text = "ADVICE MACHINE", font = font2, fill = dark_yellow)
     canvasP.create_text(1100, 45, text=coins_var, font = font4, fill = dark_green)
-    canvasP.create_text(1100, 115, text = money, font = font4, fill = black)
+    canvasP.create_text(1100, 115, text =str (money), font = font4, fill = black)
 
 
     mainloop()
@@ -244,6 +294,6 @@ def admin():
     mainloop()
     
 if __name__ == "__main__" :
-    idioma_screen()
+    machine()
 
 
