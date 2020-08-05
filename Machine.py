@@ -12,6 +12,7 @@ white = "#FFFFFF"
 
 font1 = ("fixedsys", 25)
 font2 = ("fixedsys", 50)
+font3 = ("arial", 18)
 
 
 # ---------------------------  Abriri Ventanas  ---------------------------- #
@@ -88,6 +89,8 @@ def machine ():
     button.place (x = 200, y = 400, width = 300, height = 100)
 
     # Dibujos en pantalla
+    canvasP.create_rectangle(1000, 0, 1200, 800, fill = brown, outline = brown)
+
     mainloop()
 
 
