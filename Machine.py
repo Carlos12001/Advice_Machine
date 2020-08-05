@@ -13,6 +13,20 @@ white = "#FFFFFF"
 font1 = ("fixedsys", 25)
 font2 = ("fixedsys", 50)
 
+
+# ---------------------------  Abriri Ventanas  ---------------------------- #
+
+
+def openAdmin(window):
+    window.destroy()
+    admin()
+
+
+def openMachine(window):
+    window.destroy()
+    machine()
+
+
 # --------------------------- Ventanas ---------------------------- #
 
 def idioma_screen ():
@@ -38,7 +52,8 @@ def idioma_screen ():
     # Botones
 
     button_español = Button (idi_screen, text = "Español", font = font1, bg = dark_yellow,
-                             activebackground = purple, activeforeground = dark_yellow, command = machine)
+                             activebackground = purple, activeforeground = dark_yellow,
+                             command = lambda x = idi_screen: openMachine(x))
     button_español.place (x = 200, y = 400, width = 300, height = 100)
 
     button_ingles = Button(idi_screen, text = "English", font = font1, bg = dark_yellow,
@@ -52,18 +67,7 @@ def idioma_screen ():
 
 
 def machine ():
-    global idioma_screen, machine_screen
 
-    try:
-        idi_screen.destroy()
-    except:
-        pass
-
-    try:
-        admin_screen.destroy()
-    except:
-        pass
-    
 
     # Ventana principal, aqui se encuentra la animacion
 
@@ -79,7 +83,8 @@ def machine ():
 
     #Botones
     button = Button (machine_screen, text = "prueba", font = font1, bg = dark_yellow,
-                             activebackground = purple, activeforeground = dark_yellow, command = admin)
+                             activebackground = purple, activeforeground = dark_yellow,
+                      command = lambda x = machine_screen: openAdmin(x))
     button.place (x = 200, y = 400, width = 300, height = 100)
 
     # Dibujos en pantalla
@@ -108,7 +113,8 @@ def admin():
 
     #Botones
     button = Button (admin_screen, text = "prueba2", font = font1, bg = dark_yellow,
-                             activebackground = purple, activeforeground = dark_yellow, command = machine)
+                             activebackground = purple, activeforeground = dark_yellow,
+                     command = lambda x = admin_screen: openMachine(x))
     button.place (x = 200, y = 400, width = 300, height = 100)
     mainloop()
 
