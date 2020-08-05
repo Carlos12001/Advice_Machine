@@ -74,22 +74,25 @@ def openMachine(window, idioma):
 # ---------------------------  tienda  ---------------------------- #
 
 def set_shop (tipo):
-    global sms, conse_var, dicho_var, chiste_var, screen_sms, active_shop, price_str, rest_var
+    global sms, conse_var, dicho_var, chiste_var, screen_sms, active_shop, price_str, rest_var, price
     # tipo consejo
     if tipo == 1 and active_shop:
         screen_sms.set(sms + "\n" + conse_var)
         active_shop = False
-
-        price_str.set(rest_var + "250") # agregar variable que cambie
+        price = 250
+        price_str.set(rest_var + str(price)) # agregar variable que cambie
     # tipo dicho
     elif tipo == 2 and active_shop:
         screen_sms.set(sms + "\n" + dicho_var)
         active_shop = False
-        price_str.set(rest_var + "500")
+        price = 500
+        price_str.set(rest_var + str(price))
     # tipo chiste
     elif tipo == 3 and active_shop:
         screen_sms.set(sms + "\n" + chiste_var)
         active_shop = False
+        price = 700
+        price_str.set(rest_var + str(price))
 
 def shop(pay):
        price = 500
@@ -104,16 +107,33 @@ def shop(pay):
            money.set(price)
            # logica vuelto
            pass
-       
+
+def coins_rest(type):
+    global price, money_tmp
+    if type == 25:
+        price -= 25
+        money_tmp -= 25
+    elif type == 50:
+        price -= 50
+        money_tmp -= 50
+    elif type == 100:
+        price -= 100
+        money_tmp -= 100
+    elif type == 500:
+        price -= 500
+        money_tmp -= 500
 # --------------------------- Animacion ---------------------------- #
 
 def paying(window):
     global price, rest_var, money
 
-    if 0<18:
+    if price > 0:
+        pass
+    elif price == 0:
         return paying_aux(window)
     else:
-        pass
+        price = -1 * price
+        money.set("Su vuelto es" + str(price))
 
 def paying_aux(window):
     t = Thread( name = 'Ani_Paper', target = paying_aux_2, args = (window,))
@@ -184,7 +204,7 @@ def idioma_screen ():
 
 def machine ():
     set_idi("español")
-    global conse_var, dicho_var, chiste_var, coins_var, money, screen_sms, price_str
+    global conse_var, dicho_var, chiste_var, coins_var, money, screen_sms, price_str, money_tmp
     global active_shop , im_printing
 
     #Variables de la ventana
