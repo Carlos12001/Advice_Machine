@@ -20,33 +20,147 @@ font3 = ("arial", 18)
 font4 = ("fixedsys", 20)
 font5 = ("fixedsys", 18)
 
-
 # -------------------------- Bases de datos ----------------------------- #
+class Message(object):
+    def __init__(self, text, idioma):
+
+
+        #Logica para cargar todos los datos del texto
+        data =  text.split('@')
+        data = data[1: len(data)-1]
+        i_coun = 0
+        real_data = []
+        self.spaces= []
+        for element in data:
+            if i_coun%2==0:
+                real_data.append(element)
+            else:
+                self.spaces.append(element)
+            i_coun+=1
+
+        #Atrbutos de la clase
+        self.idioma = idioma
+
+        self.type = int(real_data [0])
+
+        self.message_id = int(real_data[1])
+
+        self.message_text = ""
+        message_text = real_data[2].split('\\')
+        i_coun = 0
+        for word in message_text:
+            self.message_text += word
+            if i_coun+1 == len(message_text):
+                break
+            self.message_text += '\n'
+
+        self.cost = int(real_data[3])
+
+        self.solds = int(real_data[4])
+
+        self.rute_image = real_data
+
+    def get_idioma(self):
+        return self.idioma
+
+    def get_type(self):
+        return self.type
+
+    def get_message_id(self):
+        return self.message_id
+
+    def get_message_text(self):
+        return self.message_text
+
+    def get_cost(self):
+        return self.cost
+
+    def get_solds(self):
+        return self.solds
+
+    def get_rute(self):
+        return self.rute_image
+
+    def increse_solds(self, delete = False):
+
+        #Logica si borra el sold o lo incremento
+        if delete:
+            value = 0
+        else:
+            value = self.solds+1
+
+
+        # Ruta del archivo que depende del idioma
+        if idioma == "español":
+            rute = "Data/base_espa.txt"
+        elif idioma == "ingles":
+            rute = "Data/base_ing.txt"
+
+        # Carga el archivo
+        file = open(rute, "r+")
+
+        # Obtiene los datos
+        data_archivo = file.readlines()
+
+
+
+
+        #Lista con strings del archivo
+
+        all_data = [        data_archivo[0][:len(data_archivo)-1]        ]
+        for text in data_archivo[1:]:
+            text = text.split('@')
+
+            #Revisa cual mesaje es y si lo es cambia el dato
+            if int(text[0]) == self.type and int(text[2]) == self.message_id:
+                text[9]=f'{value}'
+
+            #Reacomoda la linea de texto
+            i = 0
+            line_text = ""
+            for line in text:
+                if i%2==0:
+                    line_text += "@"+line+"@"
+                else:
+                    line_text +=  line
+
+
+            all_data.append(line_text)
+
+        #logica para guardar los datos
+
+        # Cierra el archivo
+        file.close()
+
+
+
+
+                
 
 def load_base(idioma):
+    global conse_base, dicho_base, chiste_base
+    #Ruta del archivo que depende del idioma
     if idioma == "español":
         rute = "Data/base_espa.txt"
     elif idioma == "ingles":
         rute = "Data/base_ing.txt"
+    #Carga el archivo
     file = open(rute, "r")
+    #Obtiene los datos
+    data_archivo = file.readlines()
+
+    # Cierra el archivo
+    file.close()
+
+    #Lista de objetos que depende
     conse_base = []  # varibale qu alamcena los consejos
     dicho_base = []  # variable que almacena los dichos
     chiste_base = []  # variable que almacena los chistes
-    cont = 0
-    for line in file:
-        if 0 <= cont <= 16:
-            conse_base.append(line)
-            cont +=1
-        elif 16 < cont <= 33:
-            dicho_base.append(line)
-            cont += 1
-        elif 33 < cont <= 50:
-            chiste_base.append(line)
-            cont += 1
-    file.close()
-    print(conse_base)
-   0#print(dicho_base)
-    #print(chiste_base)
+    #Crea la variavles del
+    for text in data_archivo[1:]:
+        message = Message(text,idioma)
+
+
 
 # -------------------------- Setea el idioma ---------------------------- #
 def set_idi(idioma):
@@ -69,7 +183,6 @@ def set_idi(idioma):
         off_var = "Apagar"
         return_var = "Volver"
         ex_var = "Generar Excel"
-        load_base(idioma)
     elif idioma == "ingles":
         # Texto machine
         conse_var = "Advice"
@@ -87,7 +200,6 @@ def set_idi(idioma):
 
         # ----logica para cargar archivo en englicsj---
 
-
 # ---------------------------  Abrir Ventanas  ---------------------------- #
 
 def openAdmin(window, idioma):
@@ -99,6 +211,7 @@ def openAdmin(window, idioma):
 def openMachine(window, idioma):
     window.destroy()
     set_idi(idioma)
+    load_base(idioma)
     machine()
 
 
@@ -125,49 +238,34 @@ def set_shop(tipo):
         price = 700
         price_str.set(rest_var + str(price))
 
-
-def shop(pay):
-    global price_str, price
-    if (price - pay) >= 0:
-        price -= pay
-        price_str.set(rest_var + str(price))
-    elif (price - pay) == 0:
-        # logica de print
-        pass
-    else:
-        price = -1 * (price - pay)
-        money.set(price)
-        # logica vuelto
-        pass
-
-
 def coins_rest(type1, window):
-    global price, money_tmp, price_str, money
-    if price > 0:
-        if type1 == 25:
-            price -= 25
-            money_tmp -= 25
-            price_str.set(rest_var + str(price))
-            money.set(money_tmp)
-            return paying(window)
-        elif type1 == 50:
-            price -= 50
-            money_tmp -= 50
-            price_str.set(rest_var + str(price))
-            money.set(money_tmp)
-            return paying(window)
-        elif type1 == 100:
-            price -= 100
-            money_tmp -= 100
-            price_str.set(rest_var + str(price))
-            money.set(money_tmp)
-            return paying(window)
-        elif type1 == 500:
-            price -= 500
-            money_tmp -= 500
-            price_str.set(rest_var + str(price))
-            money.set(money_tmp)
-            return paying(window)
+    global price, money_tmp, price_str, money  , active_shop
+    if not active_shop:
+        if price > 0:
+            if type1 == 25:
+                price -= 25
+                money_tmp -= 25
+                price_str.set(rest_var + str(price))
+                money.set(money_tmp)
+                return paying(window)
+            elif type1 == 50:
+                price -= 50
+                money_tmp -= 50
+                price_str.set(rest_var + str(price))
+                money.set(money_tmp)
+                return paying(window)
+            elif type1 == 100:
+                price -= 100
+                money_tmp -= 100
+                price_str.set(rest_var + str(price))
+                money.set(money_tmp)
+                return paying(window)
+            elif type1 == 500:
+                price -= 500
+                money_tmp -= 500
+                price_str.set(rest_var + str(price))
+                money.set(money_tmp)
+                return paying(window)
 
 
 # --------------------------- Animacion ---------------------------- #
@@ -209,7 +307,8 @@ def paying_aux_2(window):
 
 
 def paying_aux_3(s):
-    global all_canvas, titulo_ventana_ms
+    global all_canvas, titulo_ventana_ms, active_shop
+    active_shop = True
     for i in all_canvas:
         i.place(x=-1000)
     window = Tk()
@@ -254,7 +353,6 @@ def idioma_screen():
 
 
 def machine():
-    set_idi("español")
     global conse_var, dicho_var, chiste_var, coins_var, money, screen_sms, price_str, money_tmp
     global active_shop, im_printing
 
@@ -273,7 +371,7 @@ def machine():
 
     canvasP = Canvas(machine_screen, width=1200, height=800, bg=dark_green, highlightbackground=dark_green)
     canvasP.pack()
-
+    Label(machine_screen,text='prueba de texto\natravesado en un\n en un label para \n como se ve',font=font3).place(x=0,y=0)
     # Botones
 
     button_Conse = Button(machine_screen, text=conse_var, font=font3, bg=dark_yellow,
@@ -393,3 +491,4 @@ def admin():
 
 if __name__ == "__main__":
     idioma_screen()
+
