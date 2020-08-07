@@ -162,6 +162,35 @@ def load_base(idioma):
 
 
 
+# -------------------------- Base de ventas ----------------------------- #
+"""
+Ventas_read() se encarga de leer la ultima transaccion del archivo, solo lee la ultima linea
+
+ventas_load() se encarga de agregar una compra cada vez que el usurario la realiza
+                debemos agregar las variables de las clases
+"""
+def ventas_read():
+    global  N_transa
+    rute = "Data/base_ventas.txt"
+    file = open(rute, "r")
+    file_total = file.readlines()[- 1]
+    file.close()
+    ult_line = file_total.split("@")
+    N_transa = int(ult_line[1])
+
+def ventas_load():
+    global N_transa, total_money, vuelto
+    N_transa += 1  # Se incrementa el numero de transaccion
+    date = time.strftime("%d/%m/%y") # Se encarga de colocar la fecha
+    hour = time.strftime("%X")  # Se encarga de colocar la hora de la compra
+    type_sms = random.randint(1, 3)  # obtener estos valores de la clase
+    code_sms = random.randint(1, 50)  # obtener estos valores de la clase
+    price_sms = 250 # obtener de la clase
+    rute = "Data/base_ventas.txt"
+    file = open(rute, "a")
+    file.write( "\n" + "@" + str(N_transa) + "@" +  "    " + "@" +  date + "    " + "@" +  hour + "    " + "@" +  str(type_sms) + "   " + "@" +  str(code_sms)\
+                + "   " + "@" +  str(price_sms) + "  " + "@" +  str(total_money) + "    " + "@" +  str(vuelto))
+    file.close()
 # -------------------------- Setea el idioma ---------------------------- #
 def set_idi(idioma):
     global glo_idioma, reset_var, off_var, return_var, ex_var
@@ -238,31 +267,38 @@ def set_shop(tipo):
         price = 700
         price_str.set(rest_var + str(price))
 
+
+# inicio de variable total
+total_money = 0
 def coins_rest(type1, window):
-    global price, money_tmp, price_str, money  , active_shop
+    global price, money_tmp, price_str, money, total_money,active_shop
     if not active_shop:
         if price > 0:
             if type1 == 25:
                 price -= 25
                 money_tmp -= 25
+                total_money += 25
                 price_str.set(rest_var + str(price))
                 money.set(money_tmp)
                 return paying(window)
             elif type1 == 50:
                 price -= 50
                 money_tmp -= 50
+                total_money += 50
                 price_str.set(rest_var + str(price))
                 money.set(money_tmp)
                 return paying(window)
             elif type1 == 100:
                 price -= 100
                 money_tmp -= 100
+                total_money += 100
                 price_str.set(rest_var + str(price))
                 money.set(money_tmp)
                 return paying(window)
             elif type1 == 500:
                 price -= 500
                 money_tmp -= 500
+                total_money += 500
                 price_str.set(rest_var + str(price))
                 money.set(money_tmp)
                 return paying(window)
@@ -271,16 +307,22 @@ def coins_rest(type1, window):
 # --------------------------- Animacion ---------------------------- #
 
 def paying(window):
-    global price, rest_var, money, price_str, money_tmp
+    global price, rest_var, money, price_str, money_tmp, vuelto, total_money
     if price > 0:
         pass
     elif price == 0:
+        vuelto = 0
+        ventas_load()
+        total_money = 0
         return paying_aux(window)
     elif price < 0:
-        price = -1 * price
-        money_tmp += price
+        vuelto = -1 * price
+        money_tmp += vuelto
         money.set(money_tmp)
         price_str.set("Su vuelto es: " + str(price))
+        ventas_load()
+        vuelto = 0
+        total_money = 0
         return paying_aux(window)
 
 
@@ -302,7 +344,6 @@ def paying_aux_2(window):
         image_paper = Canvas(window, width=300, height=anchor)
         image_paper.place(x=110, y=310)
         all_canvas += [image_paper]
-
     image_paper.bind("<Button-1>", paying_aux_3)
 
 
