@@ -1,5 +1,5 @@
 from tkinter import *
-import random, time
+import random, time, pygame
 from threading import Thread
 
 # Colores
@@ -31,6 +31,7 @@ total_money = 0
 
 # -------------------------- Bases de datos ----------------------------- #
 
+
 class Message(object):
     def __init__(self, text, idioma):
 
@@ -54,20 +55,13 @@ class Message(object):
 
         self.message_id = int(real_data[1])
 
-        self.message_text = ""
-        message_text = real_data[2].split('\\')
-        i_coun = 0
-        for word in message_text:
-            self.message_text += word
-            if i_coun + 1 == len(message_text):
-                break
-            self.message_text += '\n'
+        self.message_text = real_data[2].split('\\')
 
         self.cost = int(real_data[3])
 
         self.solds = int(real_data[4])
 
-        self.rute_image = real_data
+        self.rute_image = real_data[5]
 
     def get_idioma(self):
         return self.idioma
@@ -119,7 +113,6 @@ class Message(object):
             text = text.split('@')
             # Revisa cual mesaje es y si lo es cambia el dato
             if int(text[1]) == self.type and int(text[3]) == self.message_id:
-                print(self.message_text)
                 text[9] = f'{value}'
 
             # Reacomoda la linea de texto para quede con el formato anterior
@@ -131,7 +124,6 @@ class Message(object):
                 else:
                     line_text += line
                 i += 1
-            print(line_text)
             all_data.append(line_text)
 
 
@@ -146,10 +138,6 @@ class Message(object):
             
         # Cierra el archivo
         file.close()
-
-        
-
-
 
 
 def load_base_message(idioma):
@@ -182,7 +170,6 @@ def load_base_message(idioma):
             ch_message_list.append(message)
         else:
             pass
-
 
 
 # -------------------------- Base de ventas ----------------------------- #
@@ -308,7 +295,7 @@ def set_shop(tipo):
         #Escoge mensage de la lista consejos
         select_message = random.choice(co_message_list)
         price = select_message.get_cost()
-        select_message.increse_solds()
+
 
         price_str.set(rest_var + str(price))  # agregar variable que cambie
     # tipo dicho
@@ -320,7 +307,6 @@ def set_shop(tipo):
         #Escoge mensage de la lista de dichos
         select_message = random.choice(di_message_list)
         price = select_message.get_cost()
-        select_message.increse_solds()
 
 
         price_str.set(rest_var + str(price))
@@ -333,7 +319,7 @@ def set_shop(tipo):
         #Escoge mensage de la lista de chistes
         select_message = random.choice(ch_message_list)
         price = select_message.get_cost()
-        select_message.increse_solds()
+
 
         price_str.set(rest_var + str(price))
 
@@ -416,14 +402,77 @@ def paying_aux_2(window):
 
 
 def paying_aux_3(s):
-    global all_canvas, titulo_ventana_ms, active_shop
+    global all_canvas, titulo_ventana_ms, active_shop, select_message
+
+
+    for i in all_canvas:
+        i.place(x=-1000)
+    active_shop = True
+    select_message.increse_solds()
+
+    #Ventana en pygame
+    pygame.init()
+    pygame.font.init()
+
+    #Configuraciones de esta
+    pygame.display.set_caption("Message")
+    screen = pygame.display.set_mode((500,650))
+    screen.fill((255,255,255))
+    #Fuente
+    font_1_pyg = pygame.font.SysFont("Times New Roman", 20)
+
+    #Imagen
+    image_message = pygame.image.load(select_message.get_rute())
+    run = True
+    while run:
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+                pygame.quit()
+
+        try:
+            # Dibujo imagen
+            screen.blit(image_message, (0, 0))
+
+            x_text = 250
+            y_text = 520
+
+            for element_text in select_message.get_message_text():
+                text_pygame(element_text, font_1_pyg, (0,0,0), screen, x_text, y_text)
+                y_text += 20
+
+            pygame.display.flip()
+        except:
+            pass
+
+
+def text_pygame (text, font, color, surface, x , y):
+    txtobj = font.render(text, 1, color)
+    txtrect = txtobj.get_rect()
+    txtrect.center = (x, y)
+    surface.blit(txtobj, txtrect)
+
+
+def paying_aux_3_old(s):
+    global all_canvas, titulo_ventana_ms, active_shop, select_message
+
     active_shop = True
     for i in all_canvas:
         i.place(x=-1000)
+
+    image_message = PhotoImage(file = 'resource/di01.png')
     window = Tk()
     window.resizable(width=False, height=False)
-    window.geometry('500x500+350+250')
+    window.geometry('500x650+350+250')
     window.title(titulo_ventana_ms)
+
+    Canvas(window, width = False, height = False, bg = white).place(x=0, y=0)
+
+    image_label = Label(window, image = image_message ).place(x=0, y=0)
+
+    message_label = Label(window, text = select_message.get_message_text(), font = font3).place(x=0, y=550)
+
 
     window.mainloop()
 
@@ -480,8 +529,8 @@ def machine():
 
     canvasP = Canvas(machine_screen, width=1200, height=800, bg=dark_green, highlightbackground=dark_green)
     canvasP.pack()
-    Label(machine_screen, text='prueba de texto\natravesado en un\n en un label para \n como se ve', font=font3).place(
-        x=0, y=0)
+
+    
     # Botones
 
     button_Conse = Button(machine_screen, text=conse_var, font=font3, bg=dark_yellow,
@@ -504,10 +553,6 @@ def machine():
                           command=lambda x=machine_screen, y=glo_idioma: openAdmin(x, y))
     button_admin.place(x=850, y=700, width=100, height=50)
 
-    button_pay = Button(
-        machine_screen, text='PUSH ME ( ͡° ͜ʖ ͡°)', font=font3, bg=red_light,
-        command=lambda x=machine_screen: paying(x))
-    button_pay.place(x=750, y=560)
 
     # Boton monedas
     button_coin25 = Button(machine_screen, text=25, font=font3, bg=brown, relief=FLAT,
