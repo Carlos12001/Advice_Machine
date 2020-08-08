@@ -1,6 +1,6 @@
-@Type	@	Num	@Message															@Precio		@Ventas		@Imagen@
-@1@		@1@	@Haz el bien y no mires a quien.@	  											@20@		@1@		@resource/co01.png@
-@1@		@2@	@Ama el trabajo que haces.@		  											@10@		@0@		@resource/co02.png@
-@1@		@3@	@Demuestra Gratitud.@														@20@		@0@		@resoruce/co03.png@
-@2@		@1@	@Camaron que se duerme.@			  										@100@		@0@		@resource/di01.png@
-@3@		@1@	@Sabes que guarda Darth Vader en su nevera?\Helado oscuro.@									@300@		@0@		@resource/ch01.png@								300		@0		@resource/ch1.png@
+@Type@		@Num@		@Message@															@Precio@	@Ventas@	@Imagen@
+@1@		@1@		@Haz el bien y no mires a quien.@	  											@20@		@0@		@resource/co01.png@
+@1@		@2@		@Ama el trabajo que haces.@		  											@10@		@0@		@resource/co02.png@
+@1@		@3@		@Demuestra Gratitud.@														@20@		@0@		@resource/co03.png@
+@2@		@1@		@Camaron que se duerme.@			  										@100@		@0@		@resource/di01.png@
+@3@		@1@		@Sabes que guarda Darth Vader en su nevera?\Helado oscuro.@									@300@		@0@		@resource/ch01.png@
