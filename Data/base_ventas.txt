@@ -2,4 +2,3 @@
 Número	 Fecha	       Hora	 Tipo Código Monto Pago Vuelto
 Transacción 			Mensaje
 ---------------------------------------------------------------------------   
-
