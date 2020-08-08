@@ -139,6 +139,9 @@ class Message(object):
         # Cierra el archivo
         file.close()
 
+        #Acutiliza el valor en la clase
+        self.solds = value
+
 
 def load_base_message(idioma):
     global co_message_list, di_message_list, ch_message_list
@@ -190,11 +193,12 @@ def ventas_read():
 
 def ventas_load():
     global N_transa, total_money, vuelto
+    global select_message
     N_transa += 1  # Se incrementa el numero de transaccion
     date = time.strftime("%d/%m/%y")  # Se encarga de colocar la fecha
     hour = time.strftime("%X")  # Se encarga de colocar la hora de la compra
-    type_sms = random.randint(1, 3)  # obtener estos valores de la clase
-    code_sms = random.randint(1, 50)  # obtener estos valores de la clase
+    type_sms = select_message.get_type()  # obtener estos valores de la clase
+    code_sms = select_message.get_message_id()  # obtener estos valores de la clase
     price_sms = 250  # obtener de la clase
     rute = "Data/base_ventas.txt"
     file = open(rute, "a")
