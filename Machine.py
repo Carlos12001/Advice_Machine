@@ -59,7 +59,11 @@ def ventas_read():
     file_total = file.readlines()[- 1]
     file.close()
     ult_line = file_total.split("@")
-    N_transa = int(ult_line[1])
+    if len(ult_line) > 2:
+        N_transa = int(ult_line[1])
+    else:
+        N_transa = 1
+        print(N_transa)
 
 def ventas_load():
     global N_transa, total_money, vuelto
@@ -74,6 +78,28 @@ def ventas_load():
     file.write( "\n" + "@" + str(N_transa) + "@" +  "    " + "@" +  date + "    " + "@" +  hour + "    " + "@" +  str(type_sms) + "   " + "@" +  str(code_sms)\
                 + "   " + "@" +  str(price_sms) + "  " + "@" +  str(total_money) + "    " + "@" +  str(vuelto))
     file.close()
+
+
+# -------------------- Funciones administracion -------------------- #
+
+def reset():
+    # agregar logica para reset de ventas individuales
+    rute = "Data/base_ventas.txt"
+    file = open(rute, "r")
+    total_ventas = file.readlines()[:4]
+    file.close()
+    file = open(rute, "w")
+    for linea in total_ventas:
+        file.write(linea)
+    file.close()
+
+
+def turn_off():
+    pass
+
+
+def excel():
+    pass
 # -------------------------- Setea el idioma ---------------------------- #
 def set_idi(idioma):
     global glo_idioma, reset_var, off_var, return_var, ex_var
@@ -166,6 +192,7 @@ def set_shop(tipo):
         money.set(price)
         # logica vuelto
         pass"""
+
 # inicio de variable total
 total_money = 0
 def coins_rest(type1, window):
@@ -382,7 +409,7 @@ def machine():
     # texto
     canvasP.create_text(350, 50, text="ADVICE MACHINE", font=font2, fill=dark_yellow)
     canvasP.create_text(1100, 45, text=coins_var, font=font4, fill=dark_green)
-    canvasP.create_text(1100, 115, text=str(money), font=font4, fill=black)
+    #canvasP.create_text(1100, 115, text=str(money), font=font4, fill=black)
 
     mainloop()
 
@@ -410,7 +437,7 @@ def admin():
     button_return.place(x=20, y=700, width=350, height=50)
     # Resetear la maquina
     button_reset = Button(admin_screen, text=reset_var, font=font4, bg=gray,
-                          activebackground=purple, activeforeground=dark_yellow)
+                          activebackground=purple, activeforeground=dark_yellow, command =  reset())
     button_reset.place(x=20, y=400, width=350, height=50)
     # Apagar la maquina
     button_off = Button(admin_screen, text=off_var, font=font4, bg=gray,
