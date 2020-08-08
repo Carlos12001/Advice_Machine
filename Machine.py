@@ -415,7 +415,7 @@ def paying_aux_3(s):
     pygame.font.init()
 
     #Configuraciones de esta
-    pygame.display.set_caption("Message")
+    pygame.display.set_caption(titulo_ventana_ms)
     screen = pygame.display.set_mode((500,650))
     screen.fill((255,255,255))
     #Fuente
