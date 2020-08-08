@@ -25,7 +25,7 @@ global co_message_list, di_message_list, ch_message_list, select_message
 co_message_list = []
 di_message_list = []
 ch_message_list = []
-selct_message = None
+select_message = None
 total_money = 0
 
 
@@ -99,9 +99,9 @@ class Message(object):
             value = self.solds + 1
 
         # Ruta del archivo que depende del idioma
-        if idioma == "español":
+        if self.idioma == "español":
             rute = "Data/base_espa.txt"
-        elif idioma == "ingles":
+        elif self.idioma == "ingles":
             rute = "Data/base_ing.txt"
 
         # Carga el archivo
@@ -110,38 +110,46 @@ class Message(object):
         # Obtiene los datos
         data_archivo = file.readlines()
 
+        # Cierra el archivo
+        file.close()
+
         # Lista con strings del archivo
-        all_data = [data_archivo[0][:len(data_archivo) - 1]]
+        all_data = [data_archivo[0]]
         for text in data_archivo[1:]:
             text = text.split('@')
-
             # Revisa cual mesaje es y si lo es cambia el dato
-            if int(text[0]) == self.type and int(text[2]) == self.message_id:
+            if int(text[1]) == self.type and int(text[3]) == self.message_id:
+                print(self.message_text)
                 text[9] = f'{value}'
 
-            # Reacomoda la linea de texto
+            # Reacomoda la linea de texto para quede con el formato anterior
             i = 0
             line_text = ""
             for line in text:
-                if i % 2 == 0:
-                    line_text += "@" + line + "@"
+                if i % 2 != 0:
+                    line_text += '@' + line + '@'
                 else:
                     line_text += line
-
+                i += 1
+            print(line_text)
             all_data.append(line_text)
+
+
+
+        # Carga el archivo
+        file = open(rute, "w")
 
         # logica para guardar los datos modificados en el archivo
         i_counter = 0
         for data_line in all_data:
-            if i_counter == len(all_data)-1:
-                file.write(data_line)
-            else:
-                file.write(data_line+"\n")
-            i_counter += 1
-        
-
+            file.write(data_line)
+            
         # Cierra el archivo
         file.close()
+
+        
+
+
 
 
 def load_base_message(idioma):
@@ -174,13 +182,7 @@ def load_base_message(idioma):
             ch_message_list.append(message)
         else:
             pass
-    print("Lista de consejos")
-    print(co_message_list)
-    print("\nLista de dichos")
-    print(di_message_list)
-    print("\nLista de chistes")
-    print(ch_message_list)
-    
+
 
 
 # -------------------------- Base de ventas ----------------------------- #
@@ -296,7 +298,7 @@ def openMachine(window, idioma):
 # ---------------------------  tienda  ---------------------------- #
 
 def set_shop(tipo):
-    global sms, conse_var, dicho_var, chiste_var, screen_sms, active_shop, price_str, rest_var, price, co_message_list, di_message_list,ch_message_list , selct_message
+    global sms, conse_var, dicho_var, chiste_var, screen_sms, active_shop, price_str, rest_var, price, co_message_list, di_message_list,ch_message_list , select_message
     # tipo consejo
     if tipo == 1 and active_shop:
         screen_sms.set(sms + "\n" + conse_var)
@@ -304,9 +306,9 @@ def set_shop(tipo):
 
 
         #Escoge mensage de la lista consejos
-        selct_message = random.choice(co_message_list)
-        price = selct_message.get_cost()
-        #select_message.increse_solds()
+        select_message = random.choice(co_message_list)
+        price = select_message.get_cost()
+        select_message.increse_solds()
 
         price_str.set(rest_var + str(price))  # agregar variable que cambie
     # tipo dicho
@@ -316,9 +318,9 @@ def set_shop(tipo):
 
 
         #Escoge mensage de la lista de dichos
-        selct_message = random.choice(di_message_list)
-        price = selct_message.get_cost()
-        #select_message.increse_solds()
+        select_message = random.choice(di_message_list)
+        price = select_message.get_cost()
+        select_message.increse_solds()
 
 
         price_str.set(rest_var + str(price))
@@ -329,9 +331,9 @@ def set_shop(tipo):
 
 
         #Escoge mensage de la lista de chistes
-        selct_message = random.choice(ch_message_list)
-        price = selct_message.get_cost()
-        #select_message.increse_solds()
+        select_message = random.choice(ch_message_list)
+        price = select_message.get_cost()
+        select_message.increse_solds()
 
         price_str.set(rest_var + str(price))
 
