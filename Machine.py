@@ -132,11 +132,6 @@ class Message(object):
         # Cierra el archivo
         file.close()
 
-
-
-
-                
-
 def load_base(idioma):
     global conse_base, dicho_base, chiste_base
     #Ruta del archivo que depende del idioma
@@ -163,12 +158,7 @@ def load_base(idioma):
 
 
 # -------------------------- Base de ventas ----------------------------- #
-"""
-Ventas_read() se encarga de leer la ultima transaccion del archivo, solo lee la ultima linea
 
-ventas_load() se encarga de agregar una compra cada vez que el usurario la realiza
-                debemos agregar las variables de las clases
-"""
 def ventas_read():
     global  N_transa
     rute = "Data/base_ventas.txt"
@@ -240,6 +230,7 @@ def openAdmin(window, idioma):
 def openMachine(window, idioma):
     window.destroy()
     set_idi(idioma)
+    ventas_read()
     load_base(idioma)
     machine()
 
