@@ -1,6 +1,20 @@
 from tkinter import *
-import random, time, pygame
+import random, time, pygame, pickle
 from threading import Thread
+
+"""
+Se crea un documento con serilizacion 
+
+data = open("Data/Ao3", "wb")
+pickle.dump("admin", data)
+
+files = open("Data/Ao3", "rb")
+contraseña = pickle.load(files)
+print(contraseña)
+
+Se elimina por seguridad de la maquina en caso de que revisen el codigo y asi obtengan la contraseña
+"""
+
 
 # Colores
 
@@ -12,6 +26,7 @@ white = "#FFFFFF"
 gray = "#AEAEAE"
 black = "#000000"
 red_light = '#c26d06'
+red = "#FF6666"
 # fonts
 
 font1 = ("fixedsys", 25)
@@ -30,7 +45,6 @@ total_money = 0
 
 
 # -------------------------- Bases de datos ----------------------------- #
-
 
 class Message(object):
     def __init__(self, text, idioma):
@@ -206,6 +220,19 @@ def ventas_load():
 
 # -------------------- Funciones administracion -------------------- #
 
+def login_validation(entry_box, window1, window2, canvas):
+    global invalid
+    file = open("Data/Ao3", "rb")
+    valid = pickle.load(file)
+    entry = entry_box.get()
+    if entry == valid:
+        window1.destroy()
+        window2.destroy()
+        admin()
+    else:
+        canvas.create_text(250, 60, text=invalid, font=font5, fill=red)
+
+
 def reset():
     # agregar logica para reset de ventas individuales
     rute = "Data/base_ventas.txt"
@@ -251,13 +278,22 @@ def turn_off():
 def excel():
     pass
 
+# -------------------------- Contraseñas -------------------------------- #
+
+def new_password():
+    pass
+
+def password_validation(entry_box):
+    entry = entry_box.get()
+    for letter in entry:
+        pass
 
 # -------------------------- Setea el idioma ---------------------------- #
 
 def set_idi(idioma):
     global glo_idioma, reset_var, off_var, return_var, ex_var, on_sms, off_sms, turn_off_title
-    global conse_var, dicho_var, chiste_var, coins_var, sms, rest_var, vuelto_sms
-    global titulo_ventana_ms
+    global conse_var, dicho_var, chiste_var, coins_var, sms, rest_var, vuelto_sms, contra_sms
+    global titulo_ventana_ms, invalid
 
     glo_idioma = idioma
     if idioma == "español":
@@ -278,6 +314,8 @@ def set_idi(idioma):
         on_sms = "Cancelar"
         off_sms = "Apagar"
         turn_off_title = "¿Quiere apagar la máquina?"
+        contra_sms = "Contraseña"
+        invalid = "Contraseña incorrecta"
     elif idioma == "ingles":
         # Texto machine
         conse_var = "Advice"
@@ -296,6 +334,8 @@ def set_idi(idioma):
         on_sms = "Cancel"
         off_sms = "Turn off"
         turn_off_title = "Do you want to turn off the machine?"
+        contra_sms = "Password"
+        invalid = "Incorrect password"
 
         # ----logica para cargar archivo en englicsj---
 
@@ -318,6 +358,9 @@ def openMachine(window, idioma):
 def openOff(window):
     window.destroy()
     turn_off()
+
+def openLogin(window):
+    login(window)
 
 def destroy(window):
     window.destroy()
@@ -573,7 +616,7 @@ def machine():
     # Botones
 
     button_Conse = Button(machine_screen, text=conse_var, font=font3, bg=dark_yellow,
-                          activebackground=purple, activeforeground=dark_yellow, relief=RIDGE,
+                          activebackground=purple, activeforeground=dark_yellow, relief=SUNKEN,
                           command=lambda x=1: set_shop(x))
     button_Conse.place(x=850, y=300, width=100, height=50)
 
@@ -589,7 +632,7 @@ def machine():
 
     button_admin = Button(machine_screen, text="ADMIN", font=font3, bg=gray,
                           activebackground=purple, activeforeground=dark_yellow, relief=SUNKEN,
-                          command=lambda x=machine_screen, y=glo_idioma: openAdmin(x, y))
+                          command=lambda x= machine_screen: openLogin(x))
     button_admin.place(x=850, y=700, width=100, height=50)
 
 
@@ -649,6 +692,39 @@ def machine():
 
     mainloop()
 
+
+def login(window1):
+    global contra_sms
+
+    # Ventana principal, aqui se encuentra la animacion
+
+    login_screen = Tk()  # se crea una ventana de inicio
+    login_screen.title("Advice Machine")  # Cambiar el nombre a la ventana
+    login_screen.geometry("500x250+450+400")
+    login_screen.resizable(0, 0)  # No hay cambio de tamaño de la ventana
+
+    # se crea un canvas para dibujar
+
+    canvas_log = Canvas(login_screen, width=500, height=250, bg=gray, highlightbackground=gray)
+    canvas_log.pack()
+
+    entry_passw = Entry(login_screen, font=font5, bg=white, bd=3, show="*")
+    entry_passw.place(x=50, y=100, width=400, heigh=50)
+
+    # Botones
+
+    button_valid = Button(login_screen, text= "ok", font=font5, bg=gray,
+                            activeforeground=dark_yellow, command= lambda x=entry_passw, y=window1,
+                            z= login_screen, w = canvas_log : login_validation(x, y, z, w))
+    button_valid.place(x=100, y=180, width=300, height=50)
+
+
+
+
+    # Texto
+    canvas_log.create_text(250, 20, text=contra_sms, font=font5)
+
+    mainloop()
 
 def admin():
     global glo_idioma, reset_var, off_var, return_var, ex_var
