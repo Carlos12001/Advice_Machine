@@ -573,7 +573,7 @@ def machine():
     # Botones
 
     button_Conse = Button(machine_screen, text=conse_var, font=font3, bg=dark_yellow,
-                          activebackground=purple, activeforeground=dark_yellow, relief=SUNKEN,
+                          activebackground=purple, activeforeground=dark_yellow, relief=RIDGE,
                           command=lambda x=1: set_shop(x))
     button_Conse.place(x=850, y=300, width=100, height=50)
 
@@ -594,19 +594,27 @@ def machine():
 
 
     # Boton monedas
-    button_coin25 = Button(machine_screen, text=25, font=font3, bg=brown, relief=FLAT,
+    img_25 = PhotoImage(file='resource/25.gif')
+    coin25_img = img_25.subsample(4, 4)
+    button_coin25 = Button(machine_screen, image = coin25_img, font=font3, bg=brown, relief=FLAT,
                            command=lambda x=25, y=machine_screen: coins_rest(x, y))
     button_coin25.place(x=1050, y=150, width=100, height=100)
 
-    button_coin50 = Button(machine_screen, text=50, font=font3, bg=brown, relief=FLAT,
+    img_50 = PhotoImage(file='resource/50.gif')
+    coin50_img = img_50.subsample(4, 4)
+    button_coin50 = Button(machine_screen,image = coin50_img, font=font3, bg=brown, relief=FLAT,
                            command=lambda x=50, y=machine_screen: coins_rest(x, y))
     button_coin50.place(x=1050, y=300, width=100, height=100)
 
-    button_coin100 = Button(machine_screen, text=100, font=font3, bg=brown, relief=FLAT,
+    img_100 = PhotoImage(file='resource/100.gif')
+    coin100_img = img_100.subsample(4, 4)
+    button_coin100 = Button(machine_screen,image = coin100_img, font=font3, bg=brown, relief=FLAT,
                             command=lambda x=100, y=machine_screen: coins_rest(x, y))
     button_coin100.place(x=1050, y=450, width=100, height=100)
 
-    button_coin500 = Button(machine_screen, text=500, font=font3, bg=brown, relief=FLAT,
+    img_500 = PhotoImage(file='resource/500.gif')
+    coin500_img = img_500.subsample(7, 7)
+    button_coin500 = Button(machine_screen, image = coin500_img, font=font3, bg=brown, relief=FLAT,
                             command=lambda x=500, y=machine_screen: coins_rest(x, y))
     button_coin500.place(x=1050, y=600, width=100, height=100)
 
