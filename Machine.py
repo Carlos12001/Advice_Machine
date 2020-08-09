@@ -160,8 +160,6 @@ def load_base_message(idioma):
     file.close()
 
 
-
-
     # Crea la variavles del
     for text in data_archivo[1:]:
         message = Message(text, idioma)
@@ -188,7 +186,6 @@ def ventas_read():
         N_transa = int(ult_line[1])
     else:
         N_transa = 1
-        print(N_transa)
 
 
 def ventas_load():
@@ -202,9 +199,8 @@ def ventas_load():
     price_sms = 250  # obtener de la clase
     rute = "Data/base_ventas.txt"
     file = open(rute, "a")
-    file.write("\n" + "@" + str(N_transa) + "@" + "    " + "@" + date + "    " + "@" + hour + "    " + "@" + str(
-        type_sms) + "   " + "@" + str(code_sms) \
-               + "   " + "@" + str(price_sms) + "  " + "@" + str(total_money) + "    " + "@" + str(vuelto))
+    file.write("\n" + "@" + str(N_transa) + "@" + "    " + "@" + date + "@" + "    " + "@" + hour + "@" + "    " + "@" + str(
+        type_sms) + "@" + "   " + "@" + str(code_sms) + "@" +"   " + "@" + str(price_sms) + "@" + "  " + "@" + str(total_money) + "@" + "    " + "@" + str(vuelto) + "@" )
     file.close()
 
 
@@ -223,7 +219,33 @@ def reset():
 
 
 def turn_off():
-    pass
+    global on_sms, off_sms, turn_off_title, glo_idioma
+    # Ventana de apagado
+
+    off_screen = Tk()  # se crea una ventana de inicio
+    off_screen.title("Advice Machine")  # Cambiar el nombre a la ventana
+    off_screen.geometry("1200x800+100+100")
+    off_screen.resizable(0, 0)  # No hay cambio de tamaño de la ventana
+
+    # se crea un canvas para dibujar
+
+    canvas_idio = Canvas(off_screen, width=1200, height=800, bg=purple, highlightbackground=dark_green)
+    canvas_idio.pack()
+
+    # Botones
+
+    button_on = Button(off_screen, text=on_sms, font=font1, bg=dark_yellow,
+                            activebackground=purple, activeforeground=dark_yellow, command = lambda x = off_screen, y = glo_idioma: openMachine(x, y))
+    button_on.place(x=200, y=400, width=300, height=100)
+
+    button_off = Button(off_screen, text=off_sms, font=font1, bg=dark_yellow,
+                           activebackground=purple, activeforeground=dark_yellow, command = lambda x = off_screen: destroy(x))
+    button_off.place(x=700, y=400, width=300, height=100)
+
+    # Texto
+    canvas_idio.create_text(600, 100, text=turn_off_title, font=font2)
+
+    mainloop()
 
 
 def excel():
@@ -233,8 +255,8 @@ def excel():
 # -------------------------- Setea el idioma ---------------------------- #
 
 def set_idi(idioma):
-    global glo_idioma, reset_var, off_var, return_var, ex_var
-    global conse_var, dicho_var, chiste_var, coins_var, sms, rest_var
+    global glo_idioma, reset_var, off_var, return_var, ex_var, on_sms, off_sms, turn_off_title
+    global conse_var, dicho_var, chiste_var, coins_var, sms, rest_var, vuelto_sms
     global titulo_ventana_ms
 
     glo_idioma = idioma
@@ -247,11 +269,15 @@ def set_idi(idioma):
         sms = "Su selección es:"
         titulo_ventana_ms = 'Paper'
         rest_var = "Monto a pagar: "
+        vuelto_sms = "Su vuelto es: "
         # Texto admin
         reset_var = "Restaurar"
         off_var = "Apagar"
         return_var = "Volver"
         ex_var = "Generar Excel"
+        on_sms = "Cancelar"
+        off_sms = "Apagar"
+        turn_off_title = "¿Quiere apagar la máquina?"
     elif idioma == "ingles":
         # Texto machine
         conse_var = "Advice"
@@ -261,11 +287,15 @@ def set_idi(idioma):
         sms = "Your selection is:"
         titulo_ventana_ms = 'Papel'
         rest_var = "Amount to be paid: "
+        vuelto_sms = "Your change is: "
         # Texto admin
         reset_var = "Reset"
         off_var = "Turn off"
         return_var = "Return"
         ex_var = "Generate Excel"
+        on_sms = "Cancel"
+        off_sms = "Turn off"
+        turn_off_title = "Do you want to turn off the machine?"
 
         # ----logica para cargar archivo en englicsj---
 
@@ -285,16 +315,21 @@ def openMachine(window, idioma):
     load_base_message(idioma)
     machine()
 
+def openOff(window):
+    window.destroy()
+    turn_off()
 
+def destroy(window):
+    window.destroy()
 # ---------------------------  tienda  ---------------------------- #
 
 def set_shop(tipo):
-    global sms, conse_var, dicho_var, chiste_var, screen_sms, active_shop, price_str, rest_var, price, co_message_list, di_message_list,ch_message_list , select_message
+    global sms, conse_var, dicho_var, chiste_var, screen_sms, active_shop, price_str, rest_var, price, co_message_list,\
+        di_message_list,ch_message_list , select_message
     # tipo consejo
     if tipo == 1 and active_shop:
         screen_sms.set(sms + "\n" + conse_var)
         active_shop = False
-
 
         #Escoge mensage de la lista consejos
         select_message = random.choice(co_message_list)
@@ -365,7 +400,7 @@ def coins_rest(type1, window):
 # --------------------------- Animacion ---------------------------- #
 
 def paying(window):
-    global price, rest_var, money, price_str, money_tmp, vuelto, total_money
+    global price, rest_var, money, price_str, money_tmp, vuelto, total_money, vuelto_sms
     if price > 0:
         pass
     elif price == 0:
@@ -377,7 +412,7 @@ def paying(window):
         vuelto = -1 * price
         money_tmp += vuelto
         money.set(money_tmp)
-        price_str.set("Su vuelto es: " + str(price))
+        price_str.set(vuelto_sms + str(price))
         ventas_load()
         vuelto = 0
         total_money = 0
@@ -630,11 +665,11 @@ def admin():
     button_return.place(x=20, y=700, width=350, height=50)
     # Resetear la maquina
     button_reset = Button(admin_screen, text=reset_var, font=font4, bg=gray,
-                          activebackground=purple, activeforeground=dark_yellow, command=reset())
+                          activebackground=purple, activeforeground=dark_yellow, command=reset)
     button_reset.place(x=20, y=400, width=350, height=50)
     # Apagar la maquina
     button_off = Button(admin_screen, text=off_var, font=font4, bg=gray,
-                        activebackground=purple, activeforeground=dark_yellow)
+                        activebackground=purple, activeforeground=dark_yellow, command=lambda x=admin_screen: openOff(x))
     button_off.place(x=20, y=500, width=350, height=50)
     # Excel
     button_ex = Button(admin_screen, text=ex_var, font=font4, bg=gray,
