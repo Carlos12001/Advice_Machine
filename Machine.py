@@ -35,6 +35,7 @@ font3 = ("arial", 18)
 font4 = ("fixedsys", 20)
 font5 = ("fixedsys", 18)
 
+
 # inicio de variable total
 global co_message_list, di_message_list, ch_message_list, select_message
 co_message_list = []
@@ -270,7 +271,7 @@ def turn_off():
     button_off.place(x=700, y=400, width=300, height=100)
 
     # Texto
-    canvas_idio.create_text(600, 100, text=turn_off_title, font=font2)
+    canvas_idio.create_text(600, 100, text=turn_off_title, font=font1)
 
     mainloop()
 
@@ -417,7 +418,7 @@ def save_pass(entru_box1, entry_box2):
 def set_idi(idioma):
     global glo_idioma, reset_var, off_var, return_var, ex_var, on_sms, off_sms, turn_off_title
     global conse_var, dicho_var, chiste_var, coins_var, sms, rest_var, vuelto_sms, contra_sms
-    global titulo_ventana_ms, invalid
+    global titulo_ventana_ms, invalid, oldpass_sms, newpass_sms, setpass_sms
 
     glo_idioma = idioma
     if idioma == "español":
@@ -440,6 +441,9 @@ def set_idi(idioma):
         turn_off_title = "¿Quiere apagar la máquina?"
         contra_sms = "Contraseña"
         invalid = "Contraseña incorrecta"
+        oldpass_sms = "Antigua"
+        newpass_sms = "Nueva"
+        setpass_sms = "Cambiar contraseña"
     elif idioma == "ingles":
         # Texto machine
         conse_var = "Advice"
@@ -460,6 +464,9 @@ def set_idi(idioma):
         turn_off_title = "Do you want to turn off the machine?"
         contra_sms = "Password"
         invalid = "Incorrect password"
+        oldpass_sms = "Old password"
+        newpass_sms = "New password"
+        setpass_sms = "Set a new password"
 
         # ----logica para cargar archivo en englicsj---
 
@@ -467,6 +474,8 @@ def set_idi(idioma):
 # ---------------------------  Abrir Ventanas  ---------------------------- #
 
 def openAdmin(window, idioma):
+    global active_admin
+    active_admin = True
     window.destroy()
     set_idi(idioma)
     admin()
@@ -484,7 +493,12 @@ def openOff(window):
     turn_off()
 
 def openLogin(window):
-    login(window)
+    global active_admin
+    if active_admin == True:
+        active_admin = False
+        login(window)
+
+
 
 def destroy(window):
     window.destroy()
@@ -718,10 +732,11 @@ def idioma_screen():
 
 def machine():
     global conse_var, dicho_var, chiste_var, coins_var, money, screen_sms, price_str, money_tmp
-    global active_shop, im_printing
+    global active_shop, im_printing, active_admin
 
     # Variables de la ventana
     active_shop = True
+    active_admin = True
     money = 1000
 
     # Ventana principal, aqui se encuentra la animacion
@@ -840,11 +855,11 @@ def login(window1):
     button_valid = Button(login_screen, text= "ok", font=font5, bg=gray,
                             activeforeground=dark_yellow, command= lambda x=entry_passw, y=window1,
                             z= login_screen, w = canvas_log : login_validation(x, y, z, w))
-    button_valid.place(x=100, y=180, width=150, height=50)
+    button_valid.place(x=90, y=180, width=150, height=50)
 
     button_change = Button(login_screen, text= "New pass", font=font5, bg=gray,
                             activeforeground=dark_yellow, command= lambda x= login_screen: new_password(x))
-    button_change.place(x=250, y=180, width=150, height=50)
+    button_change.place(x=260, y=180, width=150, height=50)
 
     # Texto
     canvas_log.create_text(250, 20, text=contra_sms, font=font5)
@@ -852,6 +867,7 @@ def login(window1):
     mainloop()
 
 def new_password(window):
+    global oldpass_sms, newpass_sms, setpass_sms
     window.destroy()
     # Ventana
 
@@ -862,14 +878,14 @@ def new_password(window):
 
     # se crea un canvas para dibujar
 
-    canvas_log = Canvas(new_screen, width=500, height=250, bg=gray, highlightbackground=gray)
-    canvas_log.pack()
+    canvas_new = Canvas(new_screen, width=500, height=250, bg=gray, highlightbackground=gray)
+    canvas_new.pack()
 
     entry_passw = Entry( new_screen, font=font5, bg=white, bd=3, show="*")
-    entry_passw.place(x=50, y=50, width=400, heigh=50)
+    entry_passw.place(x=230, y=50, width=250, heigh=50)
 
     entry_new_passw = Entry(new_screen, font=font5, bg=white, bd=3, show="*")
-    entry_new_passw.place(x=50, y=100, width=400, heigh=50)
+    entry_new_passw.place(x=230, y=100, width=250, heigh=50)
 
     # Botones
 
@@ -878,8 +894,9 @@ def new_password(window):
     button_save.place(x=100, y=180, width=300, height=50)
 
     # Texto
-    canvas_log.create_text(250, 20, text=contra_sms, font=font5)
-
+    canvas_new.create_text(250, 20, text=setpass_sms, font=font5)
+    canvas_new.create_text(100, 75, text=oldpass_sms, font=font5)
+    canvas_new.create_text(100, 125, text=newpass_sms, font=font5)
     mainloop()
 
 def admin():
