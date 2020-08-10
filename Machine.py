@@ -232,9 +232,20 @@ def login_validation(entry_box, window1, window2, canvas):
     else:
         canvas.create_text(250, 60, text=invalid, font=font5, fill=red)
 
-
 def reset():
-    # agregar logica para reset de ventas individuales
+
+    #Logica para reset individuales
+    global co_message_list, di_message_list, ch_message_list
+
+    for message_co in co_message_list:
+        message_co.increse_solds(delete = True)
+
+    for message_di in di_message_list:
+        message_di.increse_solds(delete = True)
+
+    for message_ch in ch_message_list:
+        message_ch.increse_solds(delete = True)
+
     rute = "Data/base_ventas.txt"
     file = open(rute, "r")
     total_ventas = file.readlines()[:4]
@@ -243,7 +254,6 @@ def reset():
     for linea in total_ventas:
         file.write(linea)
     file.close()
-
 
 def turn_off():
     global on_sms, off_sms, turn_off_title, glo_idioma
@@ -273,7 +283,6 @@ def turn_off():
     canvas_idio.create_text(600, 100, text=turn_off_title, font=font2)
 
     mainloop()
-
 
 def excel():
     pass
@@ -324,8 +333,8 @@ def set_idi(idioma):
         coins_var = "Your cash"
         sms = "Your selection is:"
         titulo_ventana_ms = 'Papel'
-        rest_var = "Amount to be paid: "
-        vuelto_sms = "Your change is: "
+        rest_var = "Amount \nto be paid: "
+        vuelto_sms = "Your change \nis: "
         # Texto admin
         reset_var = "Reset"
         off_var = "Turn off"
@@ -347,7 +356,6 @@ def openAdmin(window, idioma):
     set_idi(idioma)
     admin()
 
-
 def openMachine(window, idioma):
     window.destroy()
     set_idi(idioma)
@@ -364,6 +372,7 @@ def openLogin(window):
 
 def destroy(window):
     window.destroy()
+
 # ---------------------------  tienda  ---------------------------- #
 
 def set_shop(tipo):
@@ -405,40 +414,38 @@ def set_shop(tipo):
 
         price_str.set(rest_var + str(price))
 
-
 def coins_rest(type1, window):
     global price, money_tmp, price_str, money, total_money, active_shop
     if not active_shop:
         if price > 0:
-            if type1 == 25:
+            if type1 == 25 and money_tmp >= 25:
                 price -= 25
                 money_tmp -= 25
                 total_money += 25
                 price_str.set(rest_var + str(price))
                 money.set(money_tmp)
                 return paying(window)
-            elif type1 == 50:
+            elif type1 == 50 and money_tmp >= 50:
                 price -= 50
                 money_tmp -= 50
                 total_money += 50
                 price_str.set(rest_var + str(price))
                 money.set(money_tmp)
                 return paying(window)
-            elif type1 == 100:
+            elif type1 == 100 and money_tmp >= 100:
                 price -= 100
                 money_tmp -= 100
                 total_money += 100
                 price_str.set(rest_var + str(price))
                 money.set(money_tmp)
                 return paying(window)
-            elif type1 == 500:
+            elif type1 == 500 and money_tmp >= 500:
                 price -= 500
                 money_tmp -= 500
                 total_money += 500
                 price_str.set(rest_var + str(price))
                 money.set(money_tmp)
                 return paying(window)
-
 
 # --------------------------- Animacion ---------------------------- #
 
@@ -455,18 +462,16 @@ def paying(window):
         vuelto = -1 * price
         money_tmp += vuelto
         money.set(money_tmp)
-        price_str.set(vuelto_sms + str(price))
+        price_str.set(vuelto_sms + str(abs(price)))
         ventas_load()
         vuelto = 0
         total_money = 0
         return paying_aux(window)
 
-
 def paying_aux(window):
     t = Thread(name='Ani_Paper', target=paying_aux_2, args=(window,))
     t.daemon = True
     t.start()
-
 
 def paying_aux_2(window):
     global image_paper, all_canvas
@@ -481,7 +486,6 @@ def paying_aux_2(window):
         image_paper.place(x=110, y=310)
         all_canvas += [image_paper]
     image_paper.bind("<Button-1>", paying_aux_3)
-
 
 def paying_aux_3(s):
     global all_canvas, titulo_ventana_ms, active_shop, select_message
@@ -528,13 +532,11 @@ def paying_aux_3(s):
         except:
             pass
 
-
 def text_pygame (text, font, color, surface, x , y):
     txtobj = font.render(text, 1, color)
     txtrect = txtobj.get_rect()
     txtrect.center = (x, y)
     surface.blit(txtobj, txtrect)
-
 
 def paying_aux_3_old(s):
     global all_canvas, titulo_ventana_ms, active_shop, select_message
@@ -557,7 +559,6 @@ def paying_aux_3_old(s):
 
 
     window.mainloop()
-
 
 # --------------------------- Ventanas ---------------------------- #
 
@@ -662,17 +663,22 @@ def machine():
     button_coin500.place(x=1050, y=600, width=100, height=100)
 
     # Etiquetas
+
+    #Imprime el mensaje en pantalla de la maquina
     screen_sms = StringVar()
     consola = Label(machine_screen, textvariable=screen_sms, font=font5, bg=purple)
     consola.place(x=685, y=70, width=290, height=100)
 
+    #Variables para el dinero  de usaurio es aleatorio al iniciar
     money = StringVar()
-    money_tmp = random.randrange(100, 2000, 25)
+    money_tmp = random.randrange(100, 2000, 25) #Cantidad de monedas del usario
     money.set(money_tmp)
 
+    #Label que impreme en pantalla el dinero del usario
     monedas = Label(machine_screen, textvariable=money, font=font4, bg=white)
     monedas.place(x=1020, y=90, width=160, height=50)
 
+    #Variable del precio por mensaje y label que imprime dicho precio
     price_str = StringVar()
     precio_consol = Label(machine_screen, textvariable=price_str, font=font4, bg=purple)
     precio_consol.place(x=685, y=200, width=290, height=50)
