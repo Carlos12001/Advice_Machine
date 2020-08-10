@@ -224,7 +224,7 @@ def login_validation(entry_box, window1, window2, canvas):
     global invalid
     file = open("Data/Ao3", "rb")
     valid = pickle.load(file)
-    entry = entry_box.get()
+    entry = password_validation(entry_box)
     if entry == valid:
         window1.destroy()
         window2.destroy()
@@ -280,13 +280,137 @@ def excel():
 
 # -------------------------- Contraseñas -------------------------------- #
 
-def new_password():
-    pass
-
 def password_validation(entry_box):
-    entry = entry_box.get()
+    entry = entry_box.get().lower()
+    encrypted = ""
     for letter in entry:
-        pass
+        if letter == "a":
+            tmp = "21x42"
+            encrypted += tmp
+        elif letter == "b":
+            tmp = "JKma"
+            encrypted += tmp
+        elif letter == "c":
+            tmp = "Fu22"
+            encrypted += tmp
+        elif letter == "d":
+            tmp = "xESL"
+            encrypted += tmp
+        elif letter == "e":
+            tmp = "0000"
+            encrypted += tmp
+        elif letter == "f":
+            tmp = "prYc"
+            encrypted += tmp
+        elif letter == "g":
+            tmp = "qñKo"
+            encrypted += tmp
+        elif letter == "h":
+            tmp = "aatR"
+            encrypted += tmp
+        elif letter == "i":
+            tmp = "zvbm"
+            encrypted += tmp
+        elif letter == "j":
+            tmp = "1249"
+            encrypted += tmp
+        elif letter == "k":
+            tmp = "QbQa"
+            encrypted += tmp
+        elif letter == "l":
+            tmp = "jK34"
+            encrypted += tmp
+        elif letter == "m":
+            tmp = "wKwQ"
+            encrypted += tmp
+        elif letter == "n":
+            tmp = "AAA0"
+            encrypted += tmp
+        elif letter == "ñ":
+            tmp = "AABB"
+            encrypted += tmp
+        elif letter == "o":
+            tmp = "xXlL"
+            encrypted += tmp
+        elif letter == "p":
+            tmp = "HHG0"
+            encrypted += tmp
+        elif letter == "q":
+            tmp = "8981"
+            encrypted += tmp
+        elif letter == "r":
+            tmp = "WEH0"
+            encrypted += tmp
+        elif letter == "s":
+            tmp = "llll"
+            encrypted += tmp
+        elif letter == "t":
+            tmp = "aLkE"
+            encrypted += tmp
+        elif letter == "u":
+            tmp = "mnnm"
+            encrypted += tmp
+        elif letter == "v":
+            tmp = "2598"
+            encrypted += tmp
+        elif letter == "w":
+            tmp = "DtLH"
+            encrypted += tmp
+        elif letter == "x":
+            tmp = "2222"
+            encrypted += tmp
+        elif letter == "y":
+            tmp = "0010"
+            encrypted += tmp
+        elif letter == "z":
+            tmp = "AEHE"
+            encrypted += tmp
+        elif letter == "0":
+            tmp = "1000"
+            encrypted += tmp
+        elif letter == "1":
+            tmp = "0100"
+            encrypted += tmp
+        elif letter == "2":
+            tmp = "0010"
+            encrypted += tmp
+        elif letter == "3":
+            tmp = "0001"
+            encrypted += tmp
+        elif letter == "4":
+            tmp = "1100"
+            encrypted += tmp
+        elif letter == "5":
+            tmp = "0110"
+            encrypted += tmp
+        elif letter == "6":
+            tmp = "0011"
+            encrypted += tmp
+        elif letter == "7":
+            tmp = "1001"
+            encrypted += tmp
+        elif letter == "8":
+            tmp = "1110"
+            encrypted += tmp
+        elif letter == "9":
+            tmp = "1111"
+            encrypted += tmp
+        else:
+            tmp = "_eTT"
+            encrypted += tmp
+    return encrypted
+
+def save_pass(entru_box1, entry_box2):
+    file = open("Data/Ao3", "rb")
+    valid = pickle.load(file)
+    old = entru_box1.get()
+    new = password_validation(entry_box2)
+    if old == valid:
+        data = open("Data/Ao3", "wb")
+        pickle.dump(new, data)
+    else:
+        print("contraseña incorrecta")
+
 
 # -------------------------- Setea el idioma ---------------------------- #
 
@@ -716,10 +840,42 @@ def login(window1):
     button_valid = Button(login_screen, text= "ok", font=font5, bg=gray,
                             activeforeground=dark_yellow, command= lambda x=entry_passw, y=window1,
                             z= login_screen, w = canvas_log : login_validation(x, y, z, w))
-    button_valid.place(x=100, y=180, width=300, height=50)
+    button_valid.place(x=100, y=180, width=150, height=50)
 
+    button_change = Button(login_screen, text= "New pass", font=font5, bg=gray,
+                            activeforeground=dark_yellow, command= lambda x= login_screen: new_password(x))
+    button_change.place(x=250, y=180, width=150, height=50)
 
+    # Texto
+    canvas_log.create_text(250, 20, text=contra_sms, font=font5)
 
+    mainloop()
+
+def new_password(window):
+    window.destroy()
+    # Ventana
+
+    new_screen = Tk()  # se crea una ventana de inicio
+    new_screen.title("Advice Machine")  # Cambiar el nombre a la ventana
+    new_screen.geometry("500x250+450+400")
+    new_screen.resizable(0, 0)  # No hay cambio de tamaño de la ventana
+
+    # se crea un canvas para dibujar
+
+    canvas_log = Canvas(new_screen, width=500, height=250, bg=gray, highlightbackground=gray)
+    canvas_log.pack()
+
+    entry_passw = Entry( new_screen, font=font5, bg=white, bd=3, show="*")
+    entry_passw.place(x=50, y=50, width=400, heigh=50)
+
+    entry_new_passw = Entry(new_screen, font=font5, bg=white, bd=3, show="*")
+    entry_new_passw.place(x=50, y=100, width=400, heigh=50)
+
+    # Botones
+
+    button_save = Button( new_screen, text="ok", font=font5, bg=gray,
+                          activeforeground=dark_yellow, command= lambda x= entry_passw, y= entry_new_passw: save_pass(x, y))
+    button_save.place(x=100, y=180, width=300, height=50)
 
     # Texto
     canvas_log.create_text(250, 20, text=contra_sms, font=font5)
