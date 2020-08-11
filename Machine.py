@@ -37,6 +37,7 @@ font4 = ("fixedsys", 20)
 font5 = ("fixedsys", 18)
 font6 = ('MS Mincho', 16)
 
+
 # inicio de variable total
 global co_message_list, di_message_list, ch_message_list, select_message, vuelto_total
 co_message_list = []
@@ -340,7 +341,7 @@ def login_validation(entry_box, window1, window2, canvas):
     global invalid
     file = open("Data/Ao3", "rb")
     valid = pickle.load(file)
-    entry = entry_box.get()
+    entry = password_validation(entry_box)
     if entry == valid:
         window1.destroy()
         window2.destroy()
@@ -401,7 +402,7 @@ def turn_off():
     button_off.place(x=700, y=400, width=300, height=100)
 
     # Texto
-    canvas_idio.create_text(600, 100, text=turn_off_title, font=font2)
+    canvas_idio.create_text(600, 100, text=turn_off_title, font=font1)
 
     mainloop()
 
@@ -410,13 +411,137 @@ def excel():
 
 # -------------------------- Contraseñas -------------------------------- #
 
-def new_password():
-    pass
-
 def password_validation(entry_box):
-    entry = entry_box.get()
+    entry = entry_box.get().lower()
+    encrypted = ""
     for letter in entry:
-        pass
+        if letter == "a":
+            tmp = "21x42"
+            encrypted += tmp
+        elif letter == "b":
+            tmp = "JKma"
+            encrypted += tmp
+        elif letter == "c":
+            tmp = "Fu22"
+            encrypted += tmp
+        elif letter == "d":
+            tmp = "xESL"
+            encrypted += tmp
+        elif letter == "e":
+            tmp = "0000"
+            encrypted += tmp
+        elif letter == "f":
+            tmp = "prYc"
+            encrypted += tmp
+        elif letter == "g":
+            tmp = "qñKo"
+            encrypted += tmp
+        elif letter == "h":
+            tmp = "aatR"
+            encrypted += tmp
+        elif letter == "i":
+            tmp = "zvbm"
+            encrypted += tmp
+        elif letter == "j":
+            tmp = "1249"
+            encrypted += tmp
+        elif letter == "k":
+            tmp = "QbQa"
+            encrypted += tmp
+        elif letter == "l":
+            tmp = "jK34"
+            encrypted += tmp
+        elif letter == "m":
+            tmp = "wKwQ"
+            encrypted += tmp
+        elif letter == "n":
+            tmp = "AAA0"
+            encrypted += tmp
+        elif letter == "ñ":
+            tmp = "AABB"
+            encrypted += tmp
+        elif letter == "o":
+            tmp = "xXlL"
+            encrypted += tmp
+        elif letter == "p":
+            tmp = "HHG0"
+            encrypted += tmp
+        elif letter == "q":
+            tmp = "8981"
+            encrypted += tmp
+        elif letter == "r":
+            tmp = "WEH0"
+            encrypted += tmp
+        elif letter == "s":
+            tmp = "llll"
+            encrypted += tmp
+        elif letter == "t":
+            tmp = "aLkE"
+            encrypted += tmp
+        elif letter == "u":
+            tmp = "mnnm"
+            encrypted += tmp
+        elif letter == "v":
+            tmp = "2598"
+            encrypted += tmp
+        elif letter == "w":
+            tmp = "DtLH"
+            encrypted += tmp
+        elif letter == "x":
+            tmp = "2222"
+            encrypted += tmp
+        elif letter == "y":
+            tmp = "0010"
+            encrypted += tmp
+        elif letter == "z":
+            tmp = "AEHE"
+            encrypted += tmp
+        elif letter == "0":
+            tmp = "1000"
+            encrypted += tmp
+        elif letter == "1":
+            tmp = "0100"
+            encrypted += tmp
+        elif letter == "2":
+            tmp = "0010"
+            encrypted += tmp
+        elif letter == "3":
+            tmp = "0001"
+            encrypted += tmp
+        elif letter == "4":
+            tmp = "1100"
+            encrypted += tmp
+        elif letter == "5":
+            tmp = "0110"
+            encrypted += tmp
+        elif letter == "6":
+            tmp = "0011"
+            encrypted += tmp
+        elif letter == "7":
+            tmp = "1001"
+            encrypted += tmp
+        elif letter == "8":
+            tmp = "1110"
+            encrypted += tmp
+        elif letter == "9":
+            tmp = "1111"
+            encrypted += tmp
+        else:
+            tmp = "_eTT"
+            encrypted += tmp
+    return encrypted
+
+def save_pass(entru_box1, entry_box2):
+    file = open("Data/Ao3", "rb")
+    valid = pickle.load(file)
+    old = entru_box1.get()
+    new = password_validation(entry_box2)
+    if old == valid:
+        data = open("Data/Ao3", "wb")
+        pickle.dump(new, data)
+    else:
+        print("contraseña incorrecta")
+
 
 # -------------------------- Setea el idioma ---------------------------- #
 
@@ -424,9 +549,9 @@ def password_validation(entry_box):
 def set_idi(idioma):
     global glo_idioma, reset_var, off_var, return_var, ex_var, on_sms, off_sms, turn_off_title
     global conse_var, dicho_var, chiste_var, coins_var, sms, rest_var, vuelto_sms, contra_sms
-    global titulo_ventana_ms, invalid
+    global titulo_ventana_ms, invalid, oldpass_sms, newpass_sms, setpass_sms
     global base_ventas_titulo_1, base_ventas_titulo_2, buttom_text_change_uno ,  buttom_text_change_dos
-
+    
     glo_idioma = idioma
     if idioma == "español":
         # Texto machine
@@ -455,6 +580,9 @@ def set_idi(idioma):
                                +"\t"+"Pago"+"\t"+"Vuelto"
         buttom_text_change_uno = "Extenso"
         buttom_text_change_dos = "Resumen"
+        oldpass_sms = "Antigua"
+        newpass_sms = "Nueva"
+        setpass_sms = "Cambiar contraseña"
     elif idioma == "ingles":
         # Texto machine
         conse_var = "Advice"
@@ -475,6 +603,9 @@ def set_idi(idioma):
         turn_off_title = "Do you want to turn off the machine?"
         contra_sms = "Password"
         invalid = "Incorrect password"
+        oldpass_sms = "Old password"
+        newpass_sms = "New password"
+        setpass_sms = "Set a new password"
 
         base_ventas_titulo_1 = "Type" + "\t" + "Code" + "\t" + "Menssage" \
                                + "\t\t\t" + "Sold" + "\t" + "Amount"
@@ -490,6 +621,8 @@ def set_idi(idioma):
 # ---------------------------  Abrir Ventanas  ---------------------------- #
 
 def openAdmin(window, idioma):
+    global active_admin
+    active_admin = True
     window.destroy()
     set_idi(idioma)
     admin()
@@ -506,7 +639,12 @@ def openOff(window):
     turn_off()
 
 def openLogin(window):
-    login(window)
+    global active_admin
+    if active_admin == True:
+        active_admin = False
+        login(window)
+
+
 
 def destroy(window):
     window.destroy()
@@ -678,6 +816,8 @@ def paying_aux_3(s):
 
     #Imagen
     image_message = pygame.image.load(select_message.get_rute())
+    image_pos = image_message.get_rect()
+    image_pos.center = (250, 250)
     run = True
     while run:
         
@@ -688,7 +828,7 @@ def paying_aux_3(s):
 
         try:
             # Dibujo imagen
-            screen.blit(image_message, (0, 0))
+            screen.blit(image_message, image_pos)
 
             x_text = 250
             y_text = 520
@@ -743,10 +883,11 @@ def idioma_screen():
 
 def machine():
     global conse_var, dicho_var, chiste_var, coins_var, money, screen_sms, price_str, money_tmp
-    global active_shop, im_printing
+    global active_shop, im_printing, active_admin
 
     # Variables de la ventana
     active_shop = True
+    active_admin = True
     money = 1000
 
     # Ventana principal, aqui se encuentra la animacion
@@ -885,16 +1026,49 @@ def login(window1):
     button_valid = Button(login_screen, text= "ok", font=font5, bg=gray,
                             activeforeground=dark_yellow, command= lambda x=entry_passw, y=window1,
                             z= login_screen, w = canvas_log : login_validation(x, y, z, w))
-    button_valid.place(x=100, y=180, width=300, height=50)
+    button_valid.place(x=90, y=180, width=150, height=50)
 
-
-
+    button_change = Button(login_screen, text= "New pass", font=font5, bg=gray,
+                            activeforeground=dark_yellow, command= lambda x= login_screen: new_password(x))
+    button_change.place(x=260, y=180, width=150, height=50)
 
     # Texto
     canvas_log.create_text(250, 20, text=contra_sms, font=font5)
 
     mainloop()
 
+def new_password(window):
+    global oldpass_sms, newpass_sms, setpass_sms
+    window.destroy()
+    # Ventana
+
+    new_screen = Tk()  # se crea una ventana de inicio
+    new_screen.title("Advice Machine")  # Cambiar el nombre a la ventana
+    new_screen.geometry("500x250+450+400")
+    new_screen.resizable(0, 0)  # No hay cambio de tamaño de la ventana
+
+    # se crea un canvas para dibujar
+
+    canvas_new = Canvas(new_screen, width=500, height=250, bg=gray, highlightbackground=gray)
+    canvas_new.pack()
+
+    entry_passw = Entry( new_screen, font=font5, bg=white, bd=3, show="*")
+    entry_passw.place(x=230, y=50, width=250, heigh=50)
+
+    entry_new_passw = Entry(new_screen, font=font5, bg=white, bd=3, show="*")
+    entry_new_passw.place(x=230, y=100, width=250, heigh=50)
+
+    # Botones
+
+    button_save = Button( new_screen, text="ok", font=font5, bg=gray,
+                          activeforeground=dark_yellow, command= lambda x= entry_passw, y= entry_new_passw: save_pass(x, y))
+    button_save.place(x=100, y=180, width=300, height=50)
+
+    # Texto
+    canvas_new.create_text(250, 20, text=setpass_sms, font=font5)
+    canvas_new.create_text(100, 75, text=oldpass_sms, font=font5)
+    canvas_new.create_text(100, 125, text=newpass_sms, font=font5)
+    mainloop()
 
 def admin():
 
