@@ -36,12 +36,13 @@ font4 = ("fixedsys", 20)
 font5 = ("fixedsys", 18)
 
 # inicio de variable total
-global co_message_list, di_message_list, ch_message_list, select_message
+global co_message_list, di_message_list, ch_message_list, select_message, vuelto_total
 co_message_list = []
 di_message_list = []
 ch_message_list = []
 select_message = None
 total_money = 0
+vuelto_total = 0
 
 
 # -------------------------- Bases de datos ----------------------------- #
@@ -156,7 +157,6 @@ class Message(object):
         #Acutiliza el valor en la clase
         self.solds = value
 
-
 def load_base_message(idioma):
     global co_message_list, di_message_list, ch_message_list
 
@@ -201,9 +201,8 @@ def ventas_read():
     else:
         N_transa = 1
 
-
 def ventas_load():
-    global N_transa, total_money, vuelto
+    global N_transa, total_money, vuelto_temp
     global select_message
     N_transa += 1  # Se incrementa el numero de transaccion
     date = time.strftime("%d/%m/%y")  # Se encarga de colocar la fecha
@@ -214,7 +213,7 @@ def ventas_load():
     rute = "Data/base_ventas.txt"
     file = open(rute, "a")
     file.write("\n" + "@" + str(N_transa) + "@" + "    " + "@" + date + "@" + "    " + "@" + hour + "@" + "    " + "@" + str(
-        type_sms) + "@" + "   " + "@" + str(code_sms) + "@" +"   " + "@" + str(price_sms) + "@" + "  " + "@" + str(total_money) + "@" + "    " + "@" + str(vuelto) + "@" )
+        type_sms) + "@" + "   " + "@" + str(code_sms) + "@" +"   " + "@" + str(price_sms) + "@" + "  " + "@" + str(total_money) + "@" + "    " + "@" + str(vuelto_temp) + "@" )
     file.close()
 
 
@@ -414,7 +413,7 @@ def set_shop(tipo):
 
         price_str.set(rest_var + str(price))
 
-def coins_rest(type1, window):
+def coins_rest(type1, window, canvas):
     global price, money_tmp, price_str, money, total_money, active_shop
     if not active_shop:
         if price > 0:
@@ -424,48 +423,82 @@ def coins_rest(type1, window):
                 total_money += 25
                 price_str.set(rest_var + str(price))
                 money.set(money_tmp)
-                return paying(window)
+                return paying(window, canvas)
             elif type1 == 50 and money_tmp >= 50:
                 price -= 50
                 money_tmp -= 50
                 total_money += 50
                 price_str.set(rest_var + str(price))
                 money.set(money_tmp)
-                return paying(window)
+                return paying(window, canvas)
             elif type1 == 100 and money_tmp >= 100:
                 price -= 100
                 money_tmp -= 100
                 total_money += 100
                 price_str.set(rest_var + str(price))
                 money.set(money_tmp)
-                return paying(window)
+                return paying(window, canvas)
             elif type1 == 500 and money_tmp >= 500:
                 price -= 500
                 money_tmp -= 500
                 total_money += 500
                 price_str.set(rest_var + str(price))
                 money.set(money_tmp)
-                return paying(window)
+                return paying(window, canvas)
+
+def vuelto_return_aux(canvas):
+    #El suma las variables de monet tmperoral y seta cantidad de monedas
+    global vuelto_total,  money_tmp, money
+    money_tmp += vuelto_total
+    vuelto_total = 0
+    money.set(money_tmp)
+    return vuelto_volar(canvas)
+
+def vuelto_volar(canvas):
+    #Mueve las del vuelto a volar
+    global active_vuelto, imagen_monedas_canvas
+    if active_vuelto:
+        canvas.move(imagen_monedas_canvas, -1000, -1000)
+        active_vuelto = False
+        
+def vuelto_move(canvas):
+    #Mueve el vuelto a la interfaz
+    global  imagen_monedas
+    canvas.move(imagen_monedas_canvas,1000,1000)
+
+    
+
+
 
 # --------------------------- Animacion ---------------------------- #
 
-def paying(window):
-    global price, rest_var, money, price_str, money_tmp, vuelto, total_money, vuelto_sms
+def paying(window, canvas):
+    global price, rest_var, money, price_str, money_tmp, vuelto_temp, total_money, vuelto_sms, vuelto_total, active_vuelto
     if price > 0:
         pass
     elif price == 0:
-        vuelto = 0
+        vuelto_temp = 0
         ventas_load()
         total_money = 0
         return paying_aux(window)
     elif price < 0:
-        vuelto = -1 * price
-        money_tmp += vuelto
+        vuelto_temp = -1 * price
+        #Revisa si ya esta vuelto
+        if vuelto_total==0:
+            active_vuelto = True
+            vuelto_move(canvas)
+
+        vuelto_total += vuelto_temp
+
         money.set(money_tmp)
         price_str.set(vuelto_sms + str(abs(price)))
+
+        #Se llaman para guardar a ventas
         ventas_load()
-        vuelto = 0
+
+        #Se quita el vuelto en ese momento y la cantidad de monedas con las que pago
         total_money = 0
+        vuelto_temp = 0
         return paying_aux(window)
 
 def paying_aux(window):
@@ -538,27 +571,6 @@ def text_pygame (text, font, color, surface, x , y):
     txtrect.center = (x, y)
     surface.blit(txtobj, txtrect)
 
-def paying_aux_3_old(s):
-    global all_canvas, titulo_ventana_ms, active_shop, select_message
-
-    active_shop = True
-    for i in all_canvas:
-        i.place(x=-1000)
-
-    image_message = PhotoImage(file = 'resource/di01.png')
-    window = Tk()
-    window.resizable(width=False, height=False)
-    window.geometry('500x650+350+250')
-    window.title(titulo_ventana_ms)
-
-    Canvas(window, width = False, height = False, bg = white).place(x=0, y=0)
-
-    image_label = Label(window, image = image_message ).place(x=0, y=0)
-
-    message_label = Label(window, text = select_message.get_message_text(), font = font3).place(x=0, y=550)
-
-
-    window.mainloop()
 
 # --------------------------- Ventanas ---------------------------- #
 
@@ -613,7 +625,20 @@ def machine():
     canvasP = Canvas(machine_screen, width=1200, height=800, bg=dark_green, highlightbackground=dark_green)
     canvasP.pack()
 
-    
+    # Mini canvas del vuelto
+    global imagen_monedas_canvas, active_vuelto
+
+    canvas_vuelto = Canvas(machine_screen, width=200, height=125,  bg=dark_green, highlightbackground=dark_green)
+    canvas_vuelto.place(x=500, y=600)
+    imagen_de_monedero = PhotoImage(file='resource/monedero.png')
+    canvas_vuelto.create_image(2 , 2, image=imagen_de_monedero, anchor='nw')
+
+    imagen_monedas = PhotoImage(file='resource/monedas.png')
+    imagen_monedas_canvas = canvas_vuelto.create_image(-990, -970, image=imagen_monedas, anchor='nw')
+
+    active_vuelto = False
+    canvas_vuelto.bind("<Button-1>", lambda event, x=canvas_vuelto: vuelto_return_aux(x))
+
     # Botones
 
     button_Conse = Button(machine_screen, text=conse_var, font=font3, bg=dark_yellow,
@@ -641,25 +666,25 @@ def machine():
     img_25 = PhotoImage(file='resource/25.gif')
     coin25_img = img_25.subsample(4, 4)
     button_coin25 = Button(machine_screen, image = coin25_img, font=font3, bg=brown, relief=FLAT,
-                           command=lambda x=25, y=machine_screen: coins_rest(x, y))
+                           command=lambda x=25, y=machine_screen, z =canvas_vuelto: coins_rest(x, y, z))
     button_coin25.place(x=1050, y=150, width=100, height=100)
 
     img_50 = PhotoImage(file='resource/50.gif')
     coin50_img = img_50.subsample(4, 4)
     button_coin50 = Button(machine_screen,image = coin50_img, font=font3, bg=brown, relief=FLAT,
-                           command=lambda x=50, y=machine_screen: coins_rest(x, y))
+                           command=lambda x=50, y=machine_screen, z =canvas_vuelto: coins_rest(x, y, z))
     button_coin50.place(x=1050, y=300, width=100, height=100)
 
     img_100 = PhotoImage(file='resource/100.gif')
     coin100_img = img_100.subsample(4, 4)
     button_coin100 = Button(machine_screen,image = coin100_img, font=font3, bg=brown, relief=FLAT,
-                            command=lambda x=100, y=machine_screen: coins_rest(x, y))
+                            command=lambda x=100, y=machine_screen, z =canvas_vuelto: coins_rest(x, y, z))
     button_coin100.place(x=1050, y=450, width=100, height=100)
 
     img_500 = PhotoImage(file='resource/500.gif')
     coin500_img = img_500.subsample(7, 7)
     button_coin500 = Button(machine_screen, image = coin500_img, font=font3, bg=brown, relief=FLAT,
-                            command=lambda x=500, y=machine_screen: coins_rest(x, y))
+                            command=lambda x=500, y=machine_screen, z =canvas_vuelto: coins_rest(x, y, z))
     button_coin500.place(x=1050, y=600, width=100, height=100)
 
     # Etiquetas
@@ -671,7 +696,7 @@ def machine():
 
     #Variables para el dinero  de usaurio es aleatorio al iniciar
     money = StringVar()
-    money_tmp = random.randrange(100, 2000, 25) #Cantidad de monedas del usario
+    money_tmp = 10000 #random.randrange(100, 2000, 25) #Cantidad de monedas del usario
     money.set(money_tmp)
 
     #Label que impreme en pantalla el dinero del usario
@@ -695,6 +720,8 @@ def machine():
     # texto
     canvasP.create_text(350, 50, text="ADVICE MACHINE", font=font2, fill=dark_yellow)
     canvasP.create_text(1100, 45, text=coins_var, font=font4, fill=dark_green)
+
+
 
     mainloop()
 
@@ -731,6 +758,7 @@ def login(window1):
     canvas_log.create_text(250, 20, text=contra_sms, font=font5)
 
     mainloop()
+
 
 def admin():
     global glo_idioma, reset_var, off_var, return_var, ex_var
