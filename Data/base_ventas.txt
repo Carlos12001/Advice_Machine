@@ -1,4 +1,4 @@
 ---------------------------------------------------------------------------
-Número	 Fecha	       Hora	 Tipo Código Monto Pago Vuelto
-Transacción 			Mensaje
+Número	Fecha		Hora		  Tipo	Código	Monto 	Pago 	Vuelto
+Tran 					  Mens
 ---------------------------------------------------------------------------   

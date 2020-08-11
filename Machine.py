@@ -23,10 +23,11 @@ brown = "#CBBAA6"
 dark_yellow = "#E8B623"
 purple = "#A4ACC3"
 white = "#FFFFFF"
-gray = "#AEAEAE"
+gray = "#8a8a8a"
 black = "#000000"
 red_light = '#c26d06'
 red = "#FF6666"
+light_yellow = '#e6d3a1'
 # fonts
 
 font1 = ("fixedsys", 25)
@@ -34,6 +35,7 @@ font2 = ("fixedsys", 50)
 font3 = ("arial", 18)
 font4 = ("fixedsys", 20)
 font5 = ("fixedsys", 18)
+font6 = ('MS Mincho', 16)
 
 # inicio de variable total
 global co_message_list, di_message_list, ch_message_list, select_message, vuelto_total
@@ -62,6 +64,8 @@ class Message(object):
             else:
                 self.spaces.append(element)
             i_coun += 1
+
+        
 
         # Atrbutos de la clase
         self.idioma = idioma
@@ -186,6 +190,119 @@ def load_base_message(idioma):
         else:
             pass
 
+def data_text_funcion():
+    #Variables de idioma
+    global base_ventas_titulo_1, base_ventas_titulo_2, buttom_text_change_uno ,  buttom_text_change_dos
+    #Variables para setiar el idioma
+    global data_text, num_data_text, titulo_base_datos, button_text_change
+    if num_data_text>0:
+        #Setea la el modo del resumen
+        button_text_change.set(buttom_text_change_uno)
+        titulo_base_datos.set(base_ventas_titulo_1)
+        data_text.set(data_text_funcion_aux_1())
+        num_data_text *= -1
+    else:
+        #Setea el modo extenso
+        button_text_change.set(buttom_text_change_dos)
+        titulo_base_datos.set(base_ventas_titulo_2)
+        data_text.set(data_text_funcion_aux_2())
+        num_data_text *= -1
+
+def data_text_funcion_aux_1():
+    global co_message_list, di_message_list, ch_message_list
+
+    texto_imprimir = ''
+
+    for consejos in co_message_list:
+        mensaje_imprimir = ''
+        for mensaje in consejos.get_message_text():
+            done = False
+            for i in mensaje:
+                mensaje_imprimir += i
+
+                if len( mensaje_imprimir ) >=25:
+                    done =True
+                    mensaje_imprimir += "..."
+                    break
+            if done:
+                break
+        if len(mensaje_imprimir)//10==0:
+            mensaje_imprimir += '\t\t\t\t'
+        elif  len(mensaje_imprimir)//10==1:
+            mensaje_imprimir += '\t\t\t'
+        elif len(mensaje_imprimir)//10>=2:
+            mensaje_imprimir += '\t\t'
+
+        texto_imprimir += f"{consejos.get_type()}"+"\t"+f"{consejos.get_message_id()}"+"\t"+f"{mensaje_imprimir}"+\
+                          f"{consejos.get_solds()}"+"\t"+f"{consejos.get_solds()*consejos.get_cost()}"+"\n"
+
+    for dichos in di_message_list:
+        mensaje_imprimir = ''
+        for mensaje in dichos.get_message_text():
+            done = False
+            for i in mensaje:
+                mensaje_imprimir += i
+
+                if len(mensaje_imprimir) >= 25:
+                    done = True
+                    mensaje_imprimir += "..."
+                    break
+            if done:
+                break
+        if len(mensaje_imprimir) // 10 == 0:
+            mensaje_imprimir += '\t\t\t\t'
+        elif len(mensaje_imprimir) // 10 == 1:
+            mensaje_imprimir += '\t\t\t'
+        elif len(mensaje_imprimir) // 10 >= 2:
+            mensaje_imprimir += '\t\t'
+
+        texto_imprimir += f"{dichos.get_type()}"+"\t"+f"{dichos.get_message_id()}"+"\t"+f"{mensaje_imprimir}"+\
+                          f"{dichos.get_solds()}"+"\t"+f"{dichos.get_solds()*dichos.get_cost()}"+"\n"
+
+    for chistes in ch_message_list:
+        mensaje_imprimir = ''
+        for mensaje in chistes.get_message_text():
+            done = False
+            for i in mensaje:
+                mensaje_imprimir += i
+
+                if len(mensaje_imprimir) >= 25:
+                    done = True
+                    mensaje_imprimir += "..."
+                    break
+            if done:
+                break
+        if len(mensaje_imprimir) // 10 == 0:
+            mensaje_imprimir += '\t\t\t\t'
+        elif len(mensaje_imprimir) // 10 == 1:
+            mensaje_imprimir += '\t\t\t'
+        elif len(mensaje_imprimir) // 10 >= 2:
+            mensaje_imprimir += '\t\t'
+
+        texto_imprimir += f"{chistes.get_type()}"+"\t"+f"{chistes.get_message_id()}"+"\t"+f"{mensaje_imprimir}"+\
+                          f"{chistes.get_solds()}"+"\t"+f"{chistes.get_solds()*chistes.get_cost()}"+"\n"
+
+
+    return texto_imprimir
+
+def data_text_funcion_aux_2():
+    rute = "Data/base_ventas.txt"
+    file = open(rute, "r")
+    file_total = file.readlines()[5:]
+    file.close()
+
+    texto_imprimir = ''
+
+    for line in file_total:
+        j = 0
+        for word in line.split("@")[1:len(line.split("@"))-1]:
+            if j%2==0:
+                texto_imprimir += word
+            else:
+                texto_imprimir += word
+        texto_imprimir +='\t\n'
+
+    return texto_imprimir
 
 # -------------------------- Base de ventas ----------------------------- #
 
@@ -212,8 +329,8 @@ def ventas_load():
     price_sms = 250  # obtener de la clase
     rute = "Data/base_ventas.txt"
     file = open(rute, "a")
-    file.write("\n" + "@" + str(N_transa) + "@" + "    " + "@" + date + "@" + "    " + "@" + hour + "@" + "    " + "@" + str(
-        type_sms) + "@" + "   " + "@" + str(code_sms) + "@" +"   " + "@" + str(price_sms) + "@" + "  " + "@" + str(total_money) + "@" + "    " + "@" + str(vuelto_temp) + "@" )
+    file.write("\n" + "@" + str(N_transa) + "@" + "\t" + "@" + date + "@" + "\t" + "@" + hour + "@" + "\t" + "@   " + str(
+        type_sms) + "@" + "\t" + "@" + str(code_sms) + "@" +"\t" + "@" + str(price_sms) + "@" + "\t" + "@" + str(total_money) + "@" + "\t" + "@" + str(vuelto_temp) + "@" )
     file.close()
 
 
@@ -244,6 +361,11 @@ def reset():
 
     for message_ch in ch_message_list:
         message_ch.increse_solds(delete = True)
+
+    #Vuelve a cargar los datos en pantalla
+    global num_data_text
+    num_data_text *= -1
+    data_text_funcion()
 
     rute = "Data/base_ventas.txt"
     file = open(rute, "r")
@@ -298,10 +420,12 @@ def password_validation(entry_box):
 
 # -------------------------- Setea el idioma ---------------------------- #
 
+
 def set_idi(idioma):
     global glo_idioma, reset_var, off_var, return_var, ex_var, on_sms, off_sms, turn_off_title
     global conse_var, dicho_var, chiste_var, coins_var, sms, rest_var, vuelto_sms, contra_sms
     global titulo_ventana_ms, invalid
+    global base_ventas_titulo_1, base_ventas_titulo_2, buttom_text_change_uno ,  buttom_text_change_dos
 
     glo_idioma = idioma
     if idioma == "español":
@@ -324,6 +448,13 @@ def set_idi(idioma):
         turn_off_title = "¿Quiere apagar la máquina?"
         contra_sms = "Contraseña"
         invalid = "Contraseña incorrecta"
+        base_ventas_titulo_1 = "Tipo"+"\t"+"Código"+"\t"+"Mensaje" \
+                               +"\t\t\t\t"+"Vendidos"+"\t"+"Monto"
+        base_ventas_titulo_2 = "Código"+"\t"+"Fecha"+"\t"+"Hora"\
+                                +"\t"+"  Tipo"+"\t"+"ID"+"\t"+" Monto "\
+                               +"\t"+"Pago"+"\t"+"Vuelto"
+        buttom_text_change_uno = "Extenso"
+        buttom_text_change_dos = "Resumen"
     elif idioma == "ingles":
         # Texto machine
         conse_var = "Advice"
@@ -344,6 +475,14 @@ def set_idi(idioma):
         turn_off_title = "Do you want to turn off the machine?"
         contra_sms = "Password"
         invalid = "Incorrect password"
+
+        base_ventas_titulo_1 = "Type" + "\t" + "Code" + "\t" + "Menssage" \
+                               + "\t\t\t" + "Sold" + "\t" + "Amount"
+        base_ventas_titulo_2 = "Code"+"\t"+"Date"+"\t"+"Time"\
+                                +"\t"+"  Type"+"\t"+"ID"+"\t"+"Amount"+\
+                               "\t"+"Payout"+"\t"+"Change"
+        buttom_text_change_uno = "Extensive"
+        buttom_text_change_dos = "Summary"
 
         # ----logica para cargar archivo en englicsj---
 
@@ -693,7 +832,7 @@ def machine():
 
     #Variables para el dinero  de usaurio es aleatorio al iniciar
     money = StringVar()
-    money_tmp = 10000 #random.randrange(100, 2000, 25) #Cantidad de monedas del usario
+    money_tmp = random.randrange(100, 2000, 25) #Cantidad de monedas del usario
     money.set(money_tmp)
 
     #Label que impreme en pantalla el dinero del usario
@@ -758,7 +897,7 @@ def login(window1):
 
 
 def admin():
-    global glo_idioma, reset_var, off_var, return_var, ex_var
+
 
     # Ventana principal, aqui se encuentra la animacion
 
@@ -767,12 +906,60 @@ def admin():
     admin_screen.geometry("1200x800+100+100")
     admin_screen.resizable(0, 0)  # No hay cambio de tamaño de la ventana
 
+    # Crea la variable del texto
+    global glo_idioma, reset_var, off_var, return_var, ex_var
+    global base_ventas_titulo_2
+    global data_text, num_data_text, titulo_base_datos, button_text_change
+
+    titulo_base_datos = StringVar()
+    data_text = StringVar()
+    button_text_change = StringVar()
+    num_data_text = 1
+
     # se crea un canvas para dibujar
 
     canvasP = Canvas(admin_screen, width=1200, height=800, bg=gray, highlightbackground=gray)
-    canvasP.pack()
+    canvasP.place(x=0,y=0)
 
-    # Botones   HACER EL TEXTO VARIABLE
+
+    #Logica para scroll bar de la ventana
+    cereal_bar = Scrollbar(admin_screen)
+
+    canvas_print = Canvas(admin_screen, background=white, width=765,
+                          height=600, yscrollcommand=cereal_bar.set)
+
+    cereal_bar.config(command=canvas_print.yview)
+
+    cereal_bar.pack(fill=Y, side='right')
+
+    elframe = Frame(canvas_print)
+
+    canvas_print.place(x=400, y=100)
+    canvas_print.create_window(0, 0, window=elframe, anchor='nw')
+
+
+
+    #Asigna el
+    data_text_funcion()
+
+    #Labels
+    texto_label = Label(elframe, wraplength=780,textvariable=data_text, bg=white, font=font6,justify=LEFT)
+    texto_label.pack()
+
+    admin_screen.update()
+    canvas_print.config(scrollregion=canvas_print.bbox("all"))
+
+    label_name = Label(admin_screen, textvariable=titulo_base_datos, font=font6, bg=gray)
+    label_name.place(x=400, y=20)
+
+     #Botones
+
+    #Boton de imprimir pantalla cual base de datos
+    button_text_funcion =  Button(admin_screen, textvariable=button_text_change, font=font4, bg=gray,
+                           activebackground=purple, activeforeground=dark_yellow,
+                           command=data_text_funcion)
+    button_text_funcion.place(x=20, y=300, width=350, height=50)
+
     # Volver a la maquina
     button_return = Button(admin_screen, text=return_var, font=font4, bg=gray,
                            activebackground=purple, activeforeground=dark_yellow,
@@ -784,15 +971,14 @@ def admin():
     button_reset.place(x=20, y=400, width=350, height=50)
     # Apagar la maquina
     button_off = Button(admin_screen, text=off_var, font=font4, bg=gray,
-                        activebackground=purple, activeforeground=dark_yellow, command=lambda x=admin_screen: openOff(x))
+                        activebackground=purple, activeforeground=dark_yellow,
+                        command=lambda x=admin_screen: openOff(x))
     button_off.place(x=20, y=500, width=350, height=50)
     # Excel
     button_ex = Button(admin_screen, text=ex_var, font=font4, bg=gray,
                        activebackground=purple, activeforeground=dark_yellow)
     button_ex.place(x=20, y=600, width=350, height=50)
 
-    # Dibujos
-    canvasP.create_rectangle(400, 20, 1180, 780, fill=white)
 
     mainloop()
 
