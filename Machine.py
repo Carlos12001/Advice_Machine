@@ -466,9 +466,6 @@ def vuelto_move(canvas):
     global  imagen_monedas
     canvas.move(imagen_monedas_canvas,1000,1000)
 
-    
-
-
 
 # --------------------------- Animacion ---------------------------- #
 
