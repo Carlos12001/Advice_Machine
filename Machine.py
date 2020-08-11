@@ -677,6 +677,8 @@ def paying_aux_3(s):
 
     #Imagen
     image_message = pygame.image.load(select_message.get_rute())
+    image_pos = image_message.get_rect()
+    image_pos.center = (250, 250)
     run = True
     while run:
         
@@ -687,7 +689,7 @@ def paying_aux_3(s):
 
         try:
             # Dibujo imagen
-            screen.blit(image_message, (0, 0))
+            screen.blit(image_message, image_pos)
 
             x_text = 250
             y_text = 520
