@@ -9,7 +9,7 @@
 @1@		@8@		@Face your fears.@		  												@25@		@0@		@resource/co08.jpg@
 @1@		@9@		@Never lose hope.@		  												@50@		@0@		@resource/co09.png@
 @1@		@10@		@Show gratitude.@		  												@25@		@0@		@resource/co10.png@
-@1@		@11@		@Take care of your personal data on the internet.@		  								@150@		@0@		@resource/co11.jpg@
+@1@		@11@		@Take care of your personal data on the internet.@		  								@150@		@1@		@resource/co11.jpg@
 @1@		@12@		@If you spend a lot of time sitting at work \ walk 2 min every hour.@		  						@25@		@0@		@resource/co12.jpg@
 @1@		@13@		@You should not go to sleep angry with someone.@		  								@50@		@0@		@resource/co13.jpg@
 @1@		@14@		@If you are stressed \ do breathing exercises.@		  									@100@		@0@		@resource/co14.jpg@
@@ -25,7 +25,7 @@
 @2@		@7@		@----------En apuros y afanes, acude a refranes.@		  										@25@		@0@		@resource/di07.jpg@
 @2@		@8@		@Like father Like Son.@		  												@75@		@1@		@resource/di08.jpg@
 @2@		@9@		@At night, all cats are gray.@		  											@25@		@0@		@resource/di09.jpg@
-@2@		@10@		@God won't deal you more than you can handle.@		  									@100@		@2@		@resource/di10.jpg@
+@2@		@10@		@God won't deal you more than you can handle.@		  									@100@		@3@		@resource/di10.jpg@
 @2@		@11@		@Move your feet, lose your seat.@	  											@100@		@1@		@resource/di11.jpg@
 @2@		@12@		@Crying cat does not fish mouse.@		  										@100@		@0@		@resource/di12.jpg@
 @2@		@13@		@Practice makes a master.@		  											@200@		@0@		@resource/di13.jpg@
@@ -33,7 +33,7 @@
 @2@		@15@		@Evil of many, consolation of fools@		  										@150@		@1@		@resource/di15.jpg@
 @2@		@16@		@Kill two birds with one shot.@		  											@150@		@0@		@resource/di16.jpg@
 @2@		@17@		@Do not leave for tomorrow what you can do today.@		  								@200@		@0@		@resource/di17.jpg@
-@3@		@1@		@--------Sabes que guarda Darth Vader en su nevera?\Helado oscuro.@									@300@		@1@		@resource/ch01.png@
+@3@		@1@		@--------Sabes que guarda Darth Vader en su nevera?\Helado oscuro.@									@300@		@2@		@resource/ch01.png@
 @3@		@2@		@--------En una entrevista de trabajo:\-¿Nivel de inglés?\-Alto\-Bien. Traduzca "fiesta".\-Party\-Perfecto. Úselo en una frase.\-Ayer me party la cara con la bicicleta.\-Contratado.@		@100@		@0@		@resource/ch02.jpg@
 @3@		@3@		@--------¿Cómo se dice escoba voladora en japonés?\Simekaigo Memato.@									@50@		@0@		@resource/ch03.png@
 @3@		@4@		@---- ¿Sabes cómo se queda un mago después de comer?\- Magordito@									@50@		@0@		@resource/ch04.jpg@
@@ -41,7 +41,7 @@
 @3@		@6@		@----- ¿Dónde cuelga Superman su supercapa?\- En superchero@									@200@		@0@		@resource/ch06.jpg@
 @3@		@7@		@- Why does a box go to the gym? \ - To become a safe.@								@75@		@0@		@resource/ch07.jpg@
 @3@		@8@		@----- Hola ¿Conchita?\- No, con Tarzán.@												@150@		@0@		@resource/ch08.jpg@
-@3@		@9@		@- What does one spaghetti say to another? \ - My body asks me for salsa?@								@50@		@0@		@resource/ch09.jpg@
+@3@		@9@		@- What does one spaghetti say to another? \ - My body asks me for salsa?@								@50@		@1@		@resource/ch09.jpg@
 @3@		@10@		@------Sí los zombies se deshacen con el paso del tiempo ¿zombiodegradables?@								@100@		@0@		@resource/ch10.png@
 @3@		@11@		@- What's the name of Bruce Lee's vegan cousin? \ - Broco Lee.@									@400@		@1@		@resource/ch11.jpeg@
 @3@		@12@		@------ ¿Qué son 50 físicos y 50 químicos juntos?\- Pues 100tificos.@								@100@		@1@		@resource/ch12.jpg@
