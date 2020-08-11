@@ -25,15 +25,15 @@
 @2@		@7@		@En apuros y afanes, acude a refranes.@		  										@25@		@0@		@resource/di07.jpg@
 @2@		@8@		@De tal palo, tal astilla.@		  											@75@		@0@		@resource/di08.jpg@
 @2@		@9@		@De noche, todos los gatos son pardos.@		  										@25@		@0@		@resource/di09.jpg@
-@2@		@10@		@Dios aprieta, pero no ahorca.@		  											@100@		@0@		@resource/di10.jpg@
-@2@		@11@		@El que se fue a Sevilla, perdió su silla.@	  										@100@		@0@		@resource/di11.jpg@
+@2@		@10@		@Dios aprieta, pero no ahorca.@		  											@100@		@2@		@resource/di10.jpg@
+@2@		@11@		@El que se fue a Sevilla, perdió su silla.@	  										@100@		@1@		@resource/di11.jpg@
 @2@		@12@		@Gato llorón no pesca ratón.@		  											@100@		@0@		@resource/di12.jpg@
 @2@		@13@		@La práctica hace al maestro.@		  											@200@		@0@		@resource/di13.jpg@
 @2@		@14@		@Lo barato sale caro.@		  												@200@		@1@		@resource/di14.jpg@
-@2@		@15@		@Mal de muchos, consuelo de tontos.@		  										@150@		@0@		@resource/di15.jpg@
+@2@		@15@		@Mal de muchos, consuelo de tontos.@		  										@150@		@1@		@resource/di15.jpg@
 @2@		@16@		@Matar dos pájaros de un tiro.@		  											@150@		@0@		@resource/di16.jpg@
 @2@		@17@		@No dejes para mañana lo que puedes hacer hoy.@		  									@200@		@0@		@resource/di17.jpg@
-@3@		@1@		@Sabes que guarda Darth Vader en su nevera?\Helado oscuro.@									@300@		@0@		@resource/ch01.png@
+@3@		@1@		@Sabes que guarda Darth Vader en su nevera?\Helado oscuro.@									@300@		@1@		@resource/ch01.png@
 @3@		@2@		@En una entrevista de trabajo:\-¿Nivel de inglés?\-Alto\-Bien. Traduzca "fiesta".\-Party\-Perfecto. Úselo en una frase.\-Ayer me party la cara con la bicicleta.\-Contratado.@		@100@		@0@		@resource/ch02.jpg@
 @3@		@3@		@¿Cómo se dice escoba voladora en japonés?\Simekaigo Memato.@									@50@		@0@		@resource/ch03.png@
 @3@		@4@		@- ¿Sabes cómo se queda un mago después de comer?\- Magordito@									@50@		@0@		@resource/ch04.jpg@
