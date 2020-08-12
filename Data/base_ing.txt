@@ -2,7 +2,7 @@
 @1@		@1@		@Do good and don't look at whom.@	  											@25@		@0@		@resource/co01.png@
 @1@		@2@		@Love the work you do.@		  												@25@		@0@		@resource/co02.png@
 @1@		@3@		@Wash your hands before eating.@		  										@100@		@0@		@resource/co03.jpg@
-@1@		@4@		@Say hello to people.@		  												@200@		@0@		@resource/co04.jpg@
+@1@		@4@		@Say hello to people.@														@200@		@0@		@resource/co04.jpg@
 @1@		@5@		@If you drink, don't drive.@		  											@100@		@0@		@resource/co05.jpg@
 @1@		@6@		@Nothing, absolutely nothing, deserves \ put your health at risk.@		  						@25@		@0@		@resource/co06.jpg@
 @1@		@7@		@Always aim high in your aspirations.@		  										@50@		@0@		@resource/co07.jpg@

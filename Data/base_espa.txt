@@ -29,7 +29,7 @@
 @2@		@11@		@El que se fue a Sevilla, perdió su silla.@	  										@100@		@0@		@resource/di11.jpg@
 @2@		@12@		@Gato llorón no pesca ratón.@		  											@100@		@0@		@resource/di12.jpg@
 @2@		@13@		@La práctica hace al maestro.@		  											@200@		@0@		@resource/di13.jpg@
-@2@		@14@		@Lo barato sale caro.@		  												@200@		@0@		@resource/di14.jpg@
+@2@		@14@		@Lo barato sale caro.@														@200@		@0@		@resource/di14.jpg@
 @2@		@15@		@Mal de muchos, consuelo de tontos.@		  										@150@		@0@		@resource/di15.jpg@
 @2@		@16@		@Matar dos pájaros de un tiro.@		  											@150@		@0@		@resource/di16.jpg@
 @2@		@17@		@No dejes para mañana lo que puedes hacer hoy.@		  									@200@		@0@		@resource/di17.jpg@
