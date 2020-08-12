@@ -2,7 +2,7 @@
 @1@		@1@		@Haz el bien y no mires a quien.@	  											@25@		@0@		@resource/co01.png@
 @1@		@2@		@Ama el trabajo que haces.@		  											@25@		@0@		@resource/co02.png@
 @1@		@3@		@Lavate las manos antes de comer.@		  										@100@		@0@		@resource/co03.jpg@
-@1@		@4@		@Saluda a las personas.@		  											@200@		@0@		@resource/co04.jpg@
+@1@		@4@		@Saluda a las personas.    @		  											@200@		@0@		@resource/co04.jpg@
 @1@		@5@		@Si bebes, no manejes.@		  												@100@		@0@		@resource/co05.jpg@
 @1@		@6@		@Nada, absolutamente nada, merece\poner en riesgo tu salud.@		  							@25@		@0@		@resource/co06.jpg@
 @1@		@7@		@Apunta siempre alto en tus aspiraciones.@		  									@50@		@0@		@resource/co07.jpg@

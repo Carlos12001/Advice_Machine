@@ -2,7 +2,7 @@
 @1@		@1@		@Do good and don't look at whom.@	  											@25@		@0@		@resource/co01.png@
 @1@		@2@		@Love the work you do.@		  												@25@		@0@		@resource/co02.png@
 @1@		@3@		@Wash your hands before eating.@		  										@100@		@0@		@resource/co03.jpg@
-@1@		@4@		@Say hello to people.@														@200@		@0@		@resource/co04.jpg@
+@1@		@4@		@Say hello to people.    @														@200@		@0@		@resource/co04.jpg@
 @1@		@5@		@If you drink, don't drive.@		  											@100@		@0@		@resource/co05.jpg@
 @1@		@6@		@Nothing, absolutely nothing, deserves \ put your health at risk.@		  						@25@		@0@		@resource/co06.jpg@
 @1@		@7@		@Always aim high in your aspirations.@		  										@50@		@0@		@resource/co07.jpg@
@@ -29,7 +29,7 @@
 @2@		@11@		@Move your feet, lose your seat.@	  											@100@		@0@		@resource/di11.jpg@
 @2@		@12@		@Crying cat does not fish mouse.@		  										@100@		@0@		@resource/di12.jpg@
 @2@		@13@		@Practice makes a master.@		  											@200@		@0@		@resource/di13.jpg@
-@2@		@14@		@Save a penny, spend a dollar.@		  											@200@		@0@		@resource/di14.jpg@
+@2@		@14@		@Save a penny, spend a dollar.         @		  											@200@		@0@		@resource/di14.jpg@
 @2@		@15@		@Evil of many, consolation of fools@		  										@150@		@0@		@resource/di15.jpg@
 @2@		@16@		@Kill two birds with one shot.@		  											@150@		@0@		@resource/di16.jpg@
 @2@		@17@		@Do not leave for tomorrow what you can do today.@		  								@200@		@0@		@resource/di17.jpg@
