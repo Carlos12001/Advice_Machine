@@ -2,20 +2,6 @@ from tkinter import *
 import random, time, pygame, pickle
 from threading import Thread
 
-"""
-Se crea un documento con serilizacion 
-
-data = open("Data/Ao3", "wb")
-pickle.dump("admin", data)   CAMBIAR    
-
-files = open("Data/Ao3", "rb")
-contraseña = pickle.load(files)
-print(contraseña)
-
-Se elimina por seguridad de la maquina en caso de que revisen el codigo y asi obtengan la contraseña
-"""
-
-
 # Colores
 
 dark_green = "#718C85"
