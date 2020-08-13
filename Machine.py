@@ -682,14 +682,20 @@ Restricciones: --
 
 """
 
-def save_pass(entru_box1, entry_box2, canvas):
+def save_pass(entry_box1, entry_box2, canvas, window, window2):
+    global active_admin
+     # Se coloca para poder abri de nuevo login
     file = open("Data/Ao3", "rb")
     valid = pickle.load(file)
-    old = entru_box1.get()
+    old = password_validation(entry_box1)
     new = password_validation(entry_box2)
     if old == valid:
+        active_admin = True
         data = open("Data/Ao3", "wb")
         pickle.dump(new, data)
+        window.destroy()
+        window2.destroy()
+        admin()
     else:
         canvas.create_text(250, 175, text=invalid, font=font5, fill=red)
 
@@ -826,6 +832,7 @@ def openLogin(window):
     if active_admin == True:
         active_admin = False
         login(window)
+
 
 """
 Esta funcion se encarga de cerrar la ventana seleccionada 
@@ -1351,7 +1358,7 @@ def login(window1):
     button_valid.place(x=90, y=180, width=150, height=50)
 
     button_change = Button(login_screen, text= change_sms, font=font5, bg=gray,
-                            activeforeground=dark_yellow, command= lambda x= login_screen: new_password(x))
+                            activeforeground=dark_yellow, command= lambda x= login_screen, y=window1: new_password(x,y))
     button_change.place(x=260, y=180, width=150, height=50)
 
     # Texto
@@ -1360,7 +1367,7 @@ def login(window1):
     login_screen.protocol("WM_DELETE_WINDOW", lambda x = login_screen: activar_admin(x))
     mainloop()
 
-def new_password(window):
+def new_password(window, window2):
     global oldpass_sms, newpass_sms, setpass_sms
     window.destroy()
     # Ventana
@@ -1384,7 +1391,7 @@ def new_password(window):
     # Botones
 
     button_save = Button( new_screen, text="ok", font=font5, bg=gray,
-                          activeforeground=dark_yellow, command= lambda x= entry_passw, y= entry_new_passw, z= canvas_new: save_pass(x, y, z))
+                          activeforeground=dark_yellow, command= lambda x= entry_passw, y= entry_new_passw, z= canvas_new, a=window2, b=new_screen: save_pass(x, y, z, a, b))
     button_save.place(x=100, y=190, width=300, height=50)
 
     # Texto
