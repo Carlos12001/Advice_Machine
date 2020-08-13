@@ -12,7 +12,7 @@
 @1@		@11@		@Take care of your personal data on the internet.@		  								@150@		@0@		@resource/co11.jpg@
 @1@		@12@		@If you spend a lot of time sitting at work \ walk 2 min every hour.@		  						@25@		@0@		@resource/co12.jpg@
 @1@		@13@		@You should not go to sleep angry with someone.@		  								@50@		@0@		@resource/co13.jpg@
-@1@		@14@		@If you are stressed \ do breathing exercises.@		  									@100@		@1@		@resource/co14.jpg@
+@1@		@14@		@If you are stressed \ do breathing exercises.@		  									@100@		@0@		@resource/co14.jpg@
 @1@		@15@		@Drink at least 8 glasses of water a day.@		  									@50@		@0@		@resource/co15.jpg@
 @1@		@16@		@Exercise at least 2 times a week.@		  										@125@		@0@		@resource/co16.jpg@
 @1@		@17@		@Remember to take the mask \ everywhere with you.@										@100@		@0@		@resource/co17.jpg@
@@ -28,9 +28,9 @@
 @2@		@10@		@God won't deal you more than you can handle.@		  									@100@		@0@		@resource/di10.jpg@
 @2@		@11@		@Move your feet, lose your seat.@	  											@100@		@0@		@resource/di11.jpg@
 @2@		@12@		@Crying cat does not fish mouse.@		  										@100@		@0@		@resource/di12.jpg@
-@2@		@13@		@Practice makes a master.@		  											@200@		@1@		@resource/di13.jpg@
-@2@		@14@		@Save a penny, spend a dollar.@		  											@200@		@1@		@resource/di14.jpg@
-@2@		@15@		@Evil of many, consolation of fools@		  										@150@		@1@		@resource/di15.jpg@
+@2@		@13@		@Practice makes a master.@		  											@200@		@0@		@resource/di13.jpg@
+@2@		@14@		@Save a penny, spend a dollar.@		  											@200@		@0@		@resource/di14.jpg@
+@2@		@15@		@Evil of many, consolation of fools@		  										@150@		@0@		@resource/di15.jpg@
 @2@		@16@		@Kill two birds with one shot.@		  											@150@		@0@		@resource/di16.jpg@
 @2@		@17@		@Do not leave for tomorrow what you can do today.@		  								@200@		@0@		@resource/di17.jpg@
 @3@		@1@		@What do you call a sick Darth Vader?\Barf Vader@										@300@		@0@		@resource/ch01.png@
