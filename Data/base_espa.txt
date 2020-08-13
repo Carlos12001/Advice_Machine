@@ -23,7 +23,7 @@
 @2@		@5@		@Cuentas claras y el chocolate espeso.@		  										@50@		@0@		@resource/di05.jpg@
 @2@		@6@		@Quien mucho abarca, poco aprieta.@		  										@75@		@0@		@resource/di06.jpg@
 @2@		@7@		@En apuros y afanes, acude a refranes.@		  										@25@		@0@		@resource/di07.jpg@
-@2@		@8@		@De tal palo, tal astilla.@		  											@75@		@1@		@resource/di08.jpg@
+@2@		@8@		@De tal palo, tal astilla.@		  											@75@		@0@		@resource/di08.jpg@
 @2@		@9@		@De noche, todos los gatos son pardos.@		  										@25@		@0@		@resource/di09.jpg@
 @2@		@10@		@Dios aprieta, pero no ahorca.@		  											@100@		@0@		@resource/di10.jpg@
 @2@		@11@		@El que se fue a Sevilla, perdio su silla.@	  										@100@		@0@		@resource/di11.jpg@
