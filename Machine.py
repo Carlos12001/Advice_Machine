@@ -9,6 +9,7 @@ dark_green = "#718C85"
 brown = "#CBBAA6"
 dark_yellow = "#E8B623"
 purple = "#A4ACC3"
+purple2 = "#657194"
 white = "#FFFFFF"
 gray = "#8a8a8a"
 black = "#000000"
@@ -1290,9 +1291,11 @@ def machine():
     precio_consol.place(x=685, y=200, width=290, height=50)
 
     # Dibujos en pantalla
+    canvasP.create_rectangle(675, 15, 985, 285, fill="", outline=purple2, width= 15)
     canvasP.create_rectangle(1000, 0, 1200, 800, fill=brown, outline=brown)
     canvasP.create_rectangle(680, 20, 980, 280, fill=purple, outline=purple)
     canvasP.create_rectangle(50, 200, 650, 400, width=15, outline='#959593')
+
     image_printa = PhotoImage(file='resource/printa.png')
     canvasP.create_image(350, 300, image=image_printa)
 
