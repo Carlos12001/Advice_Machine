@@ -918,15 +918,19 @@ def vuelto_move(canvas):
 # --------------------------- Animacion ---------------------------- #
 
 def paying(window, canvas):
-    global price, rest_var, money, price_str, money_tmp, vuelto_temp, total_money, vuelto_sms, vuelto_total, active_vuelto
+    global price, rest_var, money, price_str, money_tmp, vuelto_temp, total_money, vuelto_sms, vuelto_total, active_vuelto, select_message
     if price > 0:
         pass
     elif price == 0:
+        select_message.increse_solds()
+
         vuelto_temp = 0
         ventas_load()
         total_money = 0
         return paying_aux(window)
     elif price < 0:
+        select_message.increse_solds()
+
         vuelto_temp = -1 * price
         #Revisa si ya esta vuelto
         if vuelto_total==0:
@@ -969,13 +973,13 @@ def paying_aux_2(window):
         pass
 
 def paying_aux_3(s):
-    global all_canvas, titulo_ventana_ms, active_shop, select_message
+    global all_canvas, titulo_ventana_ms, active_shop
 
 
     for i in all_canvas:
         i.place(x=-1000)
     active_shop = True
-    select_message.increse_solds()
+
 
     #Ventana en pygame
     pygame.init()
