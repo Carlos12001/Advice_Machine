@@ -36,15 +36,15 @@
 @3@		@1@		@Sabes que guarda Darth Vader en su nevera?\Helado oscuro.@									@300@		@0@		@resource/ch01.png@
 @3@		@2@		@En una entrevista de trabajo:\-Nivel de ingles?\-Alto\-Bien. Traduzca "fiesta".\-Party\-Perfecto. Uselo en una frase.\-Ayer me party la cara con la bicicleta.\-Contratado.@		@100@		@0@		@resource/ch02.jpg@
 @3@		@3@		@Como se dice escoba voladora en japones?\Simekaigo Memato.@									@50@		@0@		@resource/ch03.png@
-@3@		@4@		@- Sabes como se queda un mago despes de comer?\- Magordito@									@50@		@1@		@resource/ch04.jpg@
+@3@		@4@		@- Sabes como se queda un mago despes de comer?\- Magordito@									@50@		@0@		@resource/ch04.jpg@
 @3@		@5@		@- Que le dice un techo a otro?\-Techo de menos.@										@25@		@0@		@resource/ch05.jpg@
-@3@		@6@		@- Donde cuelga Superman su supercapa?\- En superchero@									@200@		@0@		@resource/ch06.jpg@
+@3@		@6@		@- Donde cuelga Superman su supercapa?\- En superchero@										@200@		@0@		@resource/ch06.jpg@
 @3@		@7@		@- Para que van una caja al gimnasio?\- Para hacerse caja fuerte.@								@75@		@0@		@resource/ch07.jpg@
 @3@		@8@		@- Hola Conchita?\- No, con Tarzan.@												@150@		@0@		@resource/ch08.jpg@
-@3@		@9@		@- Que le dice un espagueti a otro?\- El cuerpo me pide salsa?@								@50@		@0@		@resource/ch09.jpg@
-@3@		@10@		@Si los zombies se deshacen con el paso del tiempo\ ¿zombiodegradables?@								@100@		@0@		@resource/ch10.png@
+@3@		@9@		@- Que le dice un espagueti a otro?\- El cuerpo me pide salsa?@									@50@		@0@		@resource/ch09.jpg@
+@3@		@10@		@Si los zombies se deshacen con el paso del tiempo\ ¿zombiodegradables?@							@100@		@0@		@resource/ch10.png@
 @3@		@11@		@- Como se llama el primo vegano de Bruce Lee?\- Broco Lee.@									@400@		@0@		@resource/ch11.jpeg@
-@3@		@12@		@- Que son 50 fisicos y 50 quimicos juntos?\- Pues 100tificos.@								@100@		@0@		@resource/ch12.jpg@
+@3@		@12@		@- Que son 50 fisicos y 50 quimicos juntos?\- Pues 100tificos.@									@100@		@0@		@resource/ch12.jpg@
 @3@		@13@		@- Que hace un perro con un taladro?\- Taladrando.@										@75@		@0@		@resource/ch13.jpg@
 @3@		@14@		@- Que hace una abeja en el gimnasio?\- Zumba@											@50@		@0@		@resource/ch14.jpg@
 @3@		@15@		@- De que se quejan siempre los astronautas?\- De falta de espacio.@								@25@		@0@		@resource/ch15.jpg@

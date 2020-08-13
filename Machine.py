@@ -442,7 +442,7 @@ Restricciones: --
 
 """
 
-def reset(): # AGREGAR LOGICA DE BORRAR VENTAS
+def reset():
 
     #Logica para reset individuales
     global co_message_list, di_message_list, ch_message_list
@@ -1152,8 +1152,13 @@ def machine():
 
     mainloop()
 
+def activar_admin(window):
+    global active_admin
+    window.destroy()
+    active_admin = True
+
 def login(window1):
-    global contra_sms, change_sms
+    global contra_sms, change_sms, active_admin
 
     # Ventana principal, aqui se encuentra la animacion
 
@@ -1184,6 +1189,7 @@ def login(window1):
     # Texto
     canvas_log.create_text(250, 20, text=contra_sms, font=font5)
 
+    login_screen.protocol("WM_DELETE_WINDOW", lambda x = login_screen: activar_admin(x))
     mainloop()
 
 def new_password(window):
