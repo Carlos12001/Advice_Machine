@@ -40,7 +40,7 @@
 @3@		@5@		@How do you make holy water? \You boil the hell out of it.@									@25@		@0@		@resource/ch05.jpg@
 @3@		@6@		@What did Superman name his dog? \ - Lex Woofer@										@200@		@1@		@resource/ch06.jpg@
 @3@		@7@		@- Why does a box go to the gym? \ - To become a safe.@										@75@		@1@		@resource/ch07.jpg@
-@3@		@8@		@- What does Tarzan sing at Christmas? \- Jungle bells, jungle bells@								@150@		@0@		@resource/ch08.jpg@
+@3@		@8@		@- What does Tarzan sing at Christmas? \- Jungle bells, jungle bells@								@150@		@1@		@resource/ch08.jpg@
 @3@		@9@		@- What does one spaghetti say to another? \ - My body asks me for salsa?@							@50@		@0@		@resource/ch09.jpg@
 @3@		@10@		@- Where do zombies swim?\- The dead sea!@											@100@		@0@		@resource/ch10.png@
 @3@		@11@		@- What's the name of Bruce Lee's vegan cousin? \ - Broco Lee.@									@400@		@0@		@resource/ch11.jpeg@

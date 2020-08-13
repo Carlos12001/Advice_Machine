@@ -40,7 +40,7 @@
 @3@		@5@		@- Que le dice un techo a otro?\-Techo de menos.@										@25@		@0@		@resource/ch05.jpg@
 @3@		@6@		@- Donde cuelga Superman su supercapa?\- En superchero@										@200@		@1@		@resource/ch06.jpg@
 @3@		@7@		@- Para que van una caja al gimnasio?\- Para hacerse caja fuerte.@								@75@		@1@		@resource/ch07.jpg@
-@3@		@8@		@- Hola Conchita?\- No, con Tarzan.@												@150@		@0@		@resource/ch08.jpg@
+@3@		@8@		@- Hola Conchita?\- No, con Tarzan.@												@150@		@1@		@resource/ch08.jpg@
 @3@		@9@		@- Que le dice un espagueti a otro?\- El cuerpo me pide salsa?@									@50@		@0@		@resource/ch09.jpg@
 @3@		@10@		@Si los zombies se deshacen con el paso del tiempo\ ¿zombiodegradables?@							@100@		@0@		@resource/ch10.png@
 @3@		@11@		@- Como se llama el primo vegano de Bruce Lee?\- Broco Lee.@									@400@		@0@		@resource/ch11.jpeg@
