@@ -37,11 +37,30 @@ vuelto_total = 0
 # -------------------------- Bases de datos ----------------------------- #
 
 """
-Objeto:
+Objeto Mensaje:
 
-Atributos:
+    Atributos:
+        -idioma: el idioma del mensaje
+        -type: tipo del mensaje
+        -message_id: el id del mensaje
+        -message_text: todo el texto del mensaje
+        -cost: costo del mensaje
+        -solds: cantidad de vendidos
+        -rute_image: ruta de la imagen
 
-Metodos:
+    Metodos:
+        -get_idioma
+        -get_type
+        -get_mesaage_id
+        -get_message_text
+        -get_cost
+        -get_rute
+        -increase_solds:
+            llama a increase_solds_aux con la ruta en español y ruta en ingles
+        -icrease_solds_aux:
+            busca en todo el archivo el id y tipo de mensaje
+            renueva el valor correspodiende
+            vuelve a escribir todos los datos, pero con el costo del mensaje actualizadov
 
 Funcion________
     E:
@@ -69,7 +88,6 @@ class Message(object):
                 self.spaces.append(element)
             i_coun += 1
 
-        
 
         # Atrbutos de la clase
         self.idioma = idioma
@@ -107,18 +125,20 @@ class Message(object):
     def get_rute(self):
         return self.rute_image
 
-    def  increse_solds(self, delete=False, num=0):
-        self.increse_solds_aux(delete=delete, num=num, rute="Data/base_espa.txt")
-        self.increse_solds_aux(delete=delete, num=num, rute="Data/base_ing.txt")
-
-    def increse_solds_aux(self, delete, num, rute):
-
+    def increse_solds(self, delete=False, num=0):
         # Logica si borra el sold o lo incremento
         if delete:
             value = num
         else:
             value = self.solds + 1
 
+        self.increse_solds_aux(value=value, rute="Data/base_espa.txt")
+        self.increse_solds_aux(value=value, rute="Data/base_ing.txt")
+
+        # Acutiliza el valor en la clase
+        self.solds = value
+
+    def increse_solds_aux(self, value, rute):
 
         # Carga el archivo
         file = open(rute, "r+")
@@ -161,8 +181,7 @@ class Message(object):
         # Cierra el archivo
         file.close()
 
-        #Acutiliza el valor en la clase
-        self.solds = value
+
 
 """
 Funcion load_base_message
@@ -349,7 +368,6 @@ def data_text_funcion_aux_2():
             else:
                 texto_imprimir += word
         texto_imprimir +='\t\n'
-
     return texto_imprimir
 
 # -------------------------- Base de ventas ----------------------------- #
@@ -931,18 +949,21 @@ def paying_aux(window):
     t.start()
 
 def paying_aux_2(window):
-    global image_paper, all_canvas
-    anchor = 20
-    all_canvas = []
-    image_paper = Canvas(window, width=300, height=anchor)
-    all_canvas += [image_paper]
-    while anchor < 300:
-        anchor += 20
-        time.sleep(0.5)
+    try:
+        global image_paper, all_canvas
+        anchor = 20
+        all_canvas = []
         image_paper = Canvas(window, width=300, height=anchor)
-        image_paper.place(x=110, y=310)
         all_canvas += [image_paper]
-    image_paper.bind("<Button-1>", paying_aux_3)
+        while anchor < 300:
+            anchor += 20
+            time.sleep(0.5)
+            image_paper = Canvas(window, width=300, height=anchor)
+            image_paper.place(x=110, y=310)
+            all_canvas += [image_paper]
+        image_paper.bind("<Button-1>", paying_aux_3)
+    except:
+        pass
 
 def paying_aux_3(s):
     global all_canvas, titulo_ventana_ms, active_shop, select_message

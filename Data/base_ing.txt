@@ -23,7 +23,7 @@
 @2@		@5@		@----------Cuentas claras y el chocolate espeso.@		  										@50@		@0@		@resource/di05.jpg@
 @2@		@6@		@don’t bite off more than you can chew.@		  									@75@		@0@		@resource/di06.jpg@
 @2@		@7@		@----------En apuros y afanes, acude a refranes.@		  										@25@		@0@		@resource/di07.jpg@
-@2@		@8@		@Like father Like Son.@		  												@75@		@0@		@resource/di08.jpg@
+@2@		@8@		@Like father Like Son.@		  												@75@		@1@		@resource/di08.jpg@
 @2@		@9@		@At night, all cats are gray.@		  											@25@		@0@		@resource/di09.jpg@
 @2@		@10@		@God won't deal you more than you can handle.@		  									@100@		@0@		@resource/di10.jpg@
 @2@		@11@		@Move your feet, lose your seat.@	  											@100@		@0@		@resource/di11.jpg@
@@ -36,7 +36,7 @@
 @3@		@1@		@--------Sabes que guarda Darth Vader en su nevera?\Helado oscuro.@									@300@		@0@		@resource/ch01.png@
 @3@		@2@		@--------En una entrevista de trabajo:\-¿Nivel de inglés?\-Alto\-Bien. Traduzca "fiesta".\-Party\-Perfecto. Úselo en una frase.\-Ayer me party la cara con la bicicleta.\-Contratado.@		@100@		@0@		@resource/ch02.jpg@
 @3@		@3@		@--------¿Cómo se dice escoba voladora en japonés?\Simekaigo Memato.@									@50@		@0@		@resource/ch03.png@
-@3@		@4@		@---- ¿Sabes cómo se queda un mago después de comer?\- Magordito@									@50@		@2@		@resource/ch04.jpg@
+@3@		@4@		@---- ¿Sabes cómo se queda un mago después de comer?\- Magordito@									@50@		@0@		@resource/ch04.jpg@
 @3@		@5@		@------ ¿Qué le dice un techo a otro?\-Techo de menos.@										@25@		@0@		@resource/ch05.jpg@
 @3@		@6@		@----- ¿Dónde cuelga Superman su supercapa?\- En superchero@									@200@		@0@		@resource/ch06.jpg@
 @3@		@7@		@- Why does a box go to the gym? \ - To become a safe.@								@75@		@0@		@resource/ch07.jpg@

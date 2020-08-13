@@ -23,7 +23,7 @@
 @2@		@5@		@Cuentas claras y el chocolate espeso.@		  										@50@		@0@		@resource/di05.jpg@
 @2@		@6@		@Quien mucho abarca, poco aprieta.@		  										@75@		@0@		@resource/di06.jpg@
 @2@		@7@		@En apuros y afanes, acude a refranes.@		  										@25@		@0@		@resource/di07.jpg@
-@2@		@8@		@De tal palo, tal astilla.@		  											@75@		@0@		@resource/di08.jpg@
+@2@		@8@		@De tal palo, tal astilla.@		  											@75@		@1@		@resource/di08.jpg@
 @2@		@9@		@De noche, todos los gatos son pardos.@		  										@25@		@0@		@resource/di09.jpg@
 @2@		@10@		@Dios aprieta, pero no ahorca.@		  											@100@		@0@		@resource/di10.jpg@
 @2@		@11@		@El que se fue a Sevilla, perdio su silla.@	  										@100@		@0@		@resource/di11.jpg@
@@ -36,7 +36,7 @@
 @3@		@1@		@Sabes que guarda Darth Vader en su nevera?\Helado oscuro.@									@300@		@0@		@resource/ch01.png@
 @3@		@2@		@En una entrevista de trabajo:\-Nivel de ingles?\-Alto\-Bien. Traduzca "fiesta".\-Party\-Perfecto. Uselo en una frase.\-Ayer me party la cara con la bicicleta.\-Contratado.@		@100@		@0@		@resource/ch02.jpg@
 @3@		@3@		@Como se dice escoba voladora en japones?\Simekaigo Memato.@									@50@		@0@		@resource/ch03.png@
-@3@		@4@		@- Sabes como se queda un mago despes de comer?\- Magordito@									@50@		@1@		@resource/ch04.jpg@
+@3@		@4@		@- Sabes como se queda un mago despes de comer?\- Magordito@									@50@		@0@		@resource/ch04.jpg@
 @3@		@5@		@- Que le dice un techo a otro?\-Techo de menos.@										@25@		@0@		@resource/ch05.jpg@
 @3@		@6@		@- Donde cuelga Superman su supercapa?\- En superchero@									@200@		@0@		@resource/ch06.jpg@
 @3@		@7@		@- Para que van una caja al gimnasio?\- Para hacerse caja fuerte.@								@75@		@0@		@resource/ch07.jpg@
