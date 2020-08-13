@@ -6,7 +6,7 @@ from threading import Thread
 Se crea un documento con serilizacion 
 
 data = open("Data/Ao3", "wb")
-pickle.dump("admin", data)
+pickle.dump("admin", data)   CAMBIAR    
 
 files = open("Data/Ao3", "rb")
 contraseña = pickle.load(files)
@@ -50,6 +50,23 @@ vuelto_total = 0
 
 # -------------------------- Bases de datos ----------------------------- #
 
+"""
+Objeto:
+
+Atributos:
+
+Metodos:
+
+Funcion________
+    E:
+    S:
+    R:
+
+Funcion____________
+    E:
+    s:
+    R:
+"""
 class Message(object):
     def __init__(self, text, idioma):
 
@@ -162,6 +179,17 @@ class Message(object):
         #Acutiliza el valor en la clase
         self.solds = value
 
+"""
+Funcion load_base_message
+
+Se encarga de cargar la base de datos de los mensajes en la simulacion dependiendo
+del idioma que el usuario elija
+
+Entrada: idioma seleccionado por el usuario
+Salida: la base de datos cargada
+Restricciones: ---
+ 
+"""
 def load_base_message(idioma):
     global co_message_list, di_message_list, ch_message_list
 
@@ -191,6 +219,18 @@ def load_base_message(idioma):
         else:
             pass
 
+
+"""
+Funcion data_text_funcion
+
+agregar descripcion
+
+Entrada: 
+Salida: 
+Restricciones: 
+
+"""
+
 def data_text_funcion():
     #Variables de idioma
     global base_ventas_titulo_1, base_ventas_titulo_2, buttom_text_change_uno ,  buttom_text_change_dos
@@ -208,6 +248,17 @@ def data_text_funcion():
         titulo_base_datos.set(base_ventas_titulo_2)
         data_text.set(data_text_funcion_aux_2())
         num_data_text *= -1
+
+"""
+Funcion data_text_funcion
+
+agregar descripcion
+
+Entrada: 
+Salida: 
+Restricciones: 
+
+"""
 
 def data_text_funcion_aux_1():
     global co_message_list, di_message_list, ch_message_list
@@ -286,6 +337,17 @@ def data_text_funcion_aux_1():
 
     return texto_imprimir
 
+"""
+Funcion data_text_funcion
+
+agregar descripcion
+
+Entrada: 
+Salida: 
+Restricciones: 
+
+"""
+
 def data_text_funcion_aux_2():
     rute = "Data/base_ventas.txt"
     file = open(rute, "r")
@@ -307,6 +369,17 @@ def data_text_funcion_aux_2():
 
 # -------------------------- Base de ventas ----------------------------- #
 
+"""
+Funcion ventas_read
+
+Se encarga de leer el .txt con las transacciones y asi aumentar el numero de transaccion 
+
+Entrada: --
+Salida: Numero de transacccion
+Restricciones: --
+
+"""
+
 def ventas_read():
     global N_transa
     rute = "Data/base_ventas.txt"
@@ -318,6 +391,18 @@ def ventas_read():
         N_transa = int(ult_line[1])
     else:
         N_transa = 1
+
+"""
+
+Funcion ventas_load
+
+Se encarga de escribir cada transaccion nueva en la base de datos 
+
+Entrada: numero de transaccion, el total de monedas pagadas, vuelto, fecha y hora
+Salida: Una nueva linea en la base de datos de ventas 
+Restricciones: --
+
+"""
 
 def ventas_load():
     global N_transa, total_money, vuelto_temp
@@ -337,6 +422,18 @@ def ventas_load():
 
 # -------------------- Funciones administracion -------------------- #
 
+"""
+Funcion login_validation
+
+Se encarga de validar la contraseña guardada en el sistema con la digitada por
+el usuario
+
+Entrada: texto de entrada, ventanas a destruir, canvas a trabajar
+Salida: acceso a la parte administrativa
+Restricciones: --
+
+"""
+
 def login_validation(entry_box, window1, window2, canvas):
     global invalid
     file = open("Data/Ao3", "rb")
@@ -348,6 +445,17 @@ def login_validation(entry_box, window1, window2, canvas):
         admin()
     else:
         canvas.create_text(250, 60, text=invalid, font=font5, fill=red)
+
+"""
+Funcion reset
+
+Se encarga se encarga de "resetear" los valores de las base de datos, dejandolas en ceros
+
+Entrada: --
+Salida: base de datos desde cero
+Restricciones: --
+
+"""
 
 def reset():
 
@@ -376,6 +484,18 @@ def reset():
     for linea in total_ventas:
         file.write(linea)
     file.close()
+
+"""
+Funcion turn_off
+
+Ventana donde se le pregunta al administrado/ra si realmente desea apagar la maquina
+si la persona decide apagarla, el programa se finaliza
+
+Entrada: --
+Salida: Fin de la simulacion 
+Restricciones: --
+
+"""
 
 def turn_off():
     global on_sms, off_sms, turn_off_title, glo_idioma
@@ -406,11 +526,18 @@ def turn_off():
 
     mainloop()
 
-def excel():
-    pass
-
 # -------------------------- Contraseñas -------------------------------- #
+"""
+Funcion password_validation
 
+Realiza la encriptacion de la contraseña para asi compararla con la guardad en el sistema
+y ademas se utiliza para cambiar la contraseña por una nueva
+
+Entrada: cuadro de texto
+Salida: String con la contraseña codificada
+Restricciones: Lo simbolos y las mayusculas no logran identificarse correctamente
+
+"""
 def password_validation(entry_box):
     entry = entry_box.get().lower()
     encrypted = ""
@@ -531,7 +658,19 @@ def password_validation(entry_box):
             encrypted += tmp
     return encrypted
 
-def save_pass(entru_box1, entry_box2):
+"""
+Funcion save_pass
+
+Se llama cuando el usuario quiere cambiar la contraseña, esta necesita de la validacion de la contraseña
+anterior po rseguridad
+
+Entrada: cuadros de texto y canvas a trabajar
+Salida: Escritura de la nueva coontraseña codificada
+Restricciones: --
+
+"""
+
+def save_pass(entru_box1, entry_box2, canvas):
     file = open("Data/Ao3", "rb")
     valid = pickle.load(file)
     old = entru_box1.get()
@@ -540,11 +679,21 @@ def save_pass(entru_box1, entry_box2):
         data = open("Data/Ao3", "wb")
         pickle.dump(new, data)
     else:
-        print("contraseña incorrecta")
+        canvas.create_text(250, 175, text=invalid, font=font5, fill=red)
 
 
 # -------------------------- Setea el idioma ---------------------------- #
 
+"""
+Funcion set_idi
+
+Se encarga de poner el idioma de la maquina
+
+Entrada: idioma seleccionado por el usuario
+Salida: variables globales con el texto
+Restricciones: --
+
+"""
 
 def set_idi(idioma):
     global glo_idioma, reset_var, off_var, return_var, ex_var, on_sms, off_sms, turn_off_title
@@ -620,6 +769,13 @@ def set_idi(idioma):
 
 # ---------------------------  Abrir Ventanas  ---------------------------- #
 
+"""
+Las siguientes cuatro funciones se encargan de abrir las ventanas correspondientes
+
+Entrada: ventana quese quiere cerrar
+Salida: una nueva ventana abierta
+Restricciones: --
+"""
 def openAdmin(window, idioma):
     global active_admin
     active_admin = True
@@ -644,7 +800,13 @@ def openLogin(window):
         active_admin = False
         login(window)
 
+"""
+Esta funcion se encarga de cerrar la ventana seleccionada 
 
+Entradas: ventana que se quiere cerrar
+Salidas: ventana cerrada
+Restricciones: --
+"""
 
 def destroy(window):
     window.destroy()
@@ -847,8 +1009,9 @@ def text_pygame (text, font, color, surface, x , y):
     txtrect.center = (x, y)
     surface.blit(txtobj, txtrect)
 
-
 # --------------------------- Ventanas ---------------------------- #
+
+#Las siguentes funciones son las ventanas de tkintes en donde se desarrolla la simulacion
 
 def idioma_screen():
     # Ventana principal, aqui se encuentra la animacion
@@ -879,7 +1042,6 @@ def idioma_screen():
     canvas_idio.create_text(600, 100, text="Idioma / Language", font=font2)
 
     mainloop()
-
 
 def machine():
     global conse_var, dicho_var, chiste_var, coins_var, money, screen_sms, price_str, money_tmp
@@ -1002,7 +1164,6 @@ def machine():
 
     mainloop()
 
-
 def login(window1):
     global contra_sms
 
@@ -1061,8 +1222,8 @@ def new_password(window):
     # Botones
 
     button_save = Button( new_screen, text="ok", font=font5, bg=gray,
-                          activeforeground=dark_yellow, command= lambda x= entry_passw, y= entry_new_passw: save_pass(x, y))
-    button_save.place(x=100, y=180, width=300, height=50)
+                          activeforeground=dark_yellow, command= lambda x= entry_passw, y= entry_new_passw, z= canvas_new: save_pass(x, y, z))
+    button_save.place(x=100, y=190, width=300, height=50)
 
     # Texto
     canvas_new.create_text(250, 20, text=setpass_sms, font=font5)
