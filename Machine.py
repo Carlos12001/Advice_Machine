@@ -443,7 +443,7 @@ Restricciones: --
 
 """
 
-def reset():
+def reset(): # AGREGAR LOGICA DE BORRAR VENTAS
 
     #Logica para reset individuales
     global co_message_list, di_message_list, ch_message_list
@@ -470,6 +470,7 @@ def reset():
     for linea in total_ventas:
         file.write(linea)
     file.close()
+    # agregar message box
 
 """
 Funcion turn_off
@@ -684,7 +685,7 @@ Restricciones: --
 def set_idi(idioma):
     global glo_idioma, reset_var, off_var, return_var, ex_var, on_sms, off_sms, turn_off_title
     global conse_var, dicho_var, chiste_var, coins_var, sms, rest_var, vuelto_sms, contra_sms
-    global titulo_ventana_ms, invalid, oldpass_sms, newpass_sms, setpass_sms
+    global titulo_ventana_ms, invalid, oldpass_sms, newpass_sms, setpass_sms, change_sms
     global base_ventas_titulo_1, base_ventas_titulo_2, buttom_text_change_uno ,  buttom_text_change_dos
     
     glo_idioma = idioma
@@ -718,6 +719,7 @@ def set_idi(idioma):
         oldpass_sms = "Antigua"
         newpass_sms = "Nueva"
         setpass_sms = "Cambiar contraseña"
+        change_sms = "Nueva"
     elif idioma == "ingles":
         # Texto machine
         conse_var = "Advice"
@@ -749,6 +751,7 @@ def set_idi(idioma):
                                "\t"+"Payout"+"\t"+"Change"
         buttom_text_change_uno = "Extensive"
         buttom_text_change_dos = "Summary"
+        change_sms = "New"
 
         # ----logica para cargar archivo en englicsj---
 
@@ -1151,7 +1154,7 @@ def machine():
     mainloop()
 
 def login(window1):
-    global contra_sms
+    global contra_sms, change_sms
 
     # Ventana principal, aqui se encuentra la animacion
 
@@ -1175,7 +1178,7 @@ def login(window1):
                             z= login_screen, w = canvas_log : login_validation(x, y, z, w))
     button_valid.place(x=90, y=180, width=150, height=50)
 
-    button_change = Button(login_screen, text= "New pass", font=font5, bg=gray,
+    button_change = Button(login_screen, text= change_sms, font=font5, bg=gray,
                             activeforeground=dark_yellow, command= lambda x= login_screen: new_password(x))
     button_change.place(x=260, y=180, width=150, height=50)
 
