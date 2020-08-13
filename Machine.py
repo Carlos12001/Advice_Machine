@@ -28,7 +28,7 @@ font6 = ('MS Mincho', 16)
 
 # inicio de variable total
 global co_message_list, di_message_list, ch_message_list, select_message, vuelto_total
-global num_data_text, texto_imprimir
+global num_data_text
 co_message_list = []
 di_message_list = []
 ch_message_list = []
@@ -36,7 +36,6 @@ select_message = None
 total_money = 0
 vuelto_total = 0
 num_data_text = 1
-texto_imprimir = ''
 # -------------------------- Bases de datos ----------------------------- #
 
 """
@@ -1043,8 +1042,11 @@ Restricciones: si aun esta en la animacion hace
 """
 
 def paying_aux_2(window):
-
-    pygame.mixer.music.play()
+    try:
+        pygame.mixer.music.play()
+    except:
+        pass
+    
     try:
         global image_paper, all_canvas
         anchor = 20
