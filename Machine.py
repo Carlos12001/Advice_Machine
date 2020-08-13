@@ -107,7 +107,11 @@ class Message(object):
     def get_rute(self):
         return self.rute_image
 
-    def increse_solds(self, delete=False, num=0):
+    def  increse_solds(self, delete=False, num=0):
+        self.increse_solds_aux(delete=delete, num=num, rute="Data/base_espa.txt")
+        self.increse_solds_aux(delete=delete, num=num, rute="Data/base_ing.txt")
+
+    def increse_solds_aux(self, delete, num, rute):
 
         # Logica si borra el sold o lo incremento
         if delete:
@@ -115,11 +119,6 @@ class Message(object):
         else:
             value = self.solds + 1
 
-        # Ruta del archivo que depende del idioma
-        if self.idioma == "español":
-            rute = "Data/base_espa.txt"
-        elif self.idioma == "ingles":
-            rute = "Data/base_ing.txt"
 
         # Carga el archivo
         file = open(rute, "r+")

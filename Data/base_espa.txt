@@ -14,7 +14,7 @@
 @1@		@13@		@No debes ir a dormirte enojado con alguien.@		  									@50@		@0@		@resource/co13.jpg@
 @1@		@14@		@Si estas estresado\ haz ejercicios de respiracion.@		  								@100@		@0@		@resource/co14.jpg@
 @1@		@15@		@Toma al menos 8 vasos de agua al dia.@		  										@50@		@0@		@resource/co15.jpg@
-@1@		@16@		@Haz ejercicio al menos 2 veces a la semana.@		  									@125@		@1@		@resource/co16.jpg@
+@1@		@16@		@Haz ejercicio al menos 2 veces a la semana.@		  									@125@		@0@		@resource/co16.jpg@
 @1@		@17@		@Recuerda llevar la mascarilla \ a todos lados contigo.@									@100@		@0@		@resource/co17.jpg@
 @2@		@1@		@A caballo regalado no se le ve colmillo@		  									@25@		@0@		@resource/di01.jpg@
 @2@		@2@		@A lo hecho, pecho.@		  												@25@		@0@		@resource/di02.png@
@@ -36,13 +36,13 @@
 @3@		@1@		@Sabes que guarda Darth Vader en su nevera?\Helado oscuro.@									@300@		@0@		@resource/ch01.png@
 @3@		@2@		@En una entrevista de trabajo:\-Nivel de ingles?\-Alto\-Bien. Traduzca "fiesta".\-Party\-Perfecto. Uselo en una frase.\-Ayer me party la cara con la bicicleta.\-Contratado.@		@100@		@0@		@resource/ch02.jpg@
 @3@		@3@		@Como se dice escoba voladora en japones?\Simekaigo Memato.@									@50@		@0@		@resource/ch03.png@
-@3@		@4@		@- Sabes como se queda un mago despes de comer?\- Magordito@									@50@		@0@		@resource/ch04.jpg@
+@3@		@4@		@- Sabes como se queda un mago despes de comer?\- Magordito@									@50@		@1@		@resource/ch04.jpg@
 @3@		@5@		@- Que le dice un techo a otro?\-Techo de menos.@										@25@		@0@		@resource/ch05.jpg@
 @3@		@6@		@- Donde cuelga Superman su supercapa?\- En superchero@									@200@		@0@		@resource/ch06.jpg@
 @3@		@7@		@- Para que van una caja al gimnasio?\- Para hacerse caja fuerte.@								@75@		@0@		@resource/ch07.jpg@
 @3@		@8@		@- Hola Conchita?\- No, con Tarzan.@												@150@		@0@		@resource/ch08.jpg@
 @3@		@9@		@- Que le dice un espagueti a otro?\- El cuerpo me pide salsa?@								@50@		@0@		@resource/ch09.jpg@
-@3@		@10@		@Si los zombies se deshacen con el paso del tiempo\ ¿zombiodegradables?@								@100@		@1@		@resource/ch10.png@
+@3@		@10@		@Si los zombies se deshacen con el paso del tiempo\ ¿zombiodegradables?@								@100@		@0@		@resource/ch10.png@
 @3@		@11@		@- Como se llama el primo vegano de Bruce Lee?\- Broco Lee.@									@400@		@0@		@resource/ch11.jpeg@
 @3@		@12@		@- Que son 50 fisicos y 50 quimicos juntos?\- Pues 100tificos.@								@100@		@0@		@resource/ch12.jpg@
 @3@		@13@		@- Que hace un perro con un taladro?\- Taladrando.@										@75@		@0@		@resource/ch13.jpg@
