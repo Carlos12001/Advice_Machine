@@ -1064,7 +1064,7 @@ def paying_aux_2(window):
         all_canvas += [image_paper]
         while anchor < 300:
             anchor += 20
-            time.sleep(0)
+            time.sleep(0.5)
             image_paper = Canvas(window, width=300, height=anchor)
             image_paper.place(x=110, y=310)
             all_canvas += [image_paper]
@@ -1289,7 +1289,7 @@ def machine():
 
     #Variables para el dinero  de usaurio es aleatorio al iniciar
     money = StringVar()
-    money_tmp = 100000#random.randrange(100, 2000, 25) #Cantidad de monedas del usario
+    money_tmp = random.randrange(100, 2000, 25) #Cantidad de monedas del usario
     money.set(money_tmp)
 
     #Label que impreme en pantalla el dinero del usario
