@@ -400,7 +400,7 @@ def ventas_read():
     if len(ult_line) > 2:
         N_transa = int(ult_line[1])
     else:
-        N_transa = 1
+        N_transa = 0
 
 """
 
@@ -806,8 +806,12 @@ def openMachine(window, idioma):
     di_message_list = []
     ch_message_list = []
     window.destroy()
-    pygame.mixer.init()
-    pygame.mixer.music.load('sounds/impresora_sound.wav')
+    try:
+        pygame.mixer.init()
+        pygame.mixer.music.load('sounds/impresora_sound.wav')
+    except:
+        pass
+    
     set_idi(idioma)
     ventas_read()
     load_base_message(idioma)
@@ -832,6 +836,11 @@ Restricciones: --
 """
 
 def destroy(window):
+    try:
+        pygame.mixer.init()
+        pygame.mixer.music.load('sounds/impresora_sound.wav')
+    except:
+        pass
     window.destroy()
 
 # ---------------------------  tienda  ---------------------------- #

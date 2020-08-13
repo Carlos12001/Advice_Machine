@@ -19,7 +19,7 @@
 @2@		@1@		@Don't look a gift horse in the mouth.@		  										@25@		@0@		@resource/di01.jpg@
 @2@		@2@		@What is done, is done.@		  											@25@		@0@		@resource/di02.png@
 @2@		@3@		@You have to look on the bright side.@		  										@25@		@0@		@resource/di03.jpg@
-@2@		@4@		@You snooze, you lose.@		  												@50@		@0@		@resource/di04.png@
+@2@		@4@		@You snooze, you lose.@		  												@50@		@1@		@resource/di04.png@
 @2@		@5@		@All you need is love. But a little chocolate now and then doesn't hurt.@		  					@50@		@0@		@resource/di05.jpg@
 @2@		@6@		@don’t bite off more than you can chew.@		  									@75@		@0@		@resource/di06.jpg@
 @2@		@7@		@Every law has its loophole@		  											@25@		@0@		@resource/di07.jpg@
@@ -29,23 +29,23 @@
 @2@		@11@		@Move your feet, lose your seat.@	  											@100@		@0@		@resource/di11.jpg@
 @2@		@12@		@Crying cat does not fish mouse.@		  										@100@		@0@		@resource/di12.jpg@
 @2@		@13@		@Practice makes a master.@		  											@200@		@0@		@resource/di13.jpg@
-@2@		@14@		@Save a penny, spend a dollar.@		  											@200@		@0@		@resource/di14.jpg@
+@2@		@14@		@Save a penny, spend a dollar.@		  											@200@		@1@		@resource/di14.jpg@
 @2@		@15@		@Evil of many, consolation of fools@		  										@150@		@1@		@resource/di15.jpg@
 @2@		@16@		@Kill two birds with one shot.@		  											@150@		@1@		@resource/di16.jpg@
 @2@		@17@		@Do not leave for tomorrow what you can do today.@		  								@200@		@1@		@resource/di17.jpg@
 @3@		@1@		@What do you call a sick Darth Vader?\Barf Vader@										@300@		@0@		@resource/ch01.png@
 @3@		@2@		@Why did the employee get fired from the calendar factory?\He took a day off.@							@100@		@1@		@resource/ch02.jpg@
-@3@		@3@		@- What do they eat for breakfast in Tokyo?\- Japancakes.@									@50@		@1@		@resource/ch03.png@
+@3@		@3@		@- What do they eat for breakfast in Tokyo?\- Japancakes.@									@50@		@2@		@resource/ch03.png@
 @3@		@4@		@- How do you make a witch itch? \-Take away the "w"!@										@50@		@0@		@resource/ch04.jpg@
 @3@		@5@		@How do you make holy water? \You boil the hell out of it.@									@25@		@0@		@resource/ch05.jpg@
 @3@		@6@		@What did Superman name his dog? \ - Lex Woofer@										@200@		@0@		@resource/ch06.jpg@
 @3@		@7@		@- Why does a box go to the gym? \ - To become a safe.@										@75@		@2@		@resource/ch07.jpg@
 @3@		@8@		@- What does Tarzan sing at Christmas? \- Jungle bells, jungle bells@								@150@		@0@		@resource/ch08.jpg@
 @3@		@9@		@- What does one spaghetti say to another? \ - My body asks me for salsa?@							@50@		@0@		@resource/ch09.jpg@
-@3@		@10@		@- Where do zombies swim?\- The dead sea!@											@100@		@0@		@resource/ch10.png@
+@3@		@10@		@- Where do zombies swim?\- The dead sea!@											@100@		@1@		@resource/ch10.png@
 @3@		@11@		@- What's the name of Bruce Lee's vegan cousin? \ - Broco Lee.@									@400@		@1@		@resource/ch11.jpeg@
 @3@		@12@		@- What’s on a chemist’s nightstand\- I was reading a book on helium. I couldn’t put it down.@					@100@		@2@		@resource/ch12.jpg@
-@3@		@13@		@- Why aren't dogs good dancers?\ - Because they have two left feet!.@								@75@		@1@		@resource/ch13.jpg@
-@3@		@14@		@- What does a bee do in the gym? \ - Zumba@											@50@		@0@		@resource/ch14.jpg@
+@3@		@13@		@- Why aren't dogs good dancers?\ - Because they have two left feet!.@								@75@		@2@		@resource/ch13.jpg@
+@3@		@14@		@- What does a bee do in the gym? \ - Zumba@											@50@		@2@		@resource/ch14.jpg@
 @3@		@15@		@- What do astronauts always complain about? \ - Lack of space.@								@25@		@0@		@resource/ch15.jpg@
 @3@		@16@		@- What do printers eat on their toast?\ - Paper jam.@										@175@		@0@		@resource/ch16.jpg@
