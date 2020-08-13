@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 import random, time, pygame, pickle
 from threading import Thread
 
@@ -460,10 +461,10 @@ Restricciones: --
 
 """
 
-def reset(): # AGREGAR LOGICA DE BORRAR VENTAS
+def reset():
 
     #Logica para reset individuales
-    global co_message_list, di_message_list, ch_message_list
+    global co_message_list, di_message_list, ch_message_list, do_reset
 
     for message_co in co_message_list:
         message_co.increse_solds(delete = True)
@@ -487,7 +488,7 @@ def reset(): # AGREGAR LOGICA DE BORRAR VENTAS
     for linea in total_ventas:
         file.write(linea)
     file.close()
-    # agregar message box
+    mensaje = messagebox.showinfo(title="Info", message= do_reset)
 
 """
 Funcion turn_off
@@ -702,7 +703,7 @@ Restricciones: --
 def set_idi(idioma):
     global glo_idioma, reset_var, off_var, return_var, ex_var, on_sms, off_sms, turn_off_title
     global conse_var, dicho_var, chiste_var, coins_var, sms, rest_var, vuelto_sms, contra_sms
-    global titulo_ventana_ms, invalid, oldpass_sms, newpass_sms, setpass_sms, change_sms
+    global titulo_ventana_ms, invalid, oldpass_sms, newpass_sms, setpass_sms, change_sms, do_reset
     global base_ventas_titulo_1, base_ventas_titulo_2, buttom_text_change_uno ,  buttom_text_change_dos
     
     glo_idioma = idioma
@@ -737,6 +738,7 @@ def set_idi(idioma):
         newpass_sms = "Nueva"
         setpass_sms = "Cambiar contraseña"
         change_sms = "Nueva"
+        do_reset = "Se actualizó correctamente"
     elif idioma == "ingles":
         # Texto machine
         conse_var = "Advice"
@@ -769,6 +771,7 @@ def set_idi(idioma):
         buttom_text_change_uno = "Extensive"
         buttom_text_change_dos = "Summary"
         change_sms = "New"
+        do_reset = "Info restaured succesful"
 
         # ----logica para cargar archivo en englicsj---
 
@@ -1173,8 +1176,13 @@ def machine():
 
     mainloop()
 
+def activar_admin(window):
+    global active_admin
+    window.destroy()
+    active_admin = True
+
 def login(window1):
-    global contra_sms, change_sms
+    global contra_sms, change_sms, active_admin
 
     # Ventana principal, aqui se encuentra la animacion
 
@@ -1205,6 +1213,7 @@ def login(window1):
     # Texto
     canvas_log.create_text(250, 20, text=contra_sms, font=font5)
 
+    login_screen.protocol("WM_DELETE_WINDOW", lambda x = login_screen: activar_admin(x))
     mainloop()
 
 def new_password(window):
@@ -1302,7 +1311,7 @@ def admin():
     button_text_funcion =  Button(admin_screen, textvariable=button_text_change, font=font4, bg=gray,
                            activebackground=purple, activeforeground=dark_yellow,
                            command=data_text_funcion)
-    button_text_funcion.place(x=20, y=300, width=350, height=50)
+    button_text_funcion.place(x=20, y=600, width=350, height=50)
 
     # Volver a la maquina
     button_return = Button(admin_screen, text=return_var, font=font4, bg=gray,
@@ -1318,11 +1327,7 @@ def admin():
                         activebackground=purple, activeforeground=dark_yellow,
                         command=lambda x=admin_screen: openOff(x))
     button_off.place(x=20, y=500, width=350, height=50)
-    # Excel
-    button_ex = Button(admin_screen, text=ex_var, font=font4, bg=gray,
-                       activebackground=purple, activeforeground=dark_yellow)
-    button_ex.place(x=20, y=600, width=350, height=50)
-
+    
 
     mainloop()
 
