@@ -27,14 +27,15 @@ font6 = ('MS Mincho', 16)
 
 # inicio de variable total
 global co_message_list, di_message_list, ch_message_list, select_message, vuelto_total
+global num_data_text, texto_imprimir
 co_message_list = []
 di_message_list = []
 ch_message_list = []
 select_message = None
 total_money = 0
 vuelto_total = 0
-
-
+num_data_text = 1
+texto_imprimir = ''
 # -------------------------- Bases de datos ----------------------------- #
 
 """
@@ -50,28 +51,31 @@ Objeto Mensaje:
         -rute_image: ruta de la imagen
 
     Metodos:
-        -get_idioma
-        -get_type
-        -get_mesaage_id
-        -get_message_text
-        -get_cost
+        -get_idioma:
+        
+        -get_type:
+        
+        -get_mesaage_id:
+        
+        -get_message_text:
+        
+        -get_cost:
+        
         -get_rute
+        
         -increase_solds:
-            llama a increase_solds_aux con la ruta en español y ruta en ingles
+            Entrada: boolean, entero
+            Salida:llama a increase_solds_aux con la ruta en español y ruta en ingles
+            Restriciones:
+            
         -icrease_solds_aux:
-            busca en todo el archivo el id y tipo de mensaje
+            Entrada: entero, ruta_txt
+            Salida: busca en todo el archivo el id y tipo de mensaje
             renueva el valor correspodiende
-            vuelve a escribir todos los datos, pero con el costo del mensaje actualizadov
+            vuelve a escribir todos los datos, pero con el costo del mensaje actualizado
+            Restriciones:
 
-Funcion________
-    E:
-    S:
-    R:
 
-Funcion____________
-    E:
-    s:
-    R:
 """
 class Message(object):
     def __init__(self, text, idioma):
@@ -228,11 +232,11 @@ def load_base_message(idioma):
 """
 Funcion data_text_funcion
 
-agregar descripcion
+cambia la modo de impresion a pantalla
 
-Entrada: 
-Salida: 
-Restricciones: 
+Entrada: ----
+Salida: load_base_message()
+Restricciones: ---
 
 """
 
@@ -257,11 +261,11 @@ def data_text_funcion():
 """
 Funcion data_text_funcion
 
-agregar descripcion
+Setea los datos en pantalla resumidos
 
-Entrada: 
-Salida: 
-Restricciones: 
+Entrada: --- 
+Salida: texto_en_imprimir_en_pantalla
+Restricciones: ---
 
 """
 
@@ -345,11 +349,12 @@ def data_text_funcion_aux_1():
 """
 Funcion data_text_funcion
 
-agregar descripcion
+Setea los datos en pantalla extendidos
 
-Entrada: 
-Salida: 
-Restricciones: 
+Entrada: --- 
+Salida: texto_en_imprimir_en_pantalla
+Restricciones: ---
+
 
 """
 
@@ -358,7 +363,6 @@ def data_text_funcion_aux_2():
     file = open(rute, "r")
     file_total = file.readlines()[5:]
     file.close()
-
     texto_imprimir = ''
 
     for line in file_total:
@@ -369,6 +373,8 @@ def data_text_funcion_aux_2():
             else:
                 texto_imprimir += word
         texto_imprimir +='\t\n'
+
+
     return texto_imprimir
 
 # -------------------------- Base de ventas ----------------------------- #
@@ -543,6 +549,7 @@ Salida: String con la contraseña codificada
 Restricciones: Lo simbolos y las mayusculas no logran identificarse correctamente
 
 """
+
 def password_validation(entry_box):
     entry = entry_box.get().lower()
     encrypted = ""
@@ -785,6 +792,7 @@ Entrada: ventana quese quiere cerrar
 Salida: una nueva ventana abierta
 Restricciones: --
 """
+
 def openAdmin(window, idioma):
     global active_admin
     active_admin = True
@@ -793,7 +801,13 @@ def openAdmin(window, idioma):
     admin()
 
 def openMachine(window, idioma):
+    global co_message_list, di_message_list, ch_message_list, select_message
+    co_message_list = []
+    di_message_list = []
+    ch_message_list = []
     window.destroy()
+    pygame.mixer.init()
+    pygame.mixer.music.load('sounds/impresora_sound.wav')
     set_idi(idioma)
     ventas_read()
     load_base_message(idioma)
@@ -821,6 +835,15 @@ def destroy(window):
     window.destroy()
 
 # ---------------------------  tienda  ---------------------------- #
+"""
+Escoge un mensaje aletorio de alguna lista de
+del tipo de mensaje e impreme en pantalla 
+lo que debe 
+
+Entradas: entero(tipo de mensaje)
+Salidas: impresion cuanto dinero debe
+Restricciones: --
+"""
 
 def set_shop(tipo):
     global sms, conse_var, dicho_var, chiste_var, screen_sms, active_shop, price_str, rest_var, price, co_message_list,\
@@ -861,6 +884,14 @@ def set_shop(tipo):
 
         price_str.set(rest_var + str(price))
 
+"""
+Resta el dinero que se pago
+
+Entradas: entero(tipo de moneda), tk(ventana), tk(canvas)
+Salidas: paying()
+Restricciones: tipo(moneda) sea mayor a la cantidad de dinero del usario o igual
+"""
+
 def coins_rest(type1, window, canvas):
     global price, money_tmp, price_str, money, total_money, active_shop
     if not active_shop:
@@ -894,6 +925,15 @@ def coins_rest(type1, window, canvas):
                 money.set(money_tmp)
                 return paying(window, canvas)
 
+"""
+Suma el vuelto total que queda almacenado,
+y borra el vuelto temporal
+
+Entradas: tk(canvas)
+Salidas: vuelto_volar()
+Restricciones: --
+"""
+
 def vuelto_return_aux(canvas):
     #El suma las variables de monet tmperoral y seta cantidad de monedas
     global vuelto_total,  money_tmp, money
@@ -902,13 +942,30 @@ def vuelto_return_aux(canvas):
     money.set(money_tmp)
     return vuelto_volar(canvas)
 
+"""
+Quita la imagen si y solo si hay
+vuelto almacenado
+
+Entradas:tk(canvas)
+Salidas: quita_imagen
+Restricciones: vuelto_almacenado
+"""
+
 def vuelto_volar(canvas):
     #Mueve las del vuelto a volar
     global active_vuelto, imagen_monedas_canvas
     if active_vuelto:
         canvas.move(imagen_monedas_canvas, -1000, -1000)
         active_vuelto = False
-        
+
+"""
+Pone en pantalla el vuelto
+
+Entradas: tk(canvas)
+Salidas: pone la imagen de monedas de sobra
+Restricciones: funciona 1 que haya vuelto las demas no
+"""
+
 def vuelto_move(canvas):
     #Mueve el vuelto a la interfaz
     global  imagen_monedas
@@ -916,6 +973,15 @@ def vuelto_move(canvas):
 
 
 # --------------------------- Animacion ---------------------------- #
+
+"""
+Imprime en mensaje en pantalla si
+no hay deuda del pago 
+
+Entradas: tk(window), tk(canvas)
+Salidas: paying_aux()
+Restricciones: di no paga la deuda no se ejecuta
+"""
 
 def paying(window, canvas):
     global price, rest_var, money, price_str, money_tmp, vuelto_temp, total_money, vuelto_sms, vuelto_total, active_vuelto, select_message
@@ -950,12 +1016,34 @@ def paying(window, canvas):
         vuelto_temp = 0
         return paying_aux(window)
 
+"""
+Hilo de animacion del papel saliendo
+y sonido de impresora
+
+Entradas: tk(window)
+Salidas: paying_aux_2()
+Restricciones: --
+"""
+
 def paying_aux(window):
-    t = Thread(name='Ani_Paper', target=paying_aux_2, args=(window,))
-    t.daemon = True
-    t.start()
+    t_1 = Thread(name='Ani_Paper', target=paying_aux_2, args=(window,))
+    t_1.daemon = True
+    t_1.start()
+
+"""
+Animacion de papel saliendo,
+crea un canvas cuadrado que aumenta 
+de tamano cada 0.5s
+
+Entradas: tk(window)
+Salidas: paying_aux_3()
+Restricciones: si aun esta en la animacion hace 
+                y presiona el mensaje para verlo en pantalla
+"""
 
 def paying_aux_2(window):
+
+    pygame.mixer.music.play()
     try:
         global image_paper, all_canvas
         anchor = 20
@@ -969,12 +1057,36 @@ def paying_aux_2(window):
             image_paper.place(x=110, y=310)
             all_canvas += [image_paper]
         image_paper.bind("<Button-1>", paying_aux_3)
+
     except:
         pass
 
-def paying_aux_3(s):
-    global all_canvas, titulo_ventana_ms, active_shop
+"""
+Pone en un hilo el mensaje
 
+Entradas: string()
+Salidas: paying_aux_4()
+Restricciones: ------
+"""
+
+def paying_aux_3(s):
+    t_2 = Thread(name='Paper', target=paying_aux_4)
+    t_2.daemon = True
+    t_2.start()
+
+"""
+Escoge un mensaje aletorio de alguna lista de
+del tipo de mensaje e impreme en pantalla 
+lo que debe 
+
+Entradas: string()
+Salidas: impresion cuanto dinero debe
+Restricciones: cuando cierra el programa no tire error debido a 
+            que esta en bucle
+"""
+
+def paying_aux_4():
+    global all_canvas, titulo_ventana_ms, active_shop
 
     for i in all_canvas:
         i.place(x=-1000)
@@ -1019,6 +1131,15 @@ def paying_aux_3(s):
         except:
             pass
 
+"""
+Imprime el texto en  la superficie 
+
+Entradas: texto, fuente, color, superficie, 
+            posicion X, posicion Y
+Salidas: impresion el texto en la superficie
+Restricciones: --
+"""
+
 def text_pygame (text, font, color, surface, x , y):
     txtobj = font.render(text, 1, color)
     txtrect = txtobj.get_rect()
@@ -1026,6 +1147,11 @@ def text_pygame (text, font, color, surface, x , y):
     surface.blit(txtobj, txtrect)
 
 # --------------------------- Ventanas ---------------------------- #
+
+"""
+Son las funciones de cconfigurar las diversas ventanas de tkinter
+
+"""
 
 #Las siguentes funciones son las ventanas de tkintes en donde se desarrolla la simulacion
 
@@ -1335,6 +1461,9 @@ def admin():
 
     mainloop()
 
+"""
+Ejecuta primero la ventana de idioma
+"""
 
 if __name__ == "__main__":
     idioma_screen()
