@@ -77,6 +77,7 @@ Objeto Mensaje:
 
 
 """
+
 class Message(object):
     def __init__(self, text, idioma):
 
@@ -199,6 +200,7 @@ Salida: la base de datos cargada
 Restricciones: ---
  
 """
+
 def load_base_message(idioma):
     global co_message_list, di_message_list, ch_message_list
 
